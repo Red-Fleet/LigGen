@@ -1,0 +1,16 @@
+# Name:          seed_class_1_8_1393/603445
+# Creation time: Fri May 21 00:57:11 2010
+
+
+@<TRIPOS>MOLECULE
+seed_class_1_8_1393/603445
+    2     1     1     1     1
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 H           1.6152    0.0826    0.3968 H.spc      1 <1>        0.000
+      2 Br          3.4724    0.1573    0.0029 Br         1 <1>        0.000
+@<TRIPOS>BOND
+     1    2    1 1  

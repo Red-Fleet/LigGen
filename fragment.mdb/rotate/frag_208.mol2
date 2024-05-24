@@ -1,0 +1,43 @@
+#      Rotatable Fragment
+#      Build by yxyuan
+#
+# Name:          frag3-180-8/31924
+# Creation time: Sat Jun  5 12:52:09 2010
+
+
+@<TRIPOS>MOLECULE
+frag3-180-8/31924
+    4     3     1     1     1
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 S1          0.9238   -0.6254    0.0001 S.3        1 <1>        0.000
+      2 C8         -0.6882   -0.1661   -0.0002 C.1        1 <1>        0.000
+      3 N1         -1.7896    0.1864   -0.0522 N.1        1 <1>        0.000
+      4 H           1.1479   -1.4502    1.0191 H.spc      1 <1>        0.000
+@<TRIPOS>BOND
+     1    1    2 1  
+     2    2    3 3  
+     3    1    4 1  
+# Name:          frag3-180-8/31924 -- energy: -0.012557
+# Creation time: Sat Jun  5 12:52:09 2010
+
+
+@<TRIPOS>MOLECULE
+frag3-180-8/31924 -- energy: -0.012557
+    4     3     1     1     1
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 S1          0.9238   -0.6254    0.0001 S.3        1 <1>        0.000
+      2 C8         -0.6882   -0.1661   -0.0002 C.1        1 <1>        0.000
+      3 N1         -1.7896    0.1864   -0.0522 N.1        1 <1>        0.000
+      4 H           1.1479   -1.4502    1.0191 H.spc      1 <1>        0.000
+@<TRIPOS>BOND
+     1    1    2 1  
+     2    2    3 3  
+     3    1    4 1  

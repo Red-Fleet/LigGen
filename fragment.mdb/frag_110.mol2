@@ -1,0 +1,57 @@
+#	Name:			indene
+#	Creating user name:	becker
+#	Creation time:		Thu Dec 19 02:54:50 2002
+
+#	Modifying user name:	zmliu
+#	Modification time:	Thu Mar 11 20:53:21 2004
+
+@<TRIPOS>MOLECULE
+indene
+   17    18     1     1     0
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 C1          1.6708    1.0538   -0.0002 C.3       1 INDENE     -0.1467 
+      2 C2          2.3584   -0.2964   -0.0007 C.2       1 INDENE     -0.1059 
+      3 C3          1.5125   -1.3326    0.0000 C.2       1 INDENE      0.0463 
+      4 C4         -1.1174   -1.4310    0.0006 C.ar      1 INDENE      0.0673 
+      5 C5         -2.2744   -0.6429   -0.0004 C.ar      1 INDENE      0.0689 
+      6 C6         -2.1867    0.7565   -0.0008 C.ar      1 INDENE      0.0664 
+      7 C7         -0.9419    1.3980    0.0012 C.ar      1 INDENE      0.0375 
+      8 C8          0.2089    0.6083    0.0006 C.ar      1 INDENE     -0.0760 
+      9 C9          0.1143   -0.7763    0.0004 C.ar      1 INDENE      0.0422 
+     10 H1          1.9084    1.6330   -0.9051 H.spc     1 INDENE     -1.0000 
+     11 H2          1.9095    1.6330    0.9045 H.spc     1 INDENE     -1.0000 
+     12 H3          3.4423   -0.4102   -0.0018 H.spc     1 INDENE     -1.0000 
+     13 H4          1.7788   -2.3891    0.0004 H.spc     1 INDENE     -1.0000 
+     14 H5         -1.1712   -2.5145    0.0015 H.spc     1 INDENE     -1.0000 
+     15 H6         -3.2489   -1.1213   -0.0007 H.spc     1 INDENE     -1.0000 
+     16 H7         -3.0950    1.3512   -0.0029 H.spc     1 INDENE     -1.0000 
+     17 H8         -0.8683    2.4804    0.0032 H.spc     1 INDENE     -1.0000 
+@<TRIPOS>BOND
+     1    2    1 1    
+     2    1    8 1    
+     3    3    2 2    
+     4    9    3 1    
+     5    4    5 ar   
+     6    4    9 ar   
+     7    5    6 ar   
+     8    6    7 ar   
+     9    7    8 ar   
+    10    8    9 ar   
+    11    1   10 1    
+    12    1   11 1    
+    13    2   12 1    
+    14    3   13 1    
+    15    4   14 1    
+    16    5   15 1    
+    17    6   16 1    
+    18    7   17 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 INDENE      4 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0

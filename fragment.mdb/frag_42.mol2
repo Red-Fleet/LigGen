@@ -1,0 +1,64 @@
+#	Name:			naphthalene
+#	Creating user name:	tang
+#	Creation time:		Tue Aug 27 07:58:48 1996
+
+#	Modifying user name:	arthur
+#	Modification time:	Thu Jan 15 17:25:02 1998
+
+@<TRIPOS>MOLECULE
+naphthalene
+   18    19     1     1     2
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 C1          1.2158    1.3955    0.0000 C.ar      1 NAPHTHALENE   -0.0540 
+      2 C2          2.4270    0.6984    0.0000 C.ar      1 NAPHTHALENE   -0.0612 
+      3 C3          2.4270   -0.6984    0.0000 C.ar      1 NAPHTHALENE   -0.0612 
+      4 C4          1.2158   -1.3955    0.0000 C.ar      1 NAPHTHALENE   -0.0540 
+      5 C5         -1.2158   -1.3955    0.0000 C.ar      1 NAPHTHALENE   -0.0540 
+      6 C6         -2.4270   -0.6984    0.0000 C.ar      1 NAPHTHALENE   -0.0612 
+      7 C7         -2.4270    0.6984    0.0000 C.ar      1 NAPHTHALENE   -0.0612 
+      8 C8         -1.2158    1.3955    0.0000 C.ar      1 NAPHTHALENE   -0.0540 
+      9 C9          0.0000    0.7009    0.0000 C.ar      1 NAPHTHALENE   -0.0179 
+     10 C10         0.0000   -0.7009    0.0000 C.ar      1 NAPHTHALENE   -0.0179 
+     11 H1          1.2306    2.4812    0.0000 H.spc     1 NAPHTHALENE    0.0624 
+     12 H2          3.3672    1.2414    0.0000 H.spc     1 NAPHTHALENE    0.0618 
+     13 H3          3.3672   -1.2414    0.0000 H.spc     1 NAPHTHALENE    0.0618 
+     14 H4          1.2306   -2.4812    0.0000 H.spc     1 NAPHTHALENE    0.0624 
+     15 H5         -1.2306   -2.4812    0.0000 H.spc     1 NAPHTHALENE    0.0624 
+     16 H6         -3.3672   -1.2414    0.0000 H.spc     1 NAPHTHALENE    0.0618 
+     17 H7         -3.3672    1.2414    0.0000 H.spc     1 NAPHTHALENE    0.0618 
+     18 H8         -1.2306    2.4812    0.0000 H.spc     1 NAPHTHALENE    0.0624 
+@<TRIPOS>BOND
+     1    2    1 ar   
+     2    1    9 ar   
+     3    3    2 ar   
+     4    4    3 ar   
+     5   10    4 ar   
+     6    5    6 ar   
+     7    5   10 ar   
+     8    6    7 ar   
+     9    7    8 ar   
+    10    8    9 ar   
+    11    9   10 ar   
+    12    1   11 1    
+    13    2   12 1    
+    14    3   13 1    
+    15    4   14 1    
+    16    5   15 1    
+    17    6   16 1    
+    18    7   17 1    
+    19    8   18 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 NAPHTHALENE     5 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>SET
+ATOM$BY_TYPE    STATIC     ATOMS    COLORGROUP SYSTEM 
+18 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
+LINK_HS         STATIC     ATOMS    <user>   **** 
+4 12 14 16 18
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0

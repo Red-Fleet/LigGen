@@ -1,0 +1,18 @@
+# Name:          seed_class_2_24_888/95646
+# Creation time: Fri May 21 00:57:13 2010
+
+
+@<TRIPOS>MOLECULE
+seed_class_2_24_888/95646
+    3     2     1     1     1
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 H           3.3701    1.3027    0.3118 H.spc      1 <1>        0.000
+      2 C           3.9464    2.6329    0.2779 C.1        1 <1>        0.000
+      3 N           4.4074    3.6970    0.2507 N.1        1 <1>        0.000
+@<TRIPOS>BOND
+     1    1    2 1  
+     2    2    3 3  

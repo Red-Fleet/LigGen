@@ -1,0 +1,51 @@
+#	Name:			benzoxazole
+#	Creating user name:	becker
+#	Creation time:		Thu Dec 19 02:54:41 2002
+
+#	Modifying user name:	zmliu
+#	Modification time:	Thu Mar 11 20:34:20 2004
+
+@<TRIPOS>MOLECULE
+benzoxazole
+   14    15     1     1     0
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 O1          1.9356    1.1438    0.0006 O.3       1 BENZOXAZOLE   -0.2022 
+      2 C1          2.6246   -0.0393   -0.0004 C.2       1 BENZOXAZOLE    0.2827 
+      3 N1          1.8451   -1.0503    0.0000 N.2       1 BENZOXAZOLE   -0.2713 
+      4 C2         -0.6224   -1.4451    0.0005 C.ar      1 BENZOXAZOLE   -0.0093 
+      5 C3         -1.7979   -0.6813   -0.0002 C.ar      1 BENZOXAZOLE   -0.0203 
+      6 C4         -1.7567    0.7246   -0.0005 C.ar      1 BENZOXAZOLE   -0.0175 
+      7 C5         -0.5425    1.4279    0.0007 C.ar      1 BENZOXAZOLE    0.0226 
+      8 C6          0.6223    0.6621    0.0007 C.ar      1 BENZOXAZOLE    0.1557 
+      9 C7          0.5595   -0.7095    0.0004 C.ar      1 BENZOXAZOLE    0.0598 
+     10 H1          3.7113   -0.1099   -0.0016 H.spc     1 BENZOXAZOLE   -1.0000 
+     11 H2         -0.6268   -2.5298    0.0011 H.spc     1 BENZOXAZOLE   -1.0000 
+     12 H3         -2.7582   -1.1873   -0.0005 H.spc     1 BENZOXAZOLE   -1.0000 
+     13 H4         -2.6881    1.2821   -0.0018 H.spc     1 BENZOXAZOLE   -1.0000 
+     14 H5         -0.5058    2.5121    0.0013 H.spc     1 BENZOXAZOLE   -1.0000 
+@<TRIPOS>BOND
+     1    2    1 1    
+     2    1    8 1    
+     3    3    2 2    
+     4    9    3 1    
+     5    4    5 ar   
+     6    4    9 ar   
+     7    5    6 ar   
+     8    6    7 ar   
+     9    7    8 ar   
+    10    8    9 ar   
+    11    2   10 1    
+    12    4   11 1    
+    13    5   12 1    
+    14    6   13 1    
+    15    7   14 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 BENZOXAZOLE     4 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0

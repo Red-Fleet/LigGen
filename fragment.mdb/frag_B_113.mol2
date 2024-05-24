@@ -1,0 +1,20 @@
+# Name:          seed_class_3_113_49/26467
+# Creation time: Fri May 21 00:57:14 2010
+
+
+@<TRIPOS>MOLECULE
+seed_class_3_113_49/26467
+    4     3     1     1     1
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 H          -1.6943   -2.8330    2.9342 H.spc      1 <1>        0.000
+      2 O          -0.5571   -1.9865    3.1221 O.3        1 <1>        0.000
+      3 O           0.4395   -2.1485    2.0400 O.3        1 <1>        0.000
+      4 H           1.6001   -1.3413    2.2554 H.spc      1 <1>        0.000
+@<TRIPOS>BOND
+     1    1    2 1  
+     2    2    3 1  
+     3    3    4 1  

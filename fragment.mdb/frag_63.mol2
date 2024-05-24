@@ -1,0 +1,43 @@
+#	Name:			1,3,4-thiazoline
+#	Creating user name:	becker
+#	Creation time:		Thu Dec 19 02:54:41 2002
+
+#	Modifying user name:	zmliu
+#	Modification time:	Thu Mar 11 16:56:35 2004
+
+@<TRIPOS>MOLECULE
+1,3,4-thiazoline
+    9     9     1     1     1
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 S1          0.3692    1.3729    0.6817 S.3       1 THIAZOLINE   -0.0316 
+      2 C1          1.4579    0.1405    0.0335 C.2       1 THIAZOLINE    0.1467 
+      3 N1          0.9232   -0.9217   -0.4036 N.2       1 THIAZOLINE   -0.2116 
+      4 N2         -0.4889   -0.9794   -0.2814 N.3       1 THIAZOLINE   -0.1038 
+      5 C2         -0.9771    0.4036   -0.0788 C.3       1 THIAZOLINE    0.2003 
+      6 H1          2.5365    0.2875    0.0097 H.spc     1 THIAZOLINE   -1.0000 
+      7 H2         -0.7419   -1.5979    0.5701 H.spc     1 THIAZOLINE   -1.0000 
+      8 H3         -1.1893    0.8370   -1.0678 H.spc     1 THIAZOLINE   -1.0000 
+      9 H4         -1.8895    0.4575    0.5366 H.spc     1 THIAZOLINE   -1.0000 
+@<TRIPOS>BOND
+     1    1    2 1    
+     2    1    5 1    
+     3    2    3 2    
+     4    3    4 1    
+     5    4    5 1    
+     6    2    6 1    
+     7    4    7 1    
+     8    5    8 1    
+     9    5    9 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 THIAZOLINE     1 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>SET
+LAB$A_TYPE      STATIC     ATOMS    LABELGROUP SYSTEM 
+9 1 2 3 4 5 6 7 8 9
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0
