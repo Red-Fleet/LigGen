@@ -1,0 +1,60 @@
+#	Name:			isoindole
+#	Creating user name:	tang
+#	Creation time:		Tue Aug 27 07:58:47 1996
+
+#	Modifying user name:	arthur
+#	Modification time:	Thu Jan 15 17:17:48 1998
+
+@<TRIPOS>MOLECULE
+isoindole
+   16    17     1     1     2
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 C1          0.1844   -1.9654    0.0157 C.2       1 INDOLE      0.0286 
+      2 N2          1.4807   -1.8271    0.0545 N.pl3     1 INDOLE     -0.2934 
+      3 C2          1.8890   -0.5885    0.0595 C.2       1 INDOLE      0.0286 
+      4 C3          0.5706    1.6285    0.0059 C.2       1 INDOLE     -0.0774 
+      5 C4         -0.6993    2.0561   -0.0354 C.2       1 INDOLE     -0.0798 
+      6 C5         -1.8539    1.1235   -0.0650 C.2       1 INDOLE     -0.0798 
+      7 C6         -1.7037   -0.2086   -0.0524 C.2       1 INDOLE     -0.0774 
+      8 C7         -0.3343   -0.7366   -0.0075 C.2       1 INDOLE     -0.0308 
+      9 C8          0.7978    0.1779    0.0216 C.2       1 INDOLE     -0.0308 
+     10 H10        -0.3779   -2.8990    0.0041 H.spc     1 INDOLE      0.0781 
+     11 H12         2.1284   -2.6297    0.0791 H.spc     1 INDOLE      0.2443 
+     12 H4          1.4147    2.3180    0.0275 H.spc     1 INDOLE      0.0548 
+     13 H5         -0.8985    3.1283   -0.0479 H.spc     1 INDOLE      0.0511 
+     14 H6         -2.8595    1.5443   -0.0981 H.spc     1 INDOLE      0.0511 
+     15 H7         -2.5554   -0.8888   -0.0743 H.spc     1 INDOLE      0.0548 
+     16 H17         2.9198   -0.2353    0.0889 H.spc     1 INDOLE      0.0781 
+@<TRIPOS>BOND
+     1    2    1 1    
+     2    1    8 2    
+     3    3    2 1    
+     4    9    3 2    
+     5    4    5 2    
+     6    4    9 1    
+     7    5    6 1    
+     8    6    7 2    
+     9    7    8 1    
+    10    8    9 1    
+    11    1   10 1    
+    12    2   11 1    
+    13    3   16 1    
+    14    4   12 1    
+    15    5   13 1    
+    16    6   14 1    
+    17    7   15 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 INDOLE      4 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>SET
+ATOM$BY_TYPE    STATIC     ATOMS    COLORGROUP SYSTEM 
+16 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+LINK_HS         STATIC     ATOMS    <user>   **** 
+2 11 13
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0

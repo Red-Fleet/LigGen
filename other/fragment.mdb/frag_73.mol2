@@ -1,0 +1,36 @@
+#	Name:			1H-tetrazole
+#	Creating user name:	becker
+#	Creation time:		Thu Dec 19 02:54:38 2002
+
+#	Modifying user name:	zmliu
+#	Modification time:	Thu Mar 11 17:16:31 2004
+
+@<TRIPOS>MOLECULE
+1H-tetrazole
+    7     7     1     1     0
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 N1          0.4468    0.6520    0.0000 N.pl3     1 TETRAZOLE    0.0460 
+      2 N2         -0.8122    1.1335    0.0000 N.2       1 TETRAZOLE   -0.0230 
+      3 N3         -1.6376    0.0711    0.0000 N.2       1 TETRAZOLE   -0.1350 
+      4 N4         -0.8488   -1.1093    0.0000 N.2       1 TETRAZOLE   -0.1909 
+      5 C1          0.3341   -0.6433    0.0000 C.2       1 TETRAZOLE    0.3029 
+      6 H1          1.3186    1.2021    0.0000 H.spc     1 TETRAZOLE   -1.0000 
+      7 H2          1.1991   -1.3061    0.0000 H.spc     1 TETRAZOLE   -1.0000 
+@<TRIPOS>BOND
+     1    1    2 1    
+     2    1    5 1    
+     3    2    3 2    
+     4    3    4 1    
+     5    4    5 2    
+     6    1    6 1    
+     7    5    7 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 TETRAZOLE     1 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0

@@ -1,0 +1,53 @@
+#	Name:			benzimidazole
+#	Creating user name:	becker
+#	Creation time:		Thu Dec 19 02:54:41 2002
+
+#	Modifying user name:	zmliu
+#	Modification time:	Thu Mar 11 20:29:28 2004
+
+@<TRIPOS>MOLECULE
+benzimidazole
+   15    16     1     1     0
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 N1          1.8712    0.6737    0.0002 N.pl3     1 BENZIMIDAZOLE   -0.0844 
+      2 C1          2.4160   -0.5140   -0.0009 C.2       1 BENZIMIDAZOLE    0.2436 
+      3 N2          1.5336   -1.4274   -0.0004 N.2       1 BENZIMIDAZOLE   -0.2886 
+      4 C2         -0.9639   -1.4494    0.0012 C.ar      1 BENZIMIDAZOLE   -0.0138 
+      5 C3         -2.0315   -0.5401   -0.0007 C.ar      1 BENZIMIDAZOLE   -0.0232 
+      6 C4         -1.8152    0.8495   -0.0005 C.ar      1 BENZIMIDAZOLE   -0.0210 
+      7 C5         -0.5231    1.3955    0.0006 C.ar      1 BENZIMIDAZOLE    0.0123 
+      8 C6          0.5309    0.4838    0.0005 C.ar      1 BENZIMIDAZOLE    0.1294 
+      9 C7          0.3086   -0.8839    0.0006 C.ar      1 BENZIMIDAZOLE    0.0457 
+     10 H1          2.3645    1.5790    0.0008 H.spc     1 BENZIMIDAZOLE   -1.0000 
+     11 H2          3.4882   -0.7080   -0.0022 H.spc     1 BENZIMIDAZOLE   -1.0000 
+     12 H3         -1.1131   -2.5237    0.0029 H.spc     1 BENZIMIDAZOLE   -1.0000 
+     13 H4         -3.0484   -0.9202   -0.0025 H.spc     1 BENZIMIDAZOLE   -1.0000 
+     14 H5         -2.6697    1.5190   -0.0011 H.spc     1 BENZIMIDAZOLE   -1.0000 
+     15 H6         -0.3482    2.4661    0.0015 H.spc     1 BENZIMIDAZOLE   -1.0000 
+@<TRIPOS>BOND
+     1    2    1 1    
+     2    1    8 1    
+     3    3    2 2    
+     4    9    3 1    
+     5    4    5 ar   
+     6    4    9 ar   
+     7    5    6 ar   
+     8    6    7 ar   
+     9    7    8 ar   
+    10    8    9 ar   
+    11    1   10 1    
+    12    2   11 1    
+    13    4   12 1    
+    14    5   13 1    
+    15    6   14 1    
+    16    7   15 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 BENZIMIDAZOLE     4 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0

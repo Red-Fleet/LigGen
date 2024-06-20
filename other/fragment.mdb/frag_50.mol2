@@ -1,0 +1,29 @@
+#	Name:			sulfoxide
+#	Creating user name:	arthur
+#	Creation time:		Thu Jan 15 23:27:24 1998
+
+#	Modifying user name:	arthur
+#	Modification time:	Thu Jan 15 23:28:02 1998
+
+@<TRIPOS>MOLECULE
+sulfoxide
+    4     3     1     1     0
+SMALL
+USER_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 S          -0.0070   -0.0091   -0.0052 S.o       1 SULFOXYL    0.0000 
+      2 O           1.4263    0.1579   -0.1471 O.2       1 SULFOXYL    0.0000 
+      3 H1         -0.4345    0.4139   -0.8142 H.spc     1 SULFOXYL    0.0000 
+      4 H2         -0.3179    0.6729    0.6688 H.spc     1 SULFOXYL    0.0000 
+@<TRIPOS>BOND
+     1    1    2 2    
+     2    1    3 1    
+     3    1    4 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 SULFOXYL     1 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 0 0 0 0 0 0 0 0 0 0 0 0 0

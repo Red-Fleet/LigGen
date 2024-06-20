@@ -1,0 +1,36 @@
+#	Name:			<unnamed>
+#	Creating user name:	zmliu
+#	Creation time:		Thu Mar 11 21:59:53 2004
+
+#	Modifying user name:	zmliu
+#	Modification time:	Thu Mar 11 22:00:48 2004
+
+@<TRIPOS>MOLECULE
+****
+    8     7     1     0     1
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 C1          2.2222   -2.0515   -0.8522 C.3       1 <1>        -0.0531 
+      2 C2          1.2835   -0.8737   -0.5313 C.3       1 <1>        -0.0531 
+      3 H1          1.8232   -2.9719   -0.4008 H         1 <1>         0.0265 
+      4 H2          3.2221   -1.8457   -0.4424 H.spc     1 <1>        -1.0000 
+      5 H3          2.2919   -2.1783   -1.9427 H         1 <1>         0.0265 
+      6 H4          1.2138   -0.7469    0.5591 H         1 <1>         0.0265 
+      7 H5          0.2836   -1.0794   -0.9411 H.spc     1 <1>        -1.0000 
+      8 H6          1.6825    0.0467   -0.9826 H         1 <1>         0.0265 
+@<TRIPOS>BOND
+     1    2    1 1    
+     2    1    3 1    
+     3    1    4 1    
+     4    1    5 1    
+     5    2    6 1    
+     6    2    7 1    
+     7    2    8 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 ****        2 TEMP              0 ****  ****    0 ROOT 
+@<TRIPOS>SET
+LAB$A_TYPE      STATIC     ATOMS    LABELGROUP SYSTEM 
+8 1 2 3 4 5 6 7 8

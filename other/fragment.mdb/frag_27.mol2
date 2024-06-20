@@ -1,0 +1,25 @@
+#	Name:			Fluorine
+#	Creating user name:	arthur
+#	Creation time:		Fri Jan  1 17:18:34 1999
+
+#	Modifying user name:	arthur
+#	Modification time:	Fri Jan  1 17:20:27 1999
+
+@<TRIPOS>MOLECULE
+Fluorine
+    2     1     1     1     0
+SMALL
+USER_CHARGES
+INVALID_CHARGES
+
+@<TRIPOS>ATOM
+      1 H1         -2.5129    0.2031    0.0000 H.spc     1 <1>         0.0000 
+      2 F2         -1.7385    0.8484    0.0000 F         1 <1>         0.0000 
+@<TRIPOS>BOND
+     1    2    1 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 ****        2 TEMP              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 0 0 0 0 0 0 0 0 0 0 0 0 0

@@ -1,0 +1,57 @@
+#	Name:			phthalan
+#	Creating user name:	becker
+#	Creation time:		Thu Dec 19 02:54:59 2002
+
+#	Modifying user name:	zmliu
+#	Modification time:	Thu Mar 11 21:18:41 2004
+
+@<TRIPOS>MOLECULE
+phthalan
+   17    18     1     1     0
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 C1          1.7040    1.1834   -0.0318 C.3       1 PHTHALAN    0.0674 
+      2 O1          2.3561   -0.0002   -0.5469 O.3       1 PHTHALAN   -0.4478 
+      3 C2          1.7045   -1.1832   -0.0298 C.3       1 PHTHALAN    0.0674 
+      4 C3         -0.9263   -1.4175   -0.0051 C.ar      1 PHTHALAN    0.0701 
+      5 C4         -2.1294   -0.7013    0.0052 C.ar      1 PHTHALAN    0.0891 
+      6 C5         -2.1296    0.7009    0.0062 C.ar      1 PHTHALAN    0.0891 
+      7 C6         -0.9266    1.4173   -0.0040 C.ar      1 PHTHALAN    0.0701 
+      8 C7          0.2658    0.6927   -0.0142 C.ar      1 PHTHALAN   -0.0027 
+      9 C8          0.2660   -0.6927   -0.0140 C.ar      1 PHTHALAN   -0.0027 
+     10 H1          1.8614    2.0515   -0.6888 H.spc     1 PHTHALAN   -1.0000 
+     11 H2          2.0339    1.4087    0.9941 H.spc     1 PHTHALAN   -1.0000 
+     12 H3          2.0337   -1.4062    0.9968 H.spc     1 PHTHALAN   -1.0000 
+     13 H4          1.8628   -2.0527   -0.6849 H.spc     1 PHTHALAN   -1.0000 
+     14 H5         -0.9154   -2.5022   -0.0061 H.spc     1 PHTHALAN   -1.0000 
+     15 H6         -3.0724   -1.2390    0.0124 H.spc     1 PHTHALAN   -1.0000 
+     16 H7         -3.0727    1.2384    0.0147 H.spc     1 PHTHALAN   -1.0000 
+     17 H8         -0.9159    2.5021   -0.0037 H.spc     1 PHTHALAN   -1.0000 
+@<TRIPOS>BOND
+     1    2    1 1    
+     2    1    8 1    
+     3    3    2 1    
+     4    9    3 1    
+     5    4    5 ar   
+     6    4    9 ar   
+     7    5    6 ar   
+     8    6    7 ar   
+     9    7    8 ar   
+    10    8    9 ar   
+    11    1   10 1    
+    12    1   11 1    
+    13    3   12 1    
+    14    3   13 1    
+    15    4   14 1    
+    16    5   15 1    
+    17    6   16 1    
+    18    7   17 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 PHTHALAN     4 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0

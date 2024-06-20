@@ -1,8 +1,31 @@
+import argparse
+from openbabel import openbabel as ob
+from openbabel import pybel as pb
+import numpy as np
+import selfies as sf
+
+def smilesToSelfies(smiles):
+    try:
+        return sf.encoder(smiles.split()[0])
+    except :
+        return None
 
 smiles_atoms = {'Al', 'As', 'B', 'Br', 'C', 'Cl', 'F', 'I', 'K', 'Li', 'N',
     'Na', 'O', 'P', 'S', 'Se', 'Si', 'Te', 'se', 'te', 'c', 'n', 'o', 'p', 's'}
 
 
+def parse_cmp_coordinates(string):
+    result = string.replace(' ', '').split(',')
+    if len(result) != 3: raise argparse.ArgumentTypeError('Incorrect Coordinates')
+
+    for i in range(3):
+        try:
+            result[i] = float(result[i])
+        except:
+            raise argparse.ArgumentTypeError('Incorrect Coordinates')
+
+    
+    return result
 
 
 def readDetailsFromPdbLine(line):
@@ -117,3 +140,28 @@ def pdbqtToPdb(pdbqt):
     
     return ''.join(result)
 
+
+def getAtomCoordinatesFromMol(mol: ob.OBMol):
+    result = []
+    for atom in  ob.OBMolAtomIter(mol):
+        result.append([atom.GetX(), atom.GetY(), atom.GetZ()])
+    
+    return np.array(result)
+
+
+# generate grid box around coordinate
+def getGridbox(coordinates: np.array, padding: float, min=None):
+    min_vals = coordinates.min(axis=0) - padding
+    max_vals = coordinates.max(axis=0) + padding
+    center = (min_vals + max_vals)/2
+    size = max_vals-min_vals
+
+    if min is not None:
+        size = np.array([size, [min]*3]).max(axis=0)
+    return center, size
+
+# get grid using the docked ligand
+def getGridFromLigand(lig_path, lig_format, min=20, padding=5):
+    lig_pb = next(pb.readfile(lig_format, lig_path))
+
+    return getGridbox(getAtomCoordinatesFromMol(lig_pb.OBMol), padding, min)

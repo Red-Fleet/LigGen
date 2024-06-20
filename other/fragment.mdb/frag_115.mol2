@@ -1,0 +1,57 @@
+#	Name:			isoquinoline
+#	Creating user name:	becker
+#	Creation time:		Thu Dec 19 02:54:55 2002
+
+#	Modifying user name:	zmliu
+#	Modification time:	Thu Mar 11 20:56:55 2004
+
+@<TRIPOS>MOLECULE
+isoquinoline
+   17    18     1     1     0
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 C1          1.2128    1.6223    0.0023 C.ar      1 ISOQUINOLINE    0.0845 
+      2 N1          2.4579    1.1037    0.0001 N.ar      1 ISOQUINOLINE   -0.2764 
+      3 C2          2.6652   -0.2286   -0.0019 C.ar      1 ISOQUINOLINE    0.0752 
+      4 C3          1.5825   -1.1119   -0.0003 C.ar      1 ISOQUINOLINE    0.0299 
+      5 C4         -0.8303   -1.4557    0.0016 C.ar      1 ISOQUINOLINE    0.0102 
+      6 C5         -2.1238   -0.9264    0.0004 C.ar      1 ISOQUINOLINE    0.0089 
+      7 C6         -2.3116    0.4582   -0.0019 C.ar      1 ISOQUINOLINE    0.0089 
+      8 C7         -1.2058    1.3130   -0.0008 C.ar      1 ISOQUINOLINE    0.0119 
+      9 C8          0.0908    0.7853    0.0008 C.ar      1 ISOQUINOLINE    0.0297 
+     10 C9          0.2794   -0.6023    0.0006 C.ar      1 ISOQUINOLINE    0.0173 
+     11 H1          1.0994    2.7011    0.0052 H.spc     1 ISOQUINOLINE   -1.0000 
+     12 H2          3.6811   -0.6089   -0.0048 H.spc     1 ISOQUINOLINE   -1.0000 
+     13 H3          1.7621   -2.1827    0.0002 H.spc     1 ISOQUINOLINE   -1.0000 
+     14 H4         -0.6967   -2.5332    0.0030 H.spc     1 ISOQUINOLINE   -1.0000 
+     15 H5         -2.9827   -1.5905    0.0013 H.spc     1 ISOQUINOLINE   -1.0000 
+     16 H6         -3.3164    0.8695   -0.0044 H.spc     1 ISOQUINOLINE   -1.0000 
+     17 H7         -1.3638    2.3871   -0.0014 H.spc     1 ISOQUINOLINE   -1.0000 
+@<TRIPOS>BOND
+     1    2    1 ar   
+     2    1    9 ar   
+     3    3    2 ar   
+     4    4    3 ar   
+     5   10    4 ar   
+     6    5    6 ar   
+     7    5   10 ar   
+     8    6    7 ar   
+     9    7    8 ar   
+    10    8    9 ar   
+    11    9   10 ar   
+    12    1   11 1    
+    13    3   12 1    
+    14    4   13 1    
+    15    5   14 1    
+    16    6   15 1    
+    17    7   16 1    
+    18    8   17 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 ISOQUINOLINE     5 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0

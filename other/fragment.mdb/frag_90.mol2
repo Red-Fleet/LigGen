@@ -1,0 +1,55 @@
+#	Name:			benzopyrimidine
+#	Creating user name:	becker
+#	Creation time:		Thu Dec 19 02:54:41 2002
+
+#	Modifying user name:	zmliu
+#	Modification time:	Thu Mar 11 20:32:58 2004
+
+@<TRIPOS>MOLECULE
+benzopyrimidine
+   16    17     1     1     0
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 N1          1.4986    1.4012    0.0012 N.ar      1 BENZOPYRIMIDINE   -0.2543 
+      2 C1          2.6584    0.7131    0.0006 C.ar      1 BENZOPYRIMIDINE    0.1697 
+      3 N2          2.6573   -0.6355   -0.0013 N.ar      1 BENZOPYRIMIDINE   -0.2329 
+      4 C2          1.4991   -1.3260   -0.0013 C.ar      1 BENZOPYRIMIDINE    0.1141 
+      5 C3         -0.9496   -1.3090    0.0012 C.ar      1 BENZOPYRIMIDINE    0.0213 
+      6 C4         -2.1411   -0.5775    0.0003 C.ar      1 BENZOPYRIMIDINE    0.0155 
+      7 C5         -2.1061    0.8201   -0.0003 C.ar      1 BENZOPYRIMIDINE    0.0155 
+      8 C6         -0.8780    1.4879   -0.0005 C.ar      1 BENZOPYRIMIDINE    0.0246 
+      9 C7          0.3134    0.7575    0.0003 C.ar      1 BENZOPYRIMIDINE    0.0716 
+     10 C8          0.2800   -0.6407    0.0002 C.ar      1 BENZOPYRIMIDINE    0.0549 
+     11 H1          3.6004    1.2491    0.0016 H.spc     1 BENZOPYRIMIDINE   -1.0000 
+     12 H2          1.5296   -2.4101   -0.0026 H.spc     1 BENZOPYRIMIDINE   -1.0000 
+     13 H3         -0.9866   -2.3940    0.0027 H.spc     1 BENZOPYRIMIDINE   -1.0000 
+     14 H4         -3.0952   -1.0956   -0.0002 H.spc     1 BENZOPYRIMIDINE   -1.0000 
+     15 H5         -3.0322    1.3867   -0.0006 H.spc     1 BENZOPYRIMIDINE   -1.0000 
+     16 H6         -0.8481    2.5728   -0.0013 H.spc     1 BENZOPYRIMIDINE   -1.0000 
+@<TRIPOS>BOND
+     1    2    1 ar   
+     2    1    9 ar   
+     3    3    2 ar   
+     4    4    3 ar   
+     5   10    4 ar   
+     6    5    6 ar   
+     7    5   10 ar   
+     8    6    7 ar   
+     9    7    8 ar   
+    10    8    9 ar   
+    11    9   10 ar   
+    12    2   11 1    
+    13    4   12 1    
+    14    5   13 1    
+    15    6   14 1    
+    16    7   15 1    
+    17    8   16 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 BENZOPYRIMIDINE     5 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0

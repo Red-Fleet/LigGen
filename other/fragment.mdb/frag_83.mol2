@@ -1,0 +1,53 @@
+#	Name:			adenine
+#	Creating user name:	becker
+#	Creation time:		Thu Dec 19 02:54:40 2002
+
+#	Modifying user name:	zmliu
+#	Modification time:	Thu Mar 11 20:25:27 2004
+
+@<TRIPOS>MOLECULE
+adenine
+   15    16     1     1     0
+SMALL
+GAST_HUCK
+
+
+@<TRIPOS>ATOM
+      1 N1         -1.8585   -0.8648    0.0016 N.ar      1 ADENINE    -0.2528 
+      2 C1         -1.1132   -1.9989    0.0001 C.ar      1 ADENINE     0.1258 
+      3 N2          0.2408   -1.9760    0.0005 N.ar      1 ADENINE    -0.2562 
+      4 C2          0.8554   -0.7786    0.0005 C.ar      1 ADENINE     0.1954 
+      5 C3          0.0972    0.3822    0.0008 C.ar      1 ADENINE     0.1136 
+      6 C4         -1.2949    0.3654    0.0008 C.ar      1 ADENINE     0.1922 
+      7 N3          0.9835    1.3863    0.0008 N.2       1 ADENINE    -0.2787 
+      8 C5          2.1624    0.9190    0.0000 C.2       1 ADENINE     0.2484 
+      9 N4          2.1527   -0.3873    0.0000 N.pl3     1 ADENINE    -0.0653 
+     10 N5         -2.0261    1.5029   -0.0003 N.pl3     1 ADENINE    -0.0224 
+     11 H1         -1.6198   -2.9570   -0.0015 H.spc     1 ADENINE    -1.0000 
+     12 H2          3.0599    1.5371   -0.0008 H.spc     1 ADENINE    -1.0000 
+     13 H3          2.9762   -1.0071   -0.0011 H.spc     1 ADENINE    -1.0000 
+     14 H4         -1.5602    2.4227   -0.0002 H.spc     1 ADENINE    -1.0000 
+     15 H5         -3.0555    1.4539   -0.0015 H.spc     1 ADENINE    -1.0000 
+@<TRIPOS>BOND
+     1    1    2 ar   
+     2    1    6 ar   
+     3    2    3 ar   
+     4    3    4 ar   
+     5    4    5 ar   
+     6    4    9 1    
+     7    5    6 ar   
+     8    5    7 1    
+     9    7    8 2    
+    10    8    9 1    
+    11    6   10 1    
+    12    2   11 1    
+    13    8   12 1    
+    14    9   13 1    
+    15   10   14 1    
+    16   10   15 1    
+@<TRIPOS>SUBSTRUCTURE
+     1 ADENINE     1 PERM              0 ****  ****    0 ROOT 
+@<TRIPOS>NORMAL
+@<TRIPOS>FF_PBC
+FORCE_FIELD_SETUP_FEATURE Force Field Setup information
+v1.0  0 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 NONE 2 0 0 0 0 0 0 0 0 0 0 0 0
