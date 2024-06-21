@@ -108,7 +108,8 @@ if __name__ == "__main__":
     for k, v in args.__dict__.items():
         print(k, ":", v)
 
-    model = RNNSelfies(vocab_size=len(VOCAB), 
+    vocab = get_vocab()
+    model = RNNSelfies(vocab_size=len(vocab), 
         embed_dim=256,
         hidden_size=512,
         num_layers=3,
@@ -116,10 +117,10 @@ if __name__ == "__main__":
 
     model = model.to(args.device)
 
-    dataset = SelfiesDataset(args.input_smiles, max_len=args.max_len)
+    dataset = SelfiesDataset(args.input_smiles, vocab=vocab, max_len=args.max_len)
     train_loader = DataLoader(dataset, args.batch_size)
 
-    criterion = nn.CrossEntropyLoss(reduction='sum', ignore_index=VOCAB[PAD_TOKEN])
+    criterion = nn.CrossEntropyLoss(reduction='sum', ignore_index=vocab[PAD_TOKEN])
     optimizer = optim.Adam(model.parameters(), lr=0.001, amsgrad=True, weight_decay=0.0001)
 
     # learning rate scheduler

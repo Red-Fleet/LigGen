@@ -8,12 +8,12 @@ import utils
 
 
 class SelfiesDataset(Dataset):
-    def __init__(self, smiles_path: list, max_len=None): # start and end tokens are added
+    def __init__(self, smiles_path: list, vocab, max_len=None): # start and end tokens are added
         '''
         if max_len is None: take max_len from dataset
         if max_len == 'avg': take average length from dataset
         '''
-        self.vocab = VOCAB
+        self.vocab = vocab
 
         # reading smiles from file
         tokenized_sen = []

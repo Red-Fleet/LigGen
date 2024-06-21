@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 from selfies_dataset import SelfiesDataset
 from torch import nn
 import torch.optim as optim
-
+from tqdm import tqdm
 
 
 if __name__ == "__main__":
@@ -44,7 +44,8 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
 
-    model = RNNSelfies(vocab_size=len(VOCAB),
+    vocab = get_vocab()
+    model = RNNSelfies(vocab_size=len(vocab),
         embed_dim=256,
         hidden_size=512,
         num_layers=3,
@@ -55,8 +56,12 @@ if __name__ == "__main__":
 
     smiles_list = []
     
+    pbar = tqdm(total=args.iteration*args.batch_size)
     for i in range(args.iteration):
-        smiles_list += model.generateSmiles(batch_size=args.batch_size, vocab=VOCAB, max_len=args.max_len)
+        smiles_list += model.generateSmiles(batch_size=args.batch_size, vocab=vocab, max_len=args.max_len)
+        pbar.update(args.batch_size)
+    
+    pbar.close()
     
     with open(args.out_path, 'w') as f:
         for smiles in smiles_list:
