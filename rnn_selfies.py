@@ -59,8 +59,7 @@ class RNNSelfies(nn.Module):
                 
                 new_sentance.append(e)
             
-            if new_sentance != 'invalid':
-                results.append(sf.decoder(''.join(new_sentance)))
+            results.append(sf.decoder(''.join(new_sentance)))
         
         return results
     

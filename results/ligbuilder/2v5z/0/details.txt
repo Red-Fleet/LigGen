@@ -1,0 +1,49 @@
+{
+    "total_frag_screened": 253,
+    "total_frag_rejected_mpc": 11,
+    "state_details": [
+        {
+            "added_frag": "N1(N=C(C(=C1)))",
+            "in_ligand": "",
+            "out_ligand": "N1(N=C(C(=C1)))",
+            "total_score": 2.605743421913412,
+            "vina_score": -2.504,
+            "sa_score": 7.715486843826825
+        },
+        {
+            "added_frag": "C2(OC3(OC(C(C(C3))))C(C(C2)))",
+            "in_ligand": "N1(N=C(C(=C1)))",
+            "out_ligand": "C2(OC3(OC(C(C(C3))))C(C(C2)))N1(N=C(C(=C1)))",
+            "total_score": 2.065446100807688,
+            "vina_score": -3.494,
+            "sa_score": 7.624892201615376
+        },
+        {
+            "added_frag": "c4(c(c5c(c(c4))OC(O5)))",
+            "in_ligand": "C2(OC3(OC(C(C(C3))))C(C(C2)))N1(N=C(C(=C1)))",
+            "out_ligand": "c4(c(c5c(c(c4))OC(O5)))C2(OC3(OC(C(C(C3))))C(C(C2)))N1(N=C(C(=C1)))",
+            "total_score": 14.187015424323334,
+            "vina_score": 20.247,
+            "sa_score": 8.127030848646669
+        },
+        {
+            "added_frag": "c6(c(c(c(c7c6c(c(c6c7c(c(c(c6)))))))))",
+            "in_ligand": "c4(c(c5c(c(c4))OC(O5)))C2(OC3(OC(C(C(C3))))C(C(C2)))N1(N=C(C(=C1)))",
+            "out_ligand": "c4(c(c5c(c(c4(c6(c(c(c(c7c6c(c(c6c7c(c(c(c6))))))))))))OC(O5)))C2(OC3(OC(C(C(C3))))C(C(C2)))N1(N=C(C(=C1)))",
+            "total_score": 9.96600333401815,
+            "vina_score": 11.622,
+            "sa_score": 8.310006668036301
+        },
+        {
+            "added_frag": "CO",
+            "in_ligand": "c4(c(c5c(c(c4(c6(c(c(c(c7c6c(c(c6c7c(c(c(c6))))))))))))OC(O5)))C2(OC3(OC(C(C(C3))))C(C(C2)))N1(N=C(C(=C1)))",
+            "out_ligand": "c4(c(c5c(c(c4(c6(c(c(c(c7c6c(c(c6c7c(c(c(c6(CO)))))))))))))OC(O5)))C2(OC3(OC(C(C(C3))))C(C(C2)))N1(N=C(C(=C1)))",
+            "total_score": 8.99999785808596,
+            "vina_score": 9.595,
+            "sa_score": 8.40499571617192
+        }
+    ],
+    "undocked_final_energy": 9.595,
+    "synthesizability_score": 8.40499571617192,
+    "docked_final_energy": -7.319
+}

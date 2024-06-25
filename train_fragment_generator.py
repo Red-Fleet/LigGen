@@ -79,7 +79,7 @@ if __name__ == "__main__":
                         description='Train fragment generation model',
                         )
 
-    default_model_params = 'model.pt'
+    default_out_model_params = 'model.pt'
     default_max_len = 100
     default_batch_size = 512
     default_epoch = 1
@@ -88,8 +88,11 @@ if __name__ == "__main__":
     parser.add_argument('-i', '--input_smiles', type=str, required=True,
                         help='path of file containing fragments in smile format')
     
-    parser.add_argument('-p', '--model_params', type=str, default=default_model_params,
-                        help=f'path for saving model parameters (default= {default_model_params})')
+    parser.add_argument('-ip', '--in_model_params', type=str, default=None,
+                        help=f'path for initializing model params (default= random)')
+    
+    parser.add_argument('-op', '--out_model_params', type=str, default=default_out_model_params,
+                        help=f'path for saving model params (default= {default_out_model_params})')
     
     parser.add_argument('-b', '--batch_size', type=int, default=default_batch_size,
                         help=f'batch size (default= {default_batch_size})')
@@ -115,6 +118,8 @@ if __name__ == "__main__":
         num_layers=3,
         dropout=0)
 
+    if args.in_model_params is not None: model.load_state_dict(torch.load(args.in_model_params))
+
     model = model.to(args.device)
 
     dataset = SelfiesDataset(args.input_smiles, vocab=vocab, max_len=args.max_len)
@@ -137,6 +142,6 @@ if __name__ == "__main__":
         print(f'Loss : {loss}')
 
     
-    torch.save(model.state_dict(), args.model_params)
+    torch.save(model.state_dict(), args.out_model_params)
         
         

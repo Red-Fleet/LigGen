@@ -1,0 +1,49 @@
+{
+    "total_frag_screened": 12,
+    "total_frag_rejected_mpc": 1,
+    "state_details": [
+        {
+            "added_frag": "N#Cc1cccnc1",
+            "in_ligand": "",
+            "out_ligand": "N#Cc1cccnc1",
+            "total_score": 2.3521876099735133,
+            "vina_score": -2.204,
+            "sa_score": 6.908375219947026
+        },
+        {
+            "added_frag": "CC(O)CN2CCOCC2",
+            "in_ligand": "N#Cc1cccnc1",
+            "out_ligand": "N#Cc1cccnc1(CC(O)CN2CCOCC2)",
+            "total_score": 5.503025464475247,
+            "vina_score": 3.931,
+            "sa_score": 7.075050928950494
+        },
+        {
+            "added_frag": "OC3CS(=O)(=O)C3",
+            "in_ligand": "N#Cc1cccnc1(CC(O)CN2CCOCC2)",
+            "out_ligand": "N#Cc1ccc(OC3CS(=O)(=O)C3)nc1(CC(O)CN2CCOCC2)",
+            "total_score": 2.174231442264146,
+            "vina_score": -2.437,
+            "sa_score": 6.785462884528291
+        },
+        {
+            "added_frag": "CP4(=O)CCNCC4",
+            "in_ligand": "N#Cc1ccc(OC3CS(=O)(=O)C3)nc1(CC(O)CN2CCOCC2)",
+            "out_ligand": "N#Cc1ccc(OC3(CP4(=O)CCNCC4)CS(=O)(=O)C3)nc1(CC(O)CN2CCOCC2)",
+            "total_score": 1.8683125822524098,
+            "vina_score": -3.617,
+            "sa_score": 7.35362516450482
+        },
+        {
+            "added_frag": "CC(O)Cn5ccnc5C",
+            "in_ligand": "N#Cc1ccc(OC3(CP4(=O)CCNCC4)CS(=O)(=O)C3)nc1(CC(O)CN2CCOCC2)",
+            "out_ligand": "N#Cc1ccc(OC3(CP4(=O)CCNCC4)CS(=O)(=O)C3(CC(O)Cn5ccnc5C))nc1(CC(O)CN2CCOCC2)",
+            "total_score": 1.7818923414473706,
+            "vina_score": -2.387,
+            "sa_score": 5.950784682894741
+        }
+    ],
+    "undocked_final_energy": -2.387,
+    "synthesizability_score": 5.950784682894741,
+    "docked_final_energy": -8.252
+}

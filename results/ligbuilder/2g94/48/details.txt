@@ -1,0 +1,24 @@
+{
+    "total_frag_screened": 4,
+    "total_frag_rejected_mpc": 0,
+    "state_details": [
+        {
+            "added_frag": "C12=C3C(=C(C(=O)C(C3)))C(C([C@]1([C@]1([C@](C(C2))(C(C(C1)))))))",
+            "in_ligand": "",
+            "out_ligand": "C12=C3C(=C(C(=O)C(C3)))C(C([C@]1([C@]1([C@](C(C2))(C(C(C1)))))))",
+            "total_score": 1.5354132282354347,
+            "vina_score": -4.562,
+            "sa_score": 7.63282645647087
+        },
+        {
+            "added_frag": "Ic13c(c(c(c(c13C(=O)N)I)C(=O)O)I)N(C(=O))",
+            "in_ligand": "C12=C3C(=C(C(=O)C(C3)))C(C([C@]1([C@]1([C@](C(C2))(C(C(C1)))))))",
+            "out_ligand": "C12=C3C(=C(C(=O)C(C3)))C(C([C@]1([C@]1([C@](C(Ic13c(c(c(c(c13C(=O)N)I)C(=O)O)I)N(C(=O)))(C2))(C(C(C1)))))))",
+            "total_score": 4.692724674178772,
+            "vina_score": 2.121,
+            "sa_score": 7.264449348357543
+        }
+    ],
+    "undocked_final_energy": 2.121,
+    "synthesizability_score": 7.264449348357543
+}

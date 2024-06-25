@@ -1,5 +1,6 @@
 from vina import Vina
 from openbabel import pybel as pb
+from openbabel import openbabel as ob
 from rdkit import Chem
 from rdkit.Chem import AllChem, Descriptors, Draw
 import random
@@ -23,6 +24,7 @@ class SimulatedAnnealing:
         self.grid_box = None  #[0=> center, 1=>size]
         self.total_frag_screened = 0
         self.total_frag_rejected_mpc = 0
+        self.obconversion = ob.OBConversion()
 
     def setTarget(self, target_pdbqt_path: str, grid_param: tuple[int, list[int, int, int], list[int, int, int]] = None):
         '''
@@ -173,6 +175,8 @@ class SimulatedAnnealing:
         mol_block = Chem.MolToMolBlock(mol) # sdf format
 
         pymol = pb.readstring(format="sdf", string=mol_block)
+        pymol.addh()
+        _ = pymol.calccharges("gasteiger")
         pdbqt = pymol.write(format="pdbqt")
 
         return pdbqt
@@ -208,9 +212,6 @@ class SimulatedAnnealing:
     def getSAScore(self, mol: rdkit.Chem.rdchem.Mol):
         '''returns synthesizability score of given ligand'''
         return sascorer.calculateScore(mol)
-
-    def defaultCoolingSchedule(self, temp, iter):
-        return temp * 0.5 ** iter
     
     def _simulatedAnnealing(self, 
                             old_ligand: str,
@@ -220,7 +221,7 @@ class SimulatedAnnealing:
                             max_mw: float, 
                             temp: float, 
                             iter: int, 
-                            coolingSchedule,
+                            alpha,
                             end_prob:float,
                             max_iter_at_state:int,
                             vina_score_weight:float,
@@ -232,6 +233,8 @@ class SimulatedAnnealing:
 
             frag = self.getRandomFragment()
             self.total_frag_screened += 1
+
+            frag = utils.justifyRingCloserLabelInSmiles(in_smiles=frag, reference_smiles=old_ligand)
             new_lig, atomMap, frag_index = self.addFragmentRandomlyToLigandSmiles(lig_smile=old_ligand, frag_smile=frag, end_prob=end_prob)
 
             # renerating 3d structure from smiles
@@ -283,9 +286,10 @@ class SimulatedAnnealing:
             sa_score = self.getSAScore(mol)
             new_score = vina_score_weight*vina_score + (1-vina_score_weight)*sa_score
             del_score = new_score - old_score
-            new_Temp = coolingSchedule(temp, iter)
+            new_Temp = temp * (alpha**iter)
+
             if del_score <= 0 or random.random() < math.exp(-del_score / new_Temp):
-                
+                new_score = new_score
                 detail = {
                     "out_pdbqt": self.rdkitToPdbqt(mol),
                     "added_frag": frag,
@@ -308,7 +312,7 @@ class SimulatedAnnealing:
                                                               max_mw=max_mw, 
                                                               temp=temp, 
                                                               iter=iter+1,
-                                                              coolingSchedule=coolingSchedule,
+                                                              alpha=alpha,
                                                               end_prob=end_prob,
                                                               max_iter_at_state=max_iter_at_state,
                                                               vina_score_weight= vina_score_weight,
@@ -333,14 +337,14 @@ class SimulatedAnnealing:
                            vina_score_weight: float = 0.5,
                            ligand:str='', 
                            ligand_3d=None, 
-                           coolingSchedule=None,
+                           alpha:float= 0.9,
                            max_iter_at_state: int= 10,
                            ):
         '''
         end_prob = probablity by which fragment will get added to ends of ligand chain
         vina_score_weight = between [0 to 1]
         max_mw = Maximum molecular weight of fragment
-        coolingSchedule = function with temperature and iteration as input and should return new temperature
+        alpha = rate at which cooling schedule changes
         ligand = smiles of initial ligand
         ligand_3d = rdkit mol object having defined coordinates(lignad_3d smiles should be same as ligand)
         initial_building_position = position at which program will start the building of fragment(if 3d ligand is present then it will be skipped)
@@ -354,9 +358,6 @@ class SimulatedAnnealing:
 
             if mol is None:
                 raise Exception("Cannot generate 3d structure for initial ligand: ", ligand)
-
-        if coolingSchedule is None:
-            coolingSchedule = self.defaultCoolingSchedule
         
         self.total_frag_screened = 0
         self.total_frag_rejected_mpc = 0
@@ -367,7 +368,7 @@ class SimulatedAnnealing:
                                                 max_mw=max_mw, 
                                                 temp=temp, 
                                                 iter=0, 
-                                                coolingSchedule=coolingSchedule,
+                                                alpha=alpha,
                                                 end_prob=end_prob,
                                                 max_iter_at_state=max_iter_at_state,
                                                 vina_score_weight=vina_score_weight)

@@ -3,6 +3,8 @@ from openbabel import openbabel as ob
 from openbabel import pybel as pb
 import numpy as np
 import selfies as sf
+from openbabel import openbabel as ob
+from openbabel import pybel as pb
 
 def smilesToSelfies(smiles):
     try:
@@ -15,7 +17,7 @@ smiles_atoms = {'Al', 'As', 'B', 'Br', 'C', 'Cl', 'F', 'I', 'K', 'Li', 'N',
 
 
 def parse_cmp_coordinates(string):
-    result = string.replace(' ', '').split(',')
+    result = string.replace(' ', '').replace('[', '').replace(']', '').split(',')
     if len(result) != 3: raise argparse.ArgumentTypeError('Incorrect Coordinates')
 
     for i in range(3):
@@ -26,6 +28,45 @@ def parse_cmp_coordinates(string):
 
     
     return result
+
+
+
+def justifyRingCloserLabelInSmiles(in_smiles, reference_smiles):
+    '''return new smiles similar to in_smiles after offsetting ring labels of in_smiles,
+    offset is calculated with respect to reference_smiles'''
+
+    # finding all labels present in reference smiles
+    ref_lbs = ['']
+    for c in reference_smiles:
+        if c.isdecimal():
+            ref_lbs[-1] += c
+        else:
+            if len(ref_lbs[-1]) != 0:
+                ref_lbs.append('')
+    
+    ref_lbs = [int(e) for e in ref_lbs if e != '']
+
+    # finding offset
+    if len(ref_lbs) == 0:
+        offset = 0
+    else:
+        offset = max(ref_lbs)
+
+    # adding offset to labels of in_smiles
+    curr = ''
+    out_smiles = ''
+    for i, c in enumerate(in_smiles):
+        if c.isdecimal():           
+            curr += c
+        else:
+            if curr != '':
+                out_smiles += str(int(curr) + offset)
+                curr = ''
+            out_smiles += c
+    if curr != '':
+        out_smiles += str(int(curr) + offset)
+
+    return out_smiles
 
 
 def readDetailsFromPdbLine(line):
@@ -122,7 +163,7 @@ def getPdbLineFromDetails(
     
 
     
-def pdbqtToPdb(pdbqt):
+def pdbqtToPdb_do_not_use(pdbqt):
     lines = pdbqt.split('\n')
 
     result = []
@@ -162,6 +203,52 @@ def getGridbox(coordinates: np.array, padding: float, min=None):
 
 # get grid using the docked ligand
 def getGridFromLigand(lig_path, lig_format, min=20, padding=5):
+    '''return center and size'''
     lig_pb = next(pb.readfile(lig_format, lig_path))
 
     return getGridbox(getAtomCoordinatesFromMol(lig_pb.OBMol), padding, min)
+
+
+def num_atoms_in_smiles(smiles):
+    '''return number of atoms present in smiles'''
+    total = 0
+    i = 0
+    while i < len(smiles):
+        if smiles[i] in smiles_atoms:
+            total += 1
+        elif i+1 < len(smiles) and smiles[i:i+2] in smiles:
+            total += 1
+            i += 1
+        i += 1
+    
+    return total
+
+def refine_smiles(smiles_list, min_atoms, max_atoms):
+    '''return new list contaning smiles which have atoms in range of min_atom and max_atom'''
+
+    result = []
+    for smiles in smiles_list: 
+        count = num_atoms_in_smiles(smiles)
+
+        if count >= min_atoms and count <= max_atoms:
+            result.append(smiles)
+
+    return result
+
+def refine_smiles_file(in_file_path, out_file_path, min_atoms, max_atoms):
+    with open(in_file_path) as f_in:
+        smiles_list = [smiles.split()[0] for smiles in f_in.readlines()]
+
+        refined_smiles_list = refine_smiles(smiles_list, min_atoms, max_atoms)
+
+        with open(out_file_path, 'w') as f_out:
+            for smiles in refined_smiles_list:
+                f_out.write(smiles + '\n')
+
+
+def pdbToPdbqt(in_path, out_path):
+    m = next(pb.readfile('pdb', in_path))
+    m.addh()
+    _ = m.calccharges("gasteiger")
+    obconv = ob.OBConversion()
+    m.write('pdbqt', out_path, overwrite=True, opt={'r':obconv.OUTOPTIONS})

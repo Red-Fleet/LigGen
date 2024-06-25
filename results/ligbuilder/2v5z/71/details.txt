@@ -1,0 +1,49 @@
+{
+    "total_frag_screened": 308,
+    "total_frag_rejected_mpc": 79,
+    "state_details": [
+        {
+            "added_frag": "C1([C@]2(SC(C(N2C1=O))))",
+            "in_ligand": "",
+            "out_ligand": "C1([C@]2(SC(C(N2C1=O))))",
+            "total_score": 1.8592571751909046,
+            "vina_score": -3.126,
+            "sa_score": 6.844514350381809
+        },
+        {
+            "added_frag": "N(c3c(c(c(c(c3))C(=O)N)))",
+            "in_ligand": "C1([C@]2(SC(C(N2C1=O))))",
+            "out_ligand": "C1([C@]2(SC(C(N2C1=O))))N(c3c(c(c(c(c3))C(=O)N)))",
+            "total_score": -0.3660902093364491,
+            "vina_score": -3.977,
+            "sa_score": 3.2448195813271017
+        },
+        {
+            "added_frag": "Oc4c(c(nc(c4)))",
+            "in_ligand": "C1([C@]2(SC(C(N2C1=O))))N(c3c(c(c(c(c3))C(=O)N)))",
+            "out_ligand": "Oc4c(c(nc(c4)))C1([C@]2(SC(C(N2C1=O))))N(c3c(c(c(c(c3))C(=O)N)))",
+            "total_score": 4.491370219636841,
+            "vina_score": 1.722,
+            "sa_score": 7.2607404392736825
+        },
+        {
+            "added_frag": "C5(=NC(C(O5)))",
+            "in_ligand": "Oc4c(c(nc(c4)))C1([C@]2(SC(C(N2C1=O))))N(c3c(c(c(c(c3))C(=O)N)))",
+            "out_ligand": "Oc4c(c(nc(c4)))C1([C@]2(SC(C(N2C1=O))))N(c3c(c(c(c(c3))C(=O)N)))C5(=NC(C(O5)))",
+            "total_score": 10.16951171819729,
+            "vina_score": 12.735,
+            "sa_score": 7.604023436394581
+        },
+        {
+            "added_frag": "N(=O)(=O)c6n(c(nc6))",
+            "in_ligand": "Oc4c(c(nc(c4)))C1([C@]2(SC(C(N2C1=O))))N(c3c(c(c(c(c3))C(=O)N)))C5(=NC(C(O5)))",
+            "out_ligand": "N(=O)(=O)c6n(c(nc6))Oc4c(c(nc(c4)))C1([C@]2(SC(C(N2C1=O))))N(c3c(c(c(c(c3))C(=O)N)))C5(=NC(C(O5)))",
+            "total_score": 1.7273514878515739,
+            "vina_score": -4.324,
+            "sa_score": 7.778702975703148
+        }
+    ],
+    "undocked_final_energy": -4.324,
+    "synthesizability_score": 7.778702975703148,
+    "docked_final_energy": -6.035
+}

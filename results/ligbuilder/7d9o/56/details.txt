@@ -1,0 +1,48 @@
+{
+    "total_frag_screened": 29,
+    "total_frag_rejected_mpc": 5,
+    "state_details": [
+        {
+            "added_frag": "c1c(c(c2c(c1)C(=C(C(=O)O2))))O",
+            "in_ligand": "",
+            "out_ligand": "c1c(c(c2c(c1)C(=C(C(=O)O2))))O",
+            "total_score": 1.4807377490297107,
+            "vina_score": -3.675,
+            "sa_score": 6.636475498059421
+        },
+        {
+            "added_frag": "P(=O)(O)(O)C(=O)O",
+            "in_ligand": "c1c(c(c2c(c1)C(=C(C(=O)O2))))O",
+            "out_ligand": "c1c(c(c2c(c1)C(=C(C(=O)O2))))OP(=O)(O)(O)C(=O)O",
+            "total_score": -0.38910494000244755,
+            "vina_score": -7.121,
+            "sa_score": 6.342790119995105
+        },
+        {
+            "added_frag": "c3sc(nn3)",
+            "in_ligand": "c1c(c(c2c(c1)C(=C(C(=O)O2))))OP(=O)(O)(O)C(=O)O",
+            "out_ligand": "c1c(c(c2c(c1)C(=C(C(=O)O2))))OP(=O)(O)(O)C(=O)Oc3sc(nn3)",
+            "total_score": -0.11171080631822017,
+            "vina_score": -7.368,
+            "sa_score": 7.14457838736356
+        },
+        {
+            "added_frag": "c4(nc5c(c(c4))c(nc(c5)))",
+            "in_ligand": "c1c(c(c2c(c1)C(=C(C(=O)O2))))OP(=O)(O)(O)C(=O)Oc3sc(nn3)",
+            "out_ligand": "c4(nc5c(c(c4))c(nc(c5)))c1c(c(c2c(c1)C(=C(C(=O)O2))))OP(=O)(O)(O)C(=O)Oc3sc(nn3)",
+            "total_score": 0.8954696327499696,
+            "vina_score": -5.437,
+            "sa_score": 7.2279392654999395
+        },
+        {
+            "added_frag": "O(C6=C(C(=O)C(=C(C6=O))O))",
+            "in_ligand": "c4(nc5c(c(c4))c(nc(c5)))c1c(c(c2c(c1)C(=C(C(=O)O2))))OP(=O)(O)(O)C(=O)Oc3sc(nn3)",
+            "out_ligand": "c4(nc5c(c(c4))c(nc(c5)))c1c(c(c2c(c1)C(=C(C(=O)O2))))OP(=O)(O)(O)C(=O)Oc3sc(nn3)O(C6=C(C(=O)C(=C(C6=O))O))",
+            "total_score": 0.9756301647313057,
+            "vina_score": -5.107,
+            "sa_score": 7.058260329462612
+        }
+    ],
+    "undocked_final_energy": -5.107,
+    "synthesizability_score": 7.058260329462612
+}

@@ -1,0 +1,49 @@
+{
+    "total_frag_screened": 469,
+    "total_frag_rejected_mpc": 20,
+    "state_details": [
+        {
+            "added_frag": "NC1CCC21CCCC2",
+            "in_ligand": "",
+            "out_ligand": "NC1CCC21CCCC2",
+            "total_score": 2.24725222546299,
+            "vina_score": -3.458,
+            "sa_score": 7.95250445092598
+        },
+        {
+            "added_frag": "CNCc22c(C)noc22C",
+            "in_ligand": "NC1CCC21CCCC2",
+            "out_ligand": "NC1CCC21C(CNCc22c(C)noc22C)CCC2",
+            "total_score": 2.2722507893998456,
+            "vina_score": -3.996,
+            "sa_score": 8.540501578799692
+        },
+        {
+            "added_frag": "COc23ccncc23C#N",
+            "in_ligand": "NC1CCC21C(CNCc22c(C)noc22C)CCC2",
+            "out_ligand": "NC1CCC21C(CNCc22c(C)noc22C(COc23ccncc23C#N))CCC2",
+            "total_score": 2.8356855199946605,
+            "vina_score": -3.389,
+            "sa_score": 9.06037103998932
+        },
+        {
+            "added_frag": "CC(C)c24ccn(CO)n24",
+            "in_ligand": "NC1CCC21C(CNCc22c(C)noc22C(COc23ccncc23C#N))CCC2",
+            "out_ligand": "NC1CCC21C(CNCc22c(C)noc22C(CC(C)c24ccn(CO)n24)(COc23ccncc23C#N))CCC2",
+            "total_score": 2.523193088808558,
+            "vina_score": -4.288,
+            "sa_score": 9.334386177617116
+        },
+        {
+            "added_frag": "OC25CCCCC25",
+            "in_ligand": "NC1CCC21C(CNCc22c(C)noc22C(CC(C)c24ccn(CO)n24)(COc23ccncc23C#N))CCC2",
+            "out_ligand": "NC1CCC21C(C(OC25CCCCC25)NCc22c(C)noc22C(CC(C)c24ccn(CO)n24)(COc23ccncc23C#N))CCC2",
+            "total_score": 2.4133494640713335,
+            "vina_score": -4.647,
+            "sa_score": 9.473698928142667
+        }
+    ],
+    "undocked_final_energy": -4.647,
+    "synthesizability_score": 9.473698928142667,
+    "docked_final_energy": -8.065
+}
