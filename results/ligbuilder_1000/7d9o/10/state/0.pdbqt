@@ -1,0 +1,11 @@
+REMARK  Name = =
+REMARK  0 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  N   UNL     1     -13.527 -43.287  27.262  0.00  0.00    -0.295 NA
+ATOM      2  C   UNL     1     -14.673 -42.786  27.108  0.00  0.00    +0.109 C 
+ATOM      3  H   UNL     1     -13.326 -43.818  28.066  0.00  0.00    +0.187 HD
+ENDROOT
+TORSDOF 0

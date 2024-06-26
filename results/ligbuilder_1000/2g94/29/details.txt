@@ -1,0 +1,57 @@
+{
+    "total_frag_screened": 66,
+    "total_frag_rejected_mpc": 2,
+    "state_details": [
+        {
+            "added_frag": "c12c(C(=O)N(C1=O))c(c(c(c2)))",
+            "in_ligand": "",
+            "out_ligand": "c12c(C(=O)N(C1=O))c(c(c(c2)))",
+            "total_score": 0.5538919795630064,
+            "vina_score": -4.613,
+            "sa_score": 5.720783959126013
+        },
+        {
+            "added_frag": "S(C(=S)N(O))",
+            "in_ligand": "c12c(C(=O)N(C1=O))c(c(c(c2)))",
+            "out_ligand": "c12c(C(=O)N(C1=O))c(c(S(C(=S)N(O)))(c(c2)))",
+            "total_score": 0.39199871319864155,
+            "vina_score": -4.566,
+            "sa_score": 5.349997426397283
+        },
+        {
+            "added_frag": "S(C#N)",
+            "in_ligand": "c12c(C(=O)N(C1=O))c(c(S(C(=S)N(O)))(c(c2)))",
+            "out_ligand": "c12c(C(=O)N(C1=O))c(c(S(C(=S)N(O(S(C#N)))))(c(c2)))",
+            "total_score": 0.3062809303979619,
+            "vina_score": -4.956,
+            "sa_score": 5.568561860795924
+        },
+        {
+            "added_frag": "N(C(=O)N(O))",
+            "in_ligand": "c12c(C(=O)N(C1=O))c(c(S(C(=S)N(O(S(C#N)))))(c(c2)))",
+            "out_ligand": "c12c(C(=O)N(C1=O))c(c(S(C(=S(N(C(=O)N(O))))N(O(S(C#N)))))(c(c2)))",
+            "total_score": -0.19984421798202856,
+            "vina_score": -6.183,
+            "sa_score": 5.783311564035943
+        },
+        {
+            "added_frag": "S",
+            "in_ligand": "c12c(C(=O)N(C1=O))c(c(S(C(=S(N(C(=O)N(O))))N(O(S(C#N)))))(c(c2)))",
+            "out_ligand": "c12c(C(=O)N(C1=O))c(c(S(C(=S(N(C(=O)N(O))))N(O(S(C#N)))))(c(c2)))S",
+            "total_score": 0.20343866156658175,
+            "vina_score": -5.095,
+            "sa_score": 5.501877323133163
+        },
+        {
+            "added_frag": "O(P(=O)(N)N)",
+            "in_ligand": "c12c(C(=O)N(C1=O))c(c(S(C(=S(N(C(=O)N(O))))N(O(S(C#N)))))(c(c2)))S",
+            "out_ligand": "c12c(C(=O)N(C1=O))c(c(S(C(=S(N(C(=O)N(O(P(=O)(N)N))(O))))N(O(S(C#N)))))(c(c2)))S",
+            "total_score": 0.2767797514118304,
+            "vina_score": -5.153,
+            "sa_score": 5.70655950282366
+        }
+    ],
+    "undocked_final_energy": -5.153,
+    "synthesizability_score": 5.70655950282366,
+    "docked_final_energy": -7.864
+}

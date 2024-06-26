@@ -1,0 +1,49 @@
+{
+    "total_frag_screened": 41,
+    "total_frag_rejected_mpc": 0,
+    "state_details": [
+        {
+            "added_frag": "[N+]1(C(C(C(=C(C1))c1c(c(c(c(c1)))))))",
+            "in_ligand": "",
+            "out_ligand": "[N+]1(C(C(C(=C(C1))c1c(c(c(c(c1)))))))",
+            "total_score": -0.6087700930533018,
+            "vina_score": -6.164,
+            "sa_score": 4.946459813893396
+        },
+        {
+            "added_frag": "S(S)S",
+            "in_ligand": "[N+]1(C(C(C(=C(C1))c1c(c(c(c(c1)))))))",
+            "out_ligand": "[N+]1(C(C(C(=C(C1))c1c(c(c(c(c1)))))))S(S)S",
+            "total_score": 1.122595451650787,
+            "vina_score": -2.822,
+            "sa_score": 5.067190903301574
+        },
+        {
+            "added_frag": "n2(nnnc2)",
+            "in_ligand": "[N+]1(C(C(C(=C(C1))c1c(c(c(c(c1)))))))S(S)S",
+            "out_ligand": "[N+]1(C(C(C(=C(C1))c1c(c(c(c(c1)))))))S(S)Sn2(nnnc2)",
+            "total_score": 3.070724117908392,
+            "vina_score": -1.601,
+            "sa_score": 7.742448235816784
+        },
+        {
+            "added_frag": "c3(c(c(c(c(c3))C(=O)O)O))",
+            "in_ligand": "[N+]1(C(C(C(=C(C1))c1c(c(c(c(c1)))))))S(S)Sn2(nnnc2)",
+            "out_ligand": "[N+]1(C(c3(c(c(c(c(c3))C(=O)O)O)))(C(C(=C(C1))c1c(c(c(c(c1)))))))S(S)Sn2(nnnc2)",
+            "total_score": 2.312136941810885,
+            "vina_score": -3.227,
+            "sa_score": 7.85127388362177
+        },
+        {
+            "added_frag": "O(P(=O)(C(=O)O)O)",
+            "in_ligand": "[N+]1(C(c3(c(c(c(c(c3))C(=O)O)O)))(C(C(=C(C1))c1c(c(c(c(c1)))))))S(S)Sn2(nnnc2)",
+            "out_ligand": "[N+]1(C(c3(c(c(c(c(c3))C(=O)O)O)))(C(C(=C(C1))c1c(c(c(c(c1)))))))S(S)S(O(P(=O)(C(=O)O)O))n2(nnnc2)",
+            "total_score": 0.5987857224813689,
+            "vina_score": -4.113,
+            "sa_score": 5.310571444962738
+        }
+    ],
+    "undocked_final_energy": -4.113,
+    "synthesizability_score": 5.310571444962738,
+    "docked_final_energy": -8.193
+}
