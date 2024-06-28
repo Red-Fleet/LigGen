@@ -1,0 +1,56 @@
+{
+    "total_frag_screened": 2772,
+    "total_frag_rejected_mpc": 485,
+    "state_details": [
+        {
+            "added_frag": "C(=CC(=O))",
+            "in_ligand": "",
+            "out_ligand": "C(=CC(=O))",
+            "total_score": 2.015076907849375,
+            "vina_score": -2.071,
+            "sa_score": 6.1011538156987495
+        },
+        {
+            "added_frag": "c1(c(c(c(c(c1)))F))",
+            "in_ligand": "C(=CC(=O))",
+            "out_ligand": "C(c1(c(c(c(c(c1)))F)))(=CC(=O))",
+            "total_score": 0.6140125750965058,
+            "vina_score": -5.69,
+            "sa_score": 6.918025150193012
+        },
+        {
+            "added_frag": "P(=O)(N)(O)O",
+            "in_ligand": "C(c1(c(c(c(c(c1)))F)))(=CC(=O))",
+            "out_ligand": "C(c1(c(P(=O)(N)(O)O)(c(c(c(c1)))F)))(=CC(=O))",
+            "total_score": 1.863640069516742,
+            "vina_score": -3.065,
+            "sa_score": 6.792280139033484
+        },
+        {
+            "added_frag": "S(C(=O))",
+            "in_ligand": "C(c1(c(P(=O)(N)(O)O)(c(c(c(c1)))F)))(=CC(=O))",
+            "out_ligand": "S(C(=O))C(c1(c(P(=O)(N)(O)O)(c(c(c(c1)))F)))(=CC(=O))",
+            "total_score": 3.5634937025314892,
+            "vina_score": 0.285,
+            "sa_score": 6.841987405062978
+        },
+        {
+            "added_frag": "C(=O)C(=O)",
+            "in_ligand": "S(C(=O))C(c1(c(P(=O)(N)(O)O)(c(c(c(c1)))F)))(=CC(=O))",
+            "out_ligand": "S(C(=O))C(c1(c(P(C(=O)C(=O))(=O)(N)(O)O)(c(c(c(c1)))F)))(=CC(=O))",
+            "total_score": 2.852476806561981,
+            "vina_score": -0.864,
+            "sa_score": 6.568953613123962
+        },
+        {
+            "added_frag": "S(SC(=S)N)C(=S)N",
+            "in_ligand": "S(C(=O))C(c1(c(P(C(=O)C(=O))(=O)(N)(O)O)(c(c(c(c1)))F)))(=CC(=O))",
+            "out_ligand": "S(SC(=S)N)C(=S)NS(C(=O))C(c1(c(P(C(=O)C(=O))(=O)(N)(O)O)(c(c(c(c1)))F)))(=CC(=O))",
+            "total_score": 2.4434495006747414,
+            "vina_score": -1.985,
+            "sa_score": 6.871899001349483
+        }
+    ],
+    "undocked_final_energy": -1.985,
+    "synthesizability_score": 6.871899001349483
+}

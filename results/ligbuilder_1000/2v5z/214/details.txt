@@ -1,0 +1,24 @@
+{
+    "total_frag_screened": 2,
+    "total_frag_rejected_mpc": 0,
+    "state_details": [
+        {
+            "added_frag": "n1oc(nc1)",
+            "in_ligand": "",
+            "out_ligand": "n1oc(nc1)",
+            "total_score": 2.437569575759566,
+            "vina_score": -2.494,
+            "sa_score": 7.369139151519132
+        },
+        {
+            "added_frag": "Ic2c(c(c(c(c2C(=O)N)I)C(=O)N)I)N(C(=O))",
+            "in_ligand": "n1oc(nc1)",
+            "out_ligand": "n1oc(nc1)Ic2c(c(c(c(c2C(=O)N)I)C(=O)N)I)N(C(=O))",
+            "total_score": 5.418122194179224,
+            "vina_score": 5.308,
+            "sa_score": 5.5282443883584484
+        }
+    ],
+    "undocked_final_energy": 5.308,
+    "synthesizability_score": 5.5282443883584484
+}

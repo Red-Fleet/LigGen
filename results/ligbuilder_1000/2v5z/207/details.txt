@@ -1,0 +1,49 @@
+{
+    "total_frag_screened": 861,
+    "total_frag_rejected_mpc": 200,
+    "state_details": [
+        {
+            "added_frag": "C1(=O)N(C(=O)C2=C(N1)N(C(=N2)))",
+            "in_ligand": "",
+            "out_ligand": "C1(=O)N(C(=O)C2=C(N1)N(C(=N2)))",
+            "total_score": -0.4016725365660254,
+            "vina_score": -5.22,
+            "sa_score": 4.416654926867949
+        },
+        {
+            "added_frag": "N(S(=O)(=O))",
+            "in_ligand": "C1(=O)N(C(=O)C2=C(N1)N(C(=N2)))",
+            "out_ligand": "C1(=O)N(C(=O)C2=C(N1)N(C(=N2)))N(S(=O)(=O))",
+            "total_score": -0.01499366573875438,
+            "vina_score": -5.244,
+            "sa_score": 5.214012668522491
+        },
+        {
+            "added_frag": "C3(N=C(N=C3))",
+            "in_ligand": "C1(=O)N(C(=O)C2=C(N1)N(C(=N2)))N(S(=O)(=O))",
+            "out_ligand": "C1(=O)N(C(=O)C2=C(N1)N(C(=N2)))N(S(=O)(=O))C3(N=C(N=C3))",
+            "total_score": 0.43990116692648806,
+            "vina_score": -5.095,
+            "sa_score": 5.974802333852976
+        },
+        {
+            "added_frag": "C(=N)",
+            "in_ligand": "C1(=O)N(C(=O)C2=C(N1)N(C(=N2)))N(S(=O)(=O))C3(N=C(N=C3))",
+            "out_ligand": "C1(=O)N(C(=O)C2=C(N1)N(C(=N2)))N(S(=O)(=O))C3(N=C(N=C3))C(=N)",
+            "total_score": 3.4150140967768916,
+            "vina_score": 0.296,
+            "sa_score": 6.534028193553783
+        },
+        {
+            "added_frag": "O(c4c5c(c(c(c4)C(=O)O))C(c4c(c(c(c(c4)))O)C5=O))",
+            "in_ligand": "C1(=O)N(C(=O)C2=C(N1)N(C(=N2)))N(S(=O)(=O))C3(N=C(N=C3))C(=N)",
+            "out_ligand": "C1(=O)N(C(=O)C2=C(N1)N(C(=N2)))N(S(=O)(=O))C3(N=C(N=C3))C(=N)O(c4c5c(c(c(c4)C(=O)O))C(c4c(c(c(c(c4)))O)C5=O))",
+            "total_score": 1.7819605954656916,
+            "vina_score": -3.497,
+            "sa_score": 7.060921190931383
+        }
+    ],
+    "undocked_final_energy": -3.497,
+    "synthesizability_score": 7.060921190931383,
+    "docked_final_energy": -9.451
+}

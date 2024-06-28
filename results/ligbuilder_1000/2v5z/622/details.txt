@@ -1,0 +1,40 @@
+{
+    "total_frag_screened": 915,
+    "total_frag_rejected_mpc": 120,
+    "state_details": [
+        {
+            "added_frag": "c1(nnn[nH]1)",
+            "in_ligand": "",
+            "out_ligand": "c1(nnn[nH]1)",
+            "total_score": 1.9963972680672584,
+            "vina_score": -2.243,
+            "sa_score": 6.235794536134517
+        },
+        {
+            "added_frag": "C2(OC(C(=O)C(=C2)))",
+            "in_ligand": "c1(nnn[nH]1)",
+            "out_ligand": "c1(nnn[nH]1)C2(OC(C(=O)C(=C2)))",
+            "total_score": 0.062332978506117076,
+            "vina_score": -5.403,
+            "sa_score": 5.527665957012234
+        },
+        {
+            "added_frag": "c3c(c(c(c(c3))Cl)Cl)",
+            "in_ligand": "c1(nnn[nH]1)C2(OC(C(=O)C(=C2)))",
+            "out_ligand": "c1(nnn[nH]1)C2(OC(C(=O)C(=C2)))c3c(c(c(c(c3))Cl)Cl)",
+            "total_score": 8.895054372426653,
+            "vina_score": 11.105,
+            "sa_score": 6.685108744853307
+        },
+        {
+            "added_frag": "O(P(=O)(OP(=O)(OP(=O)(O)O)O)O)",
+            "in_ligand": "c1(nnn[nH]1)C2(OC(C(=O)C(=C2)))c3c(c(c(c(c3))Cl)Cl)",
+            "out_ligand": "c1(nnn[nH]1)C2(OC(C(=O)C(=C2)))c3c(c(c(c(c3))Cl)Cl)O(P(=O)(OP(=O)(OP(=O)(O)O)O)O)",
+            "total_score": 7.8068424354507435,
+            "vina_score": 9.324,
+            "sa_score": 6.289684870901487
+        }
+    ],
+    "undocked_final_energy": 9.324,
+    "synthesizability_score": 6.289684870901487
+}

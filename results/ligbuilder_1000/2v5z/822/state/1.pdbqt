@@ -1,0 +1,45 @@
+REMARK  Name = =
+REMARK  3 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: S_1  and  O_10
+REMARK    2  A    between atoms: O_10  and  C_11
+REMARK    3  A    between atoms: C_11  and  C_12
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  S   UNL     1      51.955 160.129  30.261  0.00  0.00    -0.040 S 
+ATOM      2  C   UNL     1      50.069 160.819  30.513  0.00  0.00    +0.148 C 
+ATOM      3  N   UNL     1      50.429 161.256  31.839  0.00  0.00    -0.269 N 
+ATOM      4  C   UNL     1      51.622 162.005  31.902  0.00  0.00    +0.107 C 
+ATOM      5  C   UNL     1      52.582 161.560  31.124  0.00  0.00    +0.098 C 
+ATOM      6  C   UNL     1      49.228 160.587  32.281  0.00  0.00    +0.229 C 
+ATOM      7  O   UNL     1      48.465 160.801  33.226  0.00  0.00    -0.275 OA
+ATOM      8  C   UNL     1      49.399 159.658  31.160  0.00  0.00    +0.118 C 
+ENDROOT
+BRANCH   1   9
+ATOM      9  O   UNL     1      52.219 158.850  29.844  0.00  0.00    -0.304 OA
+BRANCH   9  10
+ATOM     10  C   UNL     1      51.843 158.236  28.638  0.00  0.00    +0.183 C 
+BRANCH  10  11
+ATOM     11  C   UNL     1      51.855 156.772  28.718  0.00  0.00    +0.009 C 
+ATOM     12  C   UNL     1      51.043 156.124  29.615  0.00  0.00    -0.002 C 
+ATOM     13  C   UNL     1      51.052 154.738  29.695  0.00  0.00    -0.000 C 
+ATOM     14  C   UNL     1      51.878 154.017  28.873  0.00  0.00    -0.000 C 
+ATOM     15  C   UNL     1      52.683 154.666  27.982  0.00  0.00    -0.000 C 
+ATOM     16  C   UNL     1      52.688 156.044  27.888  0.00  0.00    -0.002 C 
+ENDBRANCH  10  11
+ENDBRANCH   9  10
+ENDBRANCH   1   9
+TORSDOF 3
+REMARK  Name = =
+REMARK  3 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: S_1  and  O_10
+REMARK    2  A    between atoms: O_10  and  C_11
+REMARK    3  A    between atoms: C_11  and  C_12
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  H   UNK     1      51.833 161.225  28.421  0.00  0.00    +0.000 HD
+ENDROOT
+TORSDOF 0

@@ -1,33 +1,48 @@
 {
-    "total_frag_screened": 6548,
-    "total_frag_rejected_mpc": 71,
+    "total_frag_screened": 168,
+    "total_frag_rejected_mpc": 57,
     "state_details": [
         {
-            "added_frag": "s1c(nc2c1c(c(c(c2))))",
+            "added_frag": "C1(C(C(C(c2c1c(c(c(c2)))))))",
             "in_ligand": "",
-            "out_ligand": "s1c(nc2c1c(c(c(c2))))",
-            "total_score": 2.1692447728435473,
-            "vina_score": -3.329,
-            "sa_score": 7.667489545687095
+            "out_ligand": "C1(C(C(C(c2c1c(c(c(c2)))))))",
+            "total_score": -0.13872385741963944,
+            "vina_score": -5.712,
+            "sa_score": 5.434552285160721
         },
         {
-            "added_frag": "c3c(c4c(c(c3))C(C(C(=C4))))",
-            "in_ligand": "s1c(nc2c1c(c(c(c2))))",
-            "out_ligand": "s1c(nc2c1c(c(c(c2(c3c(c4c(c(c3))C(C(C(=C4)))))))))",
-            "total_score": 11.484797346256187,
-            "vina_score": 15.191,
-            "sa_score": 7.778594692512371
+            "added_frag": "N3C(C(C(=C(C3))))",
+            "in_ligand": "C1(C(C(C(c2c1c(c(c(c2)))))))",
+            "out_ligand": "C1(C(C(C(c2c1c(c(c(c2)))))))N3C(C(C(=C(C3))))",
+            "total_score": 1.188636084534301,
+            "vina_score": -3.405,
+            "sa_score": 5.782272169068602
         },
         {
-            "added_frag": "N(C(=O)C5=C(C([C@]6([C@](C(=C7[C@@](C(c8c(c(c(c(c8)))O)C7=O))(C6))O)(C5=O))))O)",
-            "in_ligand": "s1c(nc2c1c(c(c(c2(c3c(c4c(c(c3))C(C(C(=C4)))))))))",
-            "out_ligand": "s1c(nc2c1c(c(c(c2(c3c(N(C(=O)C5=C(C([C@]6([C@](C(=C7[C@@](C(c8c(c(c(c(c8)))O)C7=O))(C6))O)(C5=O))))O))(c4c(c(c3))C(C(C(=C4)))))))))",
-            "total_score": 10.310774033609729,
-            "vina_score": 13.449,
-            "sa_score": 7.1725480672194575
+            "added_frag": "O(P(=O)(OP(=O)(O)O)O)",
+            "in_ligand": "C1(C(C(C(c2c1c(c(c(c2)))))))N3C(C(C(=C(C3))))",
+            "out_ligand": "C1(C(C(C(c2c1c(c(c(c2)))))))N3C(C(C(=C(C3))))O(P(=O)(OP(=O)(O)O)O)",
+            "total_score": 2.217368692009539,
+            "vina_score": -2.841,
+            "sa_score": 7.275737384019078
+        },
+        {
+            "added_frag": "P(=O)(O)(O)O",
+            "in_ligand": "C1(C(C(C(c2c1c(c(c(c2)))))))N3C(C(C(=C(C3))))O(P(=O)(OP(=O)(O)O)O)",
+            "out_ligand": "P(=O)(O)(O)OC1(C(C(C(c2c1c(c(c(c2)))))))N3C(C(C(=C(C3))))O(P(=O)(OP(=O)(O)O)O)",
+            "total_score": 9.572237190837305,
+            "vina_score": 11.833,
+            "sa_score": 7.311474381674609
+        },
+        {
+            "added_frag": "S(=O)=C",
+            "in_ligand": "P(=O)(O)(O)OC1(C(C(C(c2c1c(c(c(c2)))))))N3C(C(C(=C(C3))))O(P(=O)(OP(=O)(O)O)O)",
+            "out_ligand": "S(=O)=CP(=O)(O)(O)OC1(C(C(C(c2c1c(c(c(c2)))))))N3C(C(C(=C(C3))))O(P(=O)(OP(=O)(O)O)O)",
+            "total_score": 5.571826995746738,
+            "vina_score": 3.665,
+            "sa_score": 7.478653991493477
         }
     ],
-    "undocked_final_energy": 13.449,
-    "synthesizability_score": 7.1725480672194575,
-    "docked_final_energy": -9.318
+    "undocked_final_energy": 3.665,
+    "synthesizability_score": 7.478653991493477
 }

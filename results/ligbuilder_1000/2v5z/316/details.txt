@@ -1,0 +1,41 @@
+{
+    "total_frag_screened": 138,
+    "total_frag_rejected_mpc": 42,
+    "state_details": [
+        {
+            "added_frag": "C1(C([C@]2(C([C@@]3([C@]4([C@](OC4)(C(C([C@]3(C(=O)C(C(=C1)C2)))))))))))",
+            "in_ligand": "",
+            "out_ligand": "C1(C([C@]2(C([C@@]3([C@]4([C@](OC4)(C(C([C@]3(C(=O)C(C(=C1)C2)))))))))))",
+            "total_score": 48.191441248972005,
+            "vina_score": 89.959,
+            "sa_score": 6.4238824979440095
+        },
+        {
+            "added_frag": "c5c(c(c(c(c5))O)C(=O)N)",
+            "in_ligand": "C1(C([C@]2(C([C@@]3([C@]4([C@](OC4)(C(C([C@]3(C(=O)C(C(=C1)C2)))))))))))",
+            "out_ligand": "C1(C([C@]2(C([C@@]3([C@]4([C@](OC4)(C(C([C@]3(C(=O)C(C(=C1(c5c(c(c(c(c5))O)C(=O)N)))C2)))))))))))",
+            "total_score": 8.74618145150047,
+            "vina_score": 10.024,
+            "sa_score": 7.468362903000943
+        },
+        {
+            "added_frag": "C6(=C7C(=C(C(=C(C7=C(N6))))))",
+            "in_ligand": "C1(C([C@]2(C([C@@]3([C@]4([C@](OC4)(C(C([C@]3(C(=O)C(C(=C1(c5c(c(c(c(c5))O)C(=O)N)))C2)))))))))))",
+            "out_ligand": "C1(C([C@]2(C([C@@]3([C@]4([C@](OC4)(C(C([C@]3(C(=O)C(C(=C1(c5c(c(c(c(c5))O)C(=O)N)))C2)))))))))))C6(=C7C(=C(C(=C(C7=C(N6))))))",
+            "total_score": 24.705549361149114,
+            "vina_score": 42.644,
+            "sa_score": 6.767098722298232
+        },
+        {
+            "added_frag": "Clc8c(c(c(c(c8))))",
+            "in_ligand": "C1(C([C@]2(C([C@@]3([C@]4([C@](OC4)(C(C([C@]3(C(=O)C(C(=C1(c5c(c(c(c(c5))O)C(=O)N)))C2)))))))))))C6(=C7C(=C(C(=C(C7=C(N6))))))",
+            "out_ligand": "Clc8c(c(c(c(c8))))C1(C([C@]2(C([C@@]3([C@]4([C@](OC4)(C(C([C@]3(C(=O)C(C(=C1(c5c(c(c(c(c5))O)C(=O)N)))C2)))))))))))C6(=C7C(=C(C(=C(C7=C(N6))))))",
+            "total_score": 25.077285812831157,
+            "vina_score": 41.704,
+            "sa_score": 8.450571625662311
+        }
+    ],
+    "undocked_final_energy": 41.704,
+    "synthesizability_score": 8.450571625662311,
+    "docked_final_energy": -6.744
+}

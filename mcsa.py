@@ -15,7 +15,7 @@ import sascorer
 import rdkit.Chem
 import utils as utils
 from rdkit import RDLogger
-
+import uuid
 
 class SimulatedAnnealing:
     def __init__(self, fragments: list[str], vina: Vina):
@@ -25,6 +25,9 @@ class SimulatedAnnealing:
         self.total_frag_screened = 0
         self.total_frag_rejected_mpc = 0
         self.obconversion = ob.OBConversion()
+        self.temp_folder_path = 'temp'
+        if os.path.exists(self.temp_folder_path) == False or os.path.isdir(self.temp_folder_path):
+            os.mkdir(self.temp_folder_path) 
 
     def setTarget(self, target_pdbqt_path: str, grid_param: tuple[int, list[int, int, int], list[int, int, int]] = None):
         '''
@@ -265,13 +268,17 @@ class SimulatedAnnealing:
             pdbqt = self.rdkitToPdbqt(mol)
             self.vina.set_ligand_from_string(pdbqt)
             vina_score = self.vina.optimize()[0]
-            self.vina.write_pose('denovo_temp.pdbqt', overwrite=True)
+
+            temp_file_path = os.path.join(self.temp_folder_path, str(uuid.uuid4()))
+            self.vina.write_pose(temp_file_path, overwrite=True)
             
             # reading optimized pdbqt in mol variable
-            with open('denovo_temp.pdbqt') as f:
+            with open(temp_file_path) as f:
                 mol_block = pb.readstring('pdbqt', f.read()).write('sdf')
                 mol = Chem.MolFromMolBlock(mol_block)
-
+            
+            os.remove(temp_file_path)
+            
             # optimize process or pdbqt to mol can create wrong molecule # fix this in future
             if mol is None:
                 continue
