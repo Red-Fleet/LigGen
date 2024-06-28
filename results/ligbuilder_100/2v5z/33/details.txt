@@ -1,32 +1,57 @@
 {
-    "total_frag_screened": 4,
-    "total_frag_rejected_mpc": 0,
+    "total_frag_screened": 1398,
+    "total_frag_rejected_mpc": 341,
     "state_details": [
         {
-            "added_frag": "c1c(c2c(c(c1))OC(O2))",
+            "added_frag": "[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
             "in_ligand": "",
-            "out_ligand": "c1c(c2c(c(c1))OC(O2))",
-            "total_score": 1.9096960548948299,
-            "vina_score": -3.854,
-            "sa_score": 7.67339210978966
+            "out_ligand": "[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
+            "total_score": 5.757179888428335,
+            "vina_score": 3.568,
+            "sa_score": 7.946359776856671
         },
         {
-            "added_frag": "N(C(=C))",
-            "in_ligand": "c1c(c2c(c(c1))OC(O2))",
-            "out_ligand": "N(C(=C))c1c(c2c(c(c1))OC(O2))",
-            "total_score": 1.1779382532313911,
-            "vina_score": -5.063,
-            "sa_score": 7.418876506462782
+            "added_frag": "C3(C(C(C(C(C3)))))",
+            "in_ligand": "[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
+            "out_ligand": "C3(C(C(C(C(C3)))))[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
+            "total_score": 5.697268279420415,
+            "vina_score": 5.026,
+            "sa_score": 6.36853655884083
         },
         {
-            "added_frag": "S(=O)(=O)(N(C(=O)))",
-            "in_ligand": "N(C(=C))c1c(c2c(c(c1))OC(O2))",
-            "out_ligand": "S(=O)(=O)(N(C(=O)))N(C(=C))c1c(c2c(c(c1))OC(O2))",
-            "total_score": 0.9299981354808051,
-            "vina_score": -4.426,
-            "sa_score": 6.28599627096161
+            "added_frag": "N(C(=O)C(=O)O)",
+            "in_ligand": "C3(C(C(C(C(C3)))))[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
+            "out_ligand": "N(C(=O)C(=O)O)C3(C(C(C(C(C3)))))[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
+            "total_score": 5.271082823549854,
+            "vina_score": 3.341,
+            "sa_score": 7.201165647099708
+        },
+        {
+            "added_frag": "N4C(C(C(C(C4))))",
+            "in_ligand": "N(C(=O)C(=O)O)C3(C(C(C(C(C3)))))[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
+            "out_ligand": "N4C(C(C(C(C4))))N(C(=O)C(=O)O)C3(C(C(C(C(C3)))))[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
+            "total_score": 12.038137131090284,
+            "vina_score": 16.407,
+            "sa_score": 7.669274262180567
+        },
+        {
+            "added_frag": "S=P",
+            "in_ligand": "N4C(C(C(C(C4))))N(C(=O)C(=O)O)C3(C(C(C(C(C3)))))[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
+            "out_ligand": "S=PN4C(C(C(C(C4))))N(C(=O)C(=O)O)C3(C(C(C(C(C3)))))[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
+            "total_score": 11.326596709191,
+            "vina_score": 14.94,
+            "sa_score": 7.713193418382
+        },
+        {
+            "added_frag": "C5([C@]6(C(C(C(C([C@@]6(C(C(C5=C)))))))))",
+            "in_ligand": "S=PN4C(C(C(C(C4))))N(C(=O)C(=O)O)C3(C(C(C(C(C3)))))[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
+            "out_ligand": "C5([C@]6(C(C(C(C([C@@]6(C(C(C5=C)))))))))S=PN4C(C(C(C(C4))))N(C(=O)C(=O)O)C3(C(C(C(C(C3)))))[N+]1(C(C(c2c(c(c(c(c2))))C(C1))))",
+            "total_score": 8.474570338618282,
+            "vina_score": 9.243,
+            "sa_score": 7.706140677236563
         }
     ],
-    "undocked_final_energy": -4.426,
-    "synthesizability_score": 6.28599627096161
+    "undocked_final_energy": 9.243,
+    "synthesizability_score": 7.706140677236563,
+    "docked_final_energy": -7.599
 }

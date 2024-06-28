@@ -1,0 +1,48 @@
+{
+    "total_frag_screened": 5914,
+    "total_frag_rejected_mpc": 301,
+    "state_details": [
+        {
+            "added_frag": "c12c(SC(C(C(=O)N1)))c(c(c(c2)))",
+            "in_ligand": "",
+            "out_ligand": "c12c(SC(C(C(=O)N1)))c(c(c(c2)))",
+            "total_score": 0.9313202312533693,
+            "vina_score": -5.265,
+            "sa_score": 7.127640462506738
+        },
+        {
+            "added_frag": "S(P(=O)(O)O)",
+            "in_ligand": "c12c(SC(C(C(=O)N1)))c(c(c(c2)))",
+            "out_ligand": "c12c(SC(C(C(=O)N1)))c(c(c(c2)))S(P(=O)(O)O)",
+            "total_score": 2.0988290356011294,
+            "vina_score": -2.078,
+            "sa_score": 6.275658071202258
+        },
+        {
+            "added_frag": "C(=C(C(=O)O))",
+            "in_ligand": "c12c(SC(C(C(=O)N1)))c(c(c(c2)))S(P(=O)(O)O)",
+            "out_ligand": "c12c(SC(C(C(=O)N1(C(=C(C(=O)O))))))c(c(c(c2)))S(P(=O)(O)O)",
+            "total_score": 2.8246016785933783,
+            "vina_score": -0.564,
+            "sa_score": 6.213203357186757
+        },
+        {
+            "added_frag": "C13(C(C(C(c14c13c(c(c(c14)))))))",
+            "in_ligand": "c12c(SC(C(C(=O)N1(C(=C(C(=O)O))))))c(c(c(c2)))S(P(=O)(O)O)",
+            "out_ligand": "c12c(SC(C(C(=O)N1(C(=C(C13(C(C(C(c14c13c(c(c(c14))))))))(C(=O)O))))))c(c(c(c2)))S(P(=O)(O)O)",
+            "total_score": 5.14464560208931,
+            "vina_score": 2.802,
+            "sa_score": 7.487291204178619
+        },
+        {
+            "added_frag": "P(=O)(O)(O)O",
+            "in_ligand": "c12c(SC(C(C(=O)N1(C(=C(C13(C(C(C(c14c13c(c(c(c14))))))))(C(=O)O))))))c(c(c(c2)))S(P(=O)(O)O)",
+            "out_ligand": "c12c(SC(C(C(=O)N1(C(=C(C13(C(C(C(c14c13c(c(c(c14))))))))(C(=O)O))))))c(c(c(c2)))S(P(=O)(O)O)P(=O)(O)(O)O",
+            "total_score": 5.118959228567332,
+            "vina_score": 2.412,
+            "sa_score": 7.825918457134666
+        }
+    ],
+    "undocked_final_energy": 2.412,
+    "synthesizability_score": 7.825918457134666
+}

@@ -1,49 +1,57 @@
 {
-    "total_frag_screened": 64,
-    "total_frag_rejected_mpc": 21,
+    "total_frag_screened": 1478,
+    "total_frag_rejected_mpc": 192,
     "state_details": [
         {
             "added_frag": "O(C(=O)c1c(c(c(c(c1)))))",
             "in_ligand": "",
             "out_ligand": "O(C(=O)c1c(c(c(c(c1)))))",
-            "total_score": 0.6874496959204706,
-            "vina_score": -5.12,
+            "total_score": 24.79744969592047,
+            "vina_score": 43.1,
             "sa_score": 6.494899391840941
         },
         {
-            "added_frag": "S=[P](=O)(O)O",
+            "added_frag": "S2C(C(=O)N(C2=O))",
             "in_ligand": "O(C(=O)c1c(c(c(c(c1)))))",
-            "out_ligand": "S=[P](=O)(O)OO(C(=O)c1c(c(c(c(c1)))))",
-            "total_score": 1.2456155125162747,
-            "vina_score": -4.25,
-            "sa_score": 6.741231025032549
+            "out_ligand": "O(C(=O)c1c(c(c(c(c1)))))S2C(C(=O)N(C2=O))",
+            "total_score": 9.931595003903077,
+            "vina_score": 12.861,
+            "sa_score": 7.002190007806153
         },
         {
-            "added_frag": "S=[P@@](=O)(OP(=O)(O)O)O",
-            "in_ligand": "S=[P](=O)(O)OO(C(=O)c1c(c(c(c(c1)))))",
-            "out_ligand": "S=[P@@](=O)(OP(=O)(O)O)OS=[P](=O)(O)OO(C(=O)c1c(c(c(c(c1)))))",
-            "total_score": 4.514125080485775,
-            "vina_score": 2.269,
-            "sa_score": 6.7592501609715505
+            "added_frag": "C3([C@]4([C@@](C(C(C4)))(C(C(C3)))))",
+            "in_ligand": "O(C(=O)c1c(c(c(c(c1)))))S2C(C(=O)N(C2=O))",
+            "out_ligand": "O(C(=O)c1c(c(c(c(c1)))))S2C(C(=O)N(C2=O))C3([C@]4([C@@](C(C(C4)))(C(C(C3)))))",
+            "total_score": 5.967617538163385,
+            "vina_score": 4.322,
+            "sa_score": 7.61323507632677
         },
         {
-            "added_frag": "S(C#N)",
-            "in_ligand": "S=[P@@](=O)(OP(=O)(O)O)OS=[P](=O)(O)OO(C(=O)c1c(c(c(c(c1)))))",
-            "out_ligand": "S(C#N)S=[P@@](=O)(OP(=O)(O)O)OS=[P](=O)(O)OO(C(=O)c1c(c(c(c(c1)))))",
-            "total_score": 3.872351726810453,
-            "vina_score": 0.137,
-            "sa_score": 7.607703453620905
+            "added_frag": "C(=NN)",
+            "in_ligand": "O(C(=O)c1c(c(c(c(c1)))))S2C(C(=O)N(C2=O))C3([C@]4([C@@](C(C(C4)))(C(C(C3)))))",
+            "out_ligand": "O(C(=O)c1c(c(c(c(c1)))))S2C(C(=O)N(C2=O))C3([C@]4([C@@](C(C(C4)))(C(C(C3)))))C(=NN)",
+            "total_score": 12.953481371752636,
+            "vina_score": 18.002,
+            "sa_score": 7.904962743505272
         },
         {
-            "added_frag": "C2(C(C2))",
-            "in_ligand": "S(C#N)S=[P@@](=O)(OP(=O)(O)O)OS=[P](=O)(O)OO(C(=O)c1c(c(c(c(c1)))))",
-            "out_ligand": "S(C#N)S=[P@@](=O)(OP(=O)(O)O)OS=[P](=O)(O)OO(C(=O)c1c(C2(C(C2)))(c(c(c(c1)))))",
-            "total_score": 3.2777320868091366,
-            "vina_score": -0.774,
-            "sa_score": 7.329464173618273
+            "added_frag": "S5C(C([N+](C5)))",
+            "in_ligand": "O(C(=O)c1c(c(c(c(c1)))))S2C(C(=O)N(C2=O))C3([C@]4([C@@](C(C(C4)))(C(C(C3)))))C(=NN)",
+            "out_ligand": "O(C(=O)c1c(c(c(c(c1)))))S2C(C(=O)N(C2=O))C3([C@]4([C@@](C(C(C4)))(C(C(C3)))))C(=NN)S5C(C([N+](C5)))",
+            "total_score": 12.293818702475653,
+            "vina_score": 17.471,
+            "sa_score": 7.116637404951304
+        },
+        {
+            "added_frag": "N(N(C(=O)N))(C(=O))",
+            "in_ligand": "O(C(=O)c1c(c(c(c(c1)))))S2C(C(=O)N(C2=O))C3([C@]4([C@@](C(C(C4)))(C(C(C3)))))C(=NN)S5C(C([N+](C5)))",
+            "out_ligand": "O(C(=O)c1c(c(c(c(c1)))))S2C(C(=O)N(C2=O))C3([C@]4([C@@](C(C(C4)))(C(C(C3)))))C(=NN)S5C(C([N+](C5)))N(N(C(=O)N))(C(=O))",
+            "total_score": 9.955648917915031,
+            "vina_score": 13.574,
+            "sa_score": 6.3372978358300625
         }
     ],
-    "undocked_final_energy": -0.774,
-    "synthesizability_score": 7.329464173618273,
-    "docked_final_energy": -7.908
+    "undocked_final_energy": 13.574,
+    "synthesizability_score": 6.3372978358300625,
+    "docked_final_energy": -5.913
 }

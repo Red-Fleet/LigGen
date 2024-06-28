@@ -26,14 +26,16 @@ def clean_smiles(smiles_list):
 def _pipeline(fragments:list[str], target_path, output_dirs, initial_point, grid_center, 
              grid_size, initial_ligand:str=None, chain_extend_probablity=0.2, weight=500, 
              max_iter=10, temp=300, score=0, vina_weight=0.5, alpha=0.9, dock=True):
-    
+
     vina = Vina(cpu=1)
     sa = SimulatedAnnealing(fragments=fragments, vina=vina)
-
     # setting target and computing grid box
     sa.setTarget(target_pdbqt_path=target_path, grid_param=(None, grid_center, grid_size))
 
     for output_dir in output_dirs:
+        if os.path.exists(output_dir)==False or os.path.isdir(output_dir)==False:
+            os.mkdir(output_dir)
+            
         try:
             result = sa.simulatedAnnealing(
                     max_mw=weight,
@@ -108,11 +110,6 @@ def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_cent
     fragments = clean_smiles(fragments)
 
     output_lig_dirs = [os.path.join(output_dir, str(i)) for i in range(count)]
-
-    #creating subdirs for storing ligands
-    for lig_dir in output_lig_dirs:
-        if os.path.exists(lig_dir) == False:
-            os.mkdir(lig_dir)
     
     # splitting output dirs for assigning them to multi-processes
     splitted_dir = [output_lig_dirs[i*(count//threads):(i+1)*(count//threads)] for i in range(threads)]
@@ -124,12 +121,17 @@ def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_cent
 
     # starting process pool
     with ProcessPoolExecutor(max_workers=threads) as exe:
-        futures = [exe.submit(
-            _pipeline,
-            fragments, target_path, lig_dirs, initial_point, grid_center, 
-            grid_size, initial_ligand, chain_extend_probablity, weight, 
-            max_iter, temp, score, vina_weight, alpha, dock
-        ) for lig_dirs in splitted_dir]
+        try:
+            futures = [exe.submit(
+                _pipeline,
+                fragments, target_path, lig_dirs, initial_point, grid_center, 
+                grid_size, initial_ligand, chain_extend_probablity, weight, 
+                max_iter, temp, score, vina_weight, alpha, dock
+            ) for lig_dirs in splitted_dir]
+        except KeyboardInterrupt:
+            exe.shutdown(wait=False, cancel_futures=True)
+            print("Terminating")
+
 
   
 

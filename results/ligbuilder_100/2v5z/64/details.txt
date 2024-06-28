@@ -1,0 +1,49 @@
+{
+    "total_frag_screened": 451,
+    "total_frag_rejected_mpc": 81,
+    "state_details": [
+        {
+            "added_frag": "N1(N=C(N(C1=O)))",
+            "in_ligand": "",
+            "out_ligand": "N1(N=C(N(C1=O)))",
+            "total_score": 1.3235462696181934,
+            "vina_score": -2.95,
+            "sa_score": 5.597092539236387
+        },
+        {
+            "added_frag": "C2(c3c(c(c4c(c3)OC(O4)))C([C@]3([C@]2(C(OC3)))))",
+            "in_ligand": "N1(N=C(N(C1=O)))",
+            "out_ligand": "C2(c3c(c(c4c(c3)OC(O4)))C([C@]3([C@]2(C(OC3)))))N1(N=C(N(C1=O)))",
+            "total_score": 3.856856353149592,
+            "vina_score": 0.532,
+            "sa_score": 7.181712706299184
+        },
+        {
+            "added_frag": "S5N=C(C(=C5))",
+            "in_ligand": "C2(c3c(c(c4c(c3)OC(O4)))C([C@]3([C@]2(C(OC3)))))N1(N=C(N(C1=O)))",
+            "out_ligand": "S5N=C(C(=C5))C2(c3c(c(c4c(c3)OC(O4)))C([C@]3([C@]2(C(OC3)))))N1(N=C(N(C1=O)))",
+            "total_score": 8.129177593301767,
+            "vina_score": 8.454,
+            "sa_score": 7.804355186603534
+        },
+        {
+            "added_frag": "C(=N)",
+            "in_ligand": "S5N=C(C(=C5))C2(c3c(c(c4c(c3)OC(O4)))C([C@]3([C@]2(C(OC3)))))N1(N=C(N(C1=O)))",
+            "out_ligand": "C(=N)S5N=C(C(=C5))C2(c3c(c(c4c(c3)OC(O4)))C([C@]3([C@]2(C(OC3)))))N1(N=C(N(C1=O)))",
+            "total_score": 8.695530148878067,
+            "vina_score": 10.978,
+            "sa_score": 6.413060297756134
+        },
+        {
+            "added_frag": "S([S@](=O))C(=C)",
+            "in_ligand": "C(=N)S5N=C(C(=C5))C2(c3c(c(c4c(c3)OC(O4)))C([C@]3([C@]2(C(OC3)))))N1(N=C(N(C1=O)))",
+            "out_ligand": "S([S@](=O))C(=C)C(=N)S5N=C(C(=C5))C2(c3c(c(c4c(c3)OC(O4)))C([C@]3([C@]2(C(OC3)))))N1(N=C(N(C1=O)))",
+            "total_score": 6.9753380516398025,
+            "vina_score": 7.379,
+            "sa_score": 6.571676103279605
+        }
+    ],
+    "undocked_final_energy": 7.379,
+    "synthesizability_score": 6.571676103279605,
+    "docked_final_energy": -6.421
+}

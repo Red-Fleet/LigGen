@@ -1,57 +1,49 @@
 {
-    "total_frag_screened": 17,
-    "total_frag_rejected_mpc": 0,
+    "total_frag_screened": 36,
+    "total_frag_rejected_mpc": 1,
     "state_details": [
         {
-            "added_frag": "SC(=O)",
+            "added_frag": "c1(c(c2c(c(c1))OC(O2)))",
             "in_ligand": "",
-            "out_ligand": "SC(=O)",
-            "total_score": 1.4824592885482613,
-            "vina_score": -1.54,
-            "sa_score": 4.5049185770965225
+            "out_ligand": "c1(c(c2c(c(c1))OC(O2)))",
+            "total_score": 2.2266960548948296,
+            "vina_score": -3.22,
+            "sa_score": 7.67339210978966
         },
         {
-            "added_frag": "C(=O)(O)",
-            "in_ligand": "SC(=O)",
-            "out_ligand": "S(C(=O)(O))C(=O)",
-            "total_score": 0.9272191202969273,
-            "vina_score": -2.554,
-            "sa_score": 4.4084382405938545
+            "added_frag": "N3(c4c(c(c(c(c4))))C(=C(C3=O)))",
+            "in_ligand": "c1(c(c2c(c(c1))OC(O2)))",
+            "out_ligand": "c1(c(c2c(c(c1))OC(O2)))N3(c4c(c(c(c(c4))))C(=C(C3=O)))",
+            "total_score": 2.1081170893515204,
+            "vina_score": -3.308,
+            "sa_score": 7.524234178703041
         },
         {
-            "added_frag": "C1(=C(C(=O)c2c(c(c(c(c2))))C1=O)O)",
-            "in_ligand": "S(C(=O)(O))C(=O)",
-            "out_ligand": "C1(=C(C(=O)c2c(c(c(c(c2))))C1=O)O)S(C(=O)(O))C(=O)",
-            "total_score": 1.564261527583929,
-            "vina_score": -3.033,
-            "sa_score": 6.161523055167858
+            "added_frag": "C(=O)(C(=O)O)",
+            "in_ligand": "c1(c(c2c(c(c1))OC(O2)))N3(c4c(c(c(c(c4))))C(=C(C3=O)))",
+            "out_ligand": "c1(c(C(=O)(C(=O)O))(c2c(c(c1))OC(O2)))N3(c4c(c(c(c(c4))))C(=C(C3=O)))",
+            "total_score": 2.2147751305476926,
+            "vina_score": -2.128,
+            "sa_score": 6.557550261095385
         },
         {
-            "added_frag": "N3([C@]4(C(C([C@@]3(C(C(C4)))))))",
-            "in_ligand": "C1(=C(C(=O)c2c(c(c(c(c2))))C1=O)O)S(C(=O)(O))C(=O)",
-            "out_ligand": "C1(=C(C(=O)c2c(c(c(c(c2))))C1=O)O)S(C(=O)(O))C(N3([C@]4(C(C([C@@]3(C(C(C4))))))))(=O)",
-            "total_score": 4.762526461953841,
-            "vina_score": 1.897,
-            "sa_score": 7.628052923907682
+            "added_frag": "Oc5c6c(c(c(c5)))c(c(c(c6)))",
+            "in_ligand": "c1(c(C(=O)(C(=O)O))(c2c(c(c1))OC(O2)))N3(c4c(c(c(c(c4))))C(=C(C3=O)))",
+            "out_ligand": "c1(c(C(=O)(C(=O)O))(c2c(c(c1))OC(Oc5c6c(c(c(c5)))c(c(c(c6))))(O2)))N3(c4c(c(c(c(c4))))C(=C(C3=O)))",
+            "total_score": -0.09271175591923608,
+            "vina_score": -7.358,
+            "sa_score": 7.1725764881615275
         },
         {
-            "added_frag": "[N+]5(C(C(C(=C(C5)))))",
-            "in_ligand": "C1(=C(C(=O)c2c(c(c(c(c2))))C1=O)O)S(C(=O)(O))C(N3([C@]4(C(C([C@@]3(C(C(C4))))))))(=O)",
-            "out_ligand": "C1(=C(C(=O)c2c(c(c(c(c2))))C1=O)O)S(C(=O)(O))C(N3([C@]4(C(C([C@@]3(C(C(C4([N+]5(C(C(C(=C(C5))))))))))))))(=O)",
-            "total_score": 3.11706131666391,
-            "vina_score": -1.478,
-            "sa_score": 7.712122633327819
-        },
-        {
-            "added_frag": "N6(C(c7c(c(c(c(c7))))C6))",
-            "in_ligand": "C1(=C(C(=O)c2c(c(c(c(c2))))C1=O)O)S(C(=O)(O))C(N3([C@]4(C(C([C@@]3(C(C(C4([N+]5(C(C(C(=C(C5))))))))))))))(=O)",
-            "out_ligand": "C1(=C(C(=O)c2c(c(c(c(c2))))C1=O)O)S(C(=O)(O))C(N3([C@]4(C(C(N6(C(c7c(c(c(c(c7))))C6)))([C@@]3(C(C(C4([N+]5(C(C(C(=C(C5))))))))))))))(=O)",
-            "total_score": -0.3995960645409631,
-            "vina_score": -8.469,
-            "sa_score": 7.669807870918073
+            "added_frag": "C7(C(C(C(C(C7)))))",
+            "in_ligand": "c1(c(C(=O)(C(=O)O))(c2c(c(c1))OC(Oc5c6c(c(c(c5)))c(c(c(c6))))(O2)))N3(c4c(c(c(c(c4))))C(=C(C3=O)))",
+            "out_ligand": "c1(c(C(=O)(C(=O)O))(c2c(c(c1))OC(C7(C(C(C(C(C7))))))(Oc5c6c(c(c(c5)))c(c(c(c6))))(O2)))N3(c4c(c(c(c(c4))))C(=C(C3=O)))",
+            "total_score": 0.27224820613805667,
+            "vina_score": -4.503,
+            "sa_score": 5.0474964122761135
         }
     ],
-    "undocked_final_energy": -8.469,
-    "synthesizability_score": 7.669807870918073,
-    "docked_final_energy": -8.968
+    "undocked_final_energy": -4.503,
+    "synthesizability_score": 5.0474964122761135,
+    "docked_final_energy": -9.812
 }

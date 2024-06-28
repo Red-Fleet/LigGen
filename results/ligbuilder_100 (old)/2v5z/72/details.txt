@@ -1,0 +1,41 @@
+{
+    "total_frag_screened": 210,
+    "total_frag_rejected_mpc": 37,
+    "state_details": [
+        {
+            "added_frag": "C1(C(C([C@]2([C@]1(C(C([C@@]1([C@@]2(C(C(C2=C(C(=O)C(=C([C@@]12))))))))))))))",
+            "in_ligand": "",
+            "out_ligand": "C1(C(C([C@]2([C@]1(C(C([C@@]1([C@@]2(C(C(C2=C(C(=O)C(=C([C@@]12))))))))))))))",
+            "total_score": 10.184593199207859,
+            "vina_score": 12.782,
+            "sa_score": 7.587186398415717
+        },
+        {
+            "added_frag": "N(S(=O)(=O)N(C(=O)O))",
+            "in_ligand": "C1(C(C([C@]2([C@]1(C(C([C@@]1([C@@]2(C(C(C2=C(C(=O)C(=C([C@@]12))))))))))))))",
+            "out_ligand": "N(S(=O)(=O)N(C(=O)O))C1(C(C([C@]2([C@]1(C(C([C@@]1([C@@]2(C(C(C2=C(C(=O)C(=C([C@@]12))))))))))))))",
+            "total_score": 5.055025387513706,
+            "vina_score": 3.575,
+            "sa_score": 6.535050775027412
+        },
+        {
+            "added_frag": "C13(C(N(C(C(C(C13))))))",
+            "in_ligand": "N(S(=O)(=O)N(C(=O)O))C1(C(C([C@]2([C@]1(C(C([C@@]1([C@@]2(C(C(C2=C(C(=O)C(=C([C@@]12))))))))))))))",
+            "out_ligand": "N(S(=O)(=O)N(C(=O)O))C1(C(C([C@]2([C@]1(C(C([C@@]1([C@@]2(C(C13(C(N(C(C(C(C13)))))))(C(C2=C(C(=O)C(=C([C@@]12))))))))))))))",
+            "total_score": 6.9146119733238205,
+            "vina_score": 5.969,
+            "sa_score": 7.86022394664764
+        },
+        {
+            "added_frag": "O(C(=O)N(N))",
+            "in_ligand": "N(S(=O)(=O)N(C(=O)O))C1(C(C([C@]2([C@]1(C(C([C@@]1([C@@]2(C(C13(C(N(C(C(C(C13)))))))(C(C2=C(C(=O)C(=C([C@@]12))))))))))))))",
+            "out_ligand": "N(S(=O)(=O)N(C(=O)O))C1(C(C([C@]2([C@]1(C(C([C@@]1([C@@]2(C(C13(C(N(C(O(C(=O)N(N)))(C(C(C13)))))))(C(C2=C(C(=O)C(=C([C@@]12))))))))))))))",
+            "total_score": 7.4816960004447255,
+            "vina_score": 7.386,
+            "sa_score": 7.577392000889451
+        }
+    ],
+    "undocked_final_energy": 7.386,
+    "synthesizability_score": 7.577392000889451,
+    "docked_final_energy": -7.305
+}

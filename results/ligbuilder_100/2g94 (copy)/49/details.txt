@@ -1,0 +1,17 @@
+{
+    "total_frag_screened": 1,
+    "total_frag_rejected_mpc": 0,
+    "state_details": [
+        {
+            "added_frag": "Ic1c(c(c(c(c1C(=O)N)I)C(=O)N)I)N(C(=O))",
+            "in_ligand": "",
+            "out_ligand": "Ic1c(c(c(c(c1C(=O)N)I)C(=O)N)I)N(C(=O))",
+            "total_score": 1.0119874788822445,
+            "vina_score": -1.567,
+            "sa_score": 3.590974957764489
+        }
+    ],
+    "undocked_final_energy": -1.567,
+    "synthesizability_score": 3.590974957764489,
+    "docked_final_energy": -6.733
+}

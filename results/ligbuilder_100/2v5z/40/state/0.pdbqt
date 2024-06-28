@@ -1,31 +1,12 @@
 REMARK  Name = =
-REMARK  3 active torsions:
+REMARK  0 active torsions:
 REMARK  status: ('A' for Active; 'I' for Inactive)
-REMARK    1  A    between atoms: C_1  and  N_7
-REMARK    2  A    between atoms: C_5  and  C_10
-REMARK    3  A    between atoms: C_10  and  O_12
 REMARK                            x       y       z     vdW  Elec       q    Type
 REMARK                         _______ _______ _______ _____ _____    ______ ____
 ROOT
-ATOM      1  C   UNL     1      50.620 158.034  30.001  0.00  0.00    +0.140 C 
-ATOM      2  C   UNL     1      51.661 158.819  29.850  0.00  0.00    +0.139 C 
-ATOM      3  N   UNL     1      52.855 158.325  29.266  0.00  0.00    -0.327 N 
-ATOM      4  C   UNL     1      52.906 156.973  28.847  0.00  0.00    +0.065 C 
-ATOM      5  C   UNL     1      51.880 156.156  28.983  0.00  0.00    +0.091 C 
-ATOM      6  C   UNL     1      50.631 156.629  29.581  0.00  0.00    +0.029 C 
-ATOM      7  H   UNL     1      53.637 158.913  29.153  0.00  0.00    +0.147 HD
+ATOM      1  N   UNL     1      52.944 155.156  28.589  0.00  0.00    -0.295 NA
+ATOM      2  C   UNL     1      51.685 154.368  28.781  0.00  0.00    +0.086 C 
+ATOM      3  C   UNL     1      52.826 153.862  28.031  0.00  0.00    +0.086 C 
+ATOM      4  H   UNL     1      53.571 155.316  29.378  0.00  0.00    +0.123 HD
 ENDROOT
-BRANCH   1   8
-ATOM      8  N   UNL     1      49.406 158.515  30.588  0.00  0.00    +0.055 N 
-ATOM      9  O   UNL     1      48.197 158.144  30.060  0.00  0.00    -0.126 OA
-ATOM     10  O   UNL     1      49.420 159.257  31.564  0.00  0.00    -0.126 OA
-ENDBRANCH   1   8
-BRANCH   5  11
-ATOM     11  C   UNL     1      51.931 154.762  28.551  0.00  0.00    +0.339 C 
-ATOM     12  O   UNL     1      51.189 154.299  27.657  0.00  0.00    -0.245 OA
-BRANCH  11  13
-ATOM     13  O   UNL     1      52.847 153.924  29.165  0.00  0.00    -0.477 OA
-ATOM     14  H   UNL     1      53.410 154.257  29.836  0.00  0.00    +0.295 HD
-ENDBRANCH  11  13
-ENDBRANCH   5  11
-TORSDOF 3
+TORSDOF 0

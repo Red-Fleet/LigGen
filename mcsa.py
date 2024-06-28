@@ -26,7 +26,7 @@ class SimulatedAnnealing:
         self.total_frag_rejected_mpc = 0
         self.obconversion = ob.OBConversion()
         self.temp_folder_path = 'temp'
-        if os.path.exists(self.temp_folder_path) == False or os.path.isdir(self.temp_folder_path):
+        if os.path.exists(self.temp_folder_path) == False or os.path.isdir(self.temp_folder_path)==False:
             os.mkdir(self.temp_folder_path) 
 
     def setTarget(self, target_pdbqt_path: str, grid_param: tuple[int, list[int, int, int], list[int, int, int]] = None):

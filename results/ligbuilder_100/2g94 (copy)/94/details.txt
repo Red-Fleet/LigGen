@@ -1,0 +1,49 @@
+{
+    "total_frag_screened": 8,
+    "total_frag_rejected_mpc": 0,
+    "state_details": [
+        {
+            "added_frag": "N1(C(C([N+](C(C1)))))",
+            "in_ligand": "",
+            "out_ligand": "N1(C(C([N+](C(C1)))))",
+            "total_score": 2.8269652741430806,
+            "vina_score": -2.184,
+            "sa_score": 7.837930548286161
+        },
+        {
+            "added_frag": "C2(OC(C(C(C2))))",
+            "in_ligand": "N1(C(C([N+](C(C1)))))",
+            "out_ligand": "N1(C(C(C2(OC(C(C(C2)))))([N+](C(C1)))))",
+            "total_score": 1.7197034730116112,
+            "vina_score": -4.359,
+            "sa_score": 7.798406946023222
+        },
+        {
+            "added_frag": "N(C(=O)c3c(c(c(c(c3))))O)",
+            "in_ligand": "N1(C(C(C2(OC(C(C(C2)))))([N+](C(C1)))))",
+            "out_ligand": "N1(C(C(C2(OC(C(C(N(C(=O)c3c(c(c(c(c3))))O))(C2)))))([N+](C(C1)))))",
+            "total_score": 0.5590322314779934,
+            "vina_score": -6.106,
+            "sa_score": 7.224064462955987
+        },
+        {
+            "added_frag": "C(=O)(N4C(C([N+](C(C4)))))",
+            "in_ligand": "N1(C(C(C2(OC(C(C(N(C(=O)c3c(c(c(c(c3))))O))(C2)))))([N+](C(C1)))))",
+            "out_ligand": "N1(C(C(C2(OC(C(C(N(C(=O)c3c(c(c(c(C(=O)(N4C(C([N+](C(C4))))))(c3))))O))(C2)))))([N+](C(C1)))))",
+            "total_score": 1.1482322418332864,
+            "vina_score": -5.062,
+            "sa_score": 7.358464483666573
+        },
+        {
+            "added_frag": "S(P(=S)(O)O)",
+            "in_ligand": "N1(C(C(C2(OC(C(C(N(C(=O)c3c(c(c(c(C(=O)(N4C(C([N+](C(C4))))))(c3))))O))(C2)))))([N+](C(C1)))))",
+            "out_ligand": "N1(C(C(C2(OC(C(C(N(C(=O)c3c(c(c(c(C(=O)(N4C(C([N+](C(C4))))))(c3))))O))(C2(S(P(=S)(O)O)))))))([N+](C(C1)))))",
+            "total_score": 0.8212311572687896,
+            "vina_score": -5.626,
+            "sa_score": 7.2684623145375795
+        }
+    ],
+    "undocked_final_energy": -5.626,
+    "synthesizability_score": 7.2684623145375795,
+    "docked_final_energy": -8.889
+}

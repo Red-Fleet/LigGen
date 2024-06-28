@@ -1,41 +1,57 @@
 {
-    "total_frag_screened": 23,
+    "total_frag_screened": 10,
     "total_frag_rejected_mpc": 0,
     "state_details": [
         {
-            "added_frag": "c1(c(c(O)c(c(n1))))",
+            "added_frag": "C1(C(C(c2c(c(c(c(c2))))C1=O)))",
             "in_ligand": "",
-            "out_ligand": "c1(c(c(O)c(c(n1))))",
-            "total_score": 2.369662177877424,
-            "vina_score": -2.436,
-            "sa_score": 7.175324355754848
+            "out_ligand": "C1(C(C(c2c(c(c(c(c2))))C1=O)))",
+            "total_score": 1.5695571393024612,
+            "vina_score": -4.284,
+            "sa_score": 7.423114278604922
         },
         {
-            "added_frag": "Nc2nc(c(c(c2)))",
-            "in_ligand": "c1(c(c(O)c(c(n1))))",
-            "out_ligand": "c1(c(c(O(Nc2nc(c(c(c2)))))c(c(n1))))",
-            "total_score": 2.6033012818570582,
-            "vina_score": -2.409,
-            "sa_score": 7.615602563714116
+            "added_frag": "C(=C)",
+            "in_ligand": "C1(C(C(c2c(c(c(c(c2))))C1=O)))",
+            "out_ligand": "C1(C(C(c2c(c(c(c(C(=C))(c2))))C1=O)))",
+            "total_score": 1.4085651972497355,
+            "vina_score": -4.558,
+            "sa_score": 7.375130394499471
         },
         {
-            "added_frag": "[N+]3([C@]4([C@]5([C@@]6([C@@](Oc7c6c(c(c(c7)))C4)(C(C(C5))))C(C3))))",
-            "in_ligand": "c1(c(c(O(Nc2nc(c(c(c2)))))c(c(n1))))",
-            "out_ligand": "c1(c(c(O(Nc2nc(c(c(c2)))))c(c(n1))))[N+]3([C@]4([C@]5([C@@]6([C@@](Oc7c6c(c(c(c7)))C4)(C(C(C5))))C(C3))))",
-            "total_score": 3.0956664114765653,
-            "vina_score": -2.189,
-            "sa_score": 8.38033282295313
+            "added_frag": "C3(=C(N(C(N3))))",
+            "in_ligand": "C1(C(C(c2c(c(c(c(C(=C))(c2))))C1=O)))",
+            "out_ligand": "C1(C(C(c2c(c(c(c(C(=C(C3(=C(N(C(N3)))))))(c2))))C1=O)))",
+            "total_score": -0.10229228700404303,
+            "vina_score": -7.705,
+            "sa_score": 7.500415425991914
         },
         {
-            "added_frag": "N8(c9c(c(c(c(c9))))C(C(C(C8=O))))",
-            "in_ligand": "c1(c(c(O(Nc2nc(c(c(c2)))))c(c(n1))))[N+]3([C@]4([C@]5([C@@]6([C@@](Oc7c6c(c(c(c7)))C4)(C(C(C5))))C(C3))))",
-            "out_ligand": "c1(c(c(O(Nc2nc(c(c(N8(c9c(c(c(c(c9))))C(C(C(C8=O)))))(c2)))))c(c(n1))))[N+]3([C@]4([C@]5([C@@]6([C@@](Oc7c6c(c(c(c7)))C4)(C(C(C5))))C(C3))))",
-            "total_score": 2.6038338377656123,
-            "vina_score": -3.362,
-            "sa_score": 8.569667675531225
+            "added_frag": "n4nc(oc4)",
+            "in_ligand": "C1(C(C(c2c(c(c(c(C(=C(C3(=C(N(C(N3)))))))(c2))))C1=O)))",
+            "out_ligand": "n4nc(oc4)C1(C(C(c2c(c(c(c(C(=C(C3(=C(N(C(N3)))))))(c2))))C1=O)))",
+            "total_score": 1.2004414928217586,
+            "vina_score": -4.803,
+            "sa_score": 7.203882985643517
+        },
+        {
+            "added_frag": "N5C(=O)c6c(c(c(c(c6))))C5=O",
+            "in_ligand": "n4nc(oc4)C1(C(C(c2c(c(c(c(C(=C(C3(=C(N(C(N3)))))))(c2))))C1=O)))",
+            "out_ligand": "n4nc(oc4)C1(N5C(=O)c6c(c(c(c(c6))))C5=O)(C(C(c2c(c(c(c(C(=C(C3(=C(N(C(N3)))))))(c2))))C1=O)))",
+            "total_score": 1.3011742495033558,
+            "vina_score": -5.08,
+            "sa_score": 7.682348499006712
+        },
+        {
+            "added_frag": "[P@]7(=O)(O[C@@]8([C@](OC(C8))(C(O7))))O",
+            "in_ligand": "n4nc(oc4)C1(N5C(=O)c6c(c(c(c(c6))))C5=O)(C(C(c2c(c(c(c(C(=C(C3(=C(N(C(N3)))))))(c2))))C1=O)))",
+            "out_ligand": "n4nc(oc4)C1(N5C(=O)c6c(c(c(c(c6))))C5=O)(C(C(c2c(c(c(c(C(=C(C3(=C(N([P@]7(=O)(O[C@@]8([C@](OC(C8))(C(O7))))O)(C(N3)))))))(c2))))C1=O)))",
+            "total_score": 0.7738264284711507,
+            "vina_score": -4.613,
+            "sa_score": 6.160652856942302
         }
     ],
-    "undocked_final_energy": -3.362,
-    "synthesizability_score": 8.569667675531225,
-    "docked_final_energy": -13.171
+    "undocked_final_energy": -4.613,
+    "synthesizability_score": 6.160652856942302,
+    "docked_final_energy": -11.214
 }

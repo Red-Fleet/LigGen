@@ -1,49 +1,49 @@
 {
-    "total_frag_screened": 114,
-    "total_frag_rejected_mpc": 3,
+    "total_frag_screened": 16,
+    "total_frag_rejected_mpc": 1,
     "state_details": [
         {
-            "added_frag": "N1(C(=O)c2c(c(c(c(c2))))C1=O)",
+            "added_frag": "O(C)C",
             "in_ligand": "",
-            "out_ligand": "N1(C(=O)c2c(c(c(c(c2))))C1=O)",
-            "total_score": 0.8048919795630067,
-            "vina_score": -4.111,
-            "sa_score": 5.720783959126013
+            "out_ligand": "O(C)C",
+            "total_score": 2.9998631347021067,
+            "vina_score": -1.41,
+            "sa_score": 7.409726269404214
         },
         {
-            "added_frag": "C3(C(C(C(C(C3=O)))))",
-            "in_ligand": "N1(C(=O)c2c(c(c(c(c2))))C1=O)",
-            "out_ligand": "N1(C(=O)c2c(c(c(c(c2(C3(C(C(C(C(C3=O))))))))))C1=O)",
-            "total_score": 0.19735658177423776,
-            "vina_score": -5.739,
-            "sa_score": 6.133713163548475
+            "added_frag": "C1(OC(=C([C@@]2([C@]1(C(C(C2)))))))",
+            "in_ligand": "O(C)C",
+            "out_ligand": "O(C)CC1(OC(=C([C@@]2([C@]1(C(C(C2)))))))",
+            "total_score": 2.0236692422423803,
+            "vina_score": -3.569,
+            "sa_score": 7.616338484484761
         },
         {
-            "added_frag": "N(C(=O)N(c4c(c(c(c(c4))))))",
-            "in_ligand": "N1(C(=O)c2c(c(c(c(c2(C3(C(C(C(C(C3=O))))))))))C1=O)",
-            "out_ligand": "N1(C(=O)c2c(c(c(c(N(C(=O)N(c4c(c(c(c(c4)))))))(c2(C3(C(C(C(C(C3=O))))))))))C1=O)",
-            "total_score": -0.15540026613020652,
-            "vina_score": -6.667,
-            "sa_score": 6.356199467739587
+            "added_frag": "O(c3c(c4c(c(c3))c(c(c(c4)))))",
+            "in_ligand": "O(C)CC1(OC(=C([C@@]2([C@]1(C(C(C2)))))))",
+            "out_ligand": "O(C)CC1(O(c3c(c4c(c(c3))c(c(c(c4))))))(OC(=C([C@@]2([C@]1(C(C(C2)))))))",
+            "total_score": 0.9127313582489451,
+            "vina_score": -5.236,
+            "sa_score": 7.06146271649789
         },
         {
-            "added_frag": "N(N(C(=O)))",
-            "in_ligand": "N1(C(=O)c2c(c(c(c(N(C(=O)N(c4c(c(c(c(c4)))))))(c2(C3(C(C(C(C(C3=O))))))))))C1=O)",
-            "out_ligand": "N1(C(=O)c2c(c(c(c(N(C(=O)N(c4c(c(c(c(c4)))))))(c2(C3(C(C(C(C(N(N(C(=O))))(C3=O))))))))))C1=O)",
-            "total_score": 0.9613968475293295,
-            "vina_score": -4.389,
-            "sa_score": 6.311793695058659
+            "added_frag": "[P@]5(=O)(O[C@@]6([C@](OC(C6))(C(O5))))O",
+            "in_ligand": "O(C)CC1(O(c3c(c4c(c(c3))c(c(c(c4))))))(OC(=C([C@@]2([C@]1(C(C(C2)))))))",
+            "out_ligand": "O(C)CC1(O(c3c([P@]5(=O)(O[C@@]6([C@](OC(C6))(C(O5))))O)(c4c(c(c3))c(c(c(c4))))))(OC(=C([C@@]2([C@]1(C(C(C2)))))))",
+            "total_score": 0.4589606873712513,
+            "vina_score": -6.397,
+            "sa_score": 7.314921374742503
         },
         {
-            "added_frag": "C(c5ccccc5)",
-            "in_ligand": "N1(C(=O)c2c(c(c(c(N(C(=O)N(c4c(c(c(c(c4)))))))(c2(C3(C(C(C(C(N(N(C(=O))))(C3=O))))))))))C1=O)",
-            "out_ligand": "N1(C(=O)c2c(c(c(c(N(C(=O)N(c4c(c(c(c(c4)))))))(c2(C3(C(C(C(C(c5ccccc5))(C(N(N(C(=O))))(C3=O))))))))))C1=O)",
-            "total_score": 2.2562110912993854,
-            "vina_score": -2.406,
-            "sa_score": 6.91842218259877
+            "added_frag": "O(C(=O)O)",
+            "in_ligand": "O(C)CC1(O(c3c([P@]5(=O)(O[C@@]6([C@](OC(C6))(C(O5))))O)(c4c(c(c3))c(c(c(c4))))))(OC(=C([C@@]2([C@]1(C(C(C2)))))))",
+            "out_ligand": "O(C)CC1(O(c3c([P@]5(=O)(O[C@@]6([C@](OC(C6))(C(O5))))O)(c4c(c(O(C(=O)O))(c3))c(c(c(c4))))))(OC(=C([C@@]2([C@]1(C(C(C2)))))))",
+            "total_score": 0.5237882861826773,
+            "vina_score": -5.088,
+            "sa_score": 6.135576572365355
         }
     ],
-    "undocked_final_energy": -2.406,
-    "synthesizability_score": 6.91842218259877,
-    "docked_final_energy": -10.56
+    "undocked_final_energy": -5.088,
+    "synthesizability_score": 6.135576572365355,
+    "docked_final_energy": -9.368
 }
