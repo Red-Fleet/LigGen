@@ -1,72 +1,33 @@
 {
-    "total_frag_screened": 1982,
-    "total_frag_rejected_mpc": 137,
+    "total_frag_screened": 14,
+    "total_frag_rejected_mpc": 1,
     "state_details": [
         {
-            "added_frag": "N1(C(C(C(C(C1)))))C(=O)",
+            "added_frag": "C1(C([N+]([C@]2([C@](C1)(C1=C(C(=C(C3=NC(C(=C13)C2)))))))))",
             "in_ligand": "",
-            "out_ligand": "N1(C(C(C(C(C1)))))C(=O)",
-            "total_score": 2.0896394494383963,
-            "vina_score": -3.26,
-            "sa_score": 7.439278898876792
+            "out_ligand": "C1(C([N+]([C@]2([C@](C1)(C1=C(C(=C(C3=NC(C(=C13)C2)))))))))",
+            "total_score": 0.5393756799818581,
+            "vina_score": -6.471,
+            "sa_score": 7.549751359963716
         },
         {
-            "added_frag": "P(=O)(O)(O)O",
-            "in_ligand": "N1(C(C(C(C(C1)))))C(=O)",
-            "out_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)O",
-            "total_score": 1.8400598750044128,
-            "vina_score": -3.1,
-            "sa_score": 6.780119750008826
+            "added_frag": "N(C(=O)N(N=O))",
+            "in_ligand": "C1(C([N+]([C@]2([C@](C1)(C1=C(C(=C(C3=NC(C(=C13)C2)))))))))",
+            "out_ligand": "C1(C([N+]([C@]2([C@](C1)(C1=C(C(=C(C3=NC(C(=C13)C2)))))))))N(C(=O)N(N=O))",
+            "total_score": 6.683450380516455,
+            "vina_score": 6.725,
+            "sa_score": 6.641900761032911
         },
         {
-            "added_frag": "S",
-            "in_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)O",
-            "out_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)OS",
-            "total_score": 1.332615310087125,
-            "vina_score": -4.776,
-            "sa_score": 7.44123062017425
-        },
-        {
-            "added_frag": "I",
-            "in_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)OS",
-            "out_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)OSI",
-            "total_score": 2.158233753972094,
-            "vina_score": -2.609,
-            "sa_score": 6.925467507944188
-        },
-        {
-            "added_frag": "N",
-            "in_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)OSI",
-            "out_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)OSIN",
-            "total_score": 1.2461242376741657,
-            "vina_score": -4.407,
-            "sa_score": 6.899248475348331
-        },
-        {
-            "added_frag": "C2([C@@]3(O[C@](C2)(C(C3))))",
-            "in_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)OSIN",
-            "out_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)OSINC2([C@@]3(O[C@](C2)(C(C3))))",
-            "total_score": -0.4886229240269242,
-            "vina_score": -6.666,
-            "sa_score": 5.688754151946152
-        },
-        {
-            "added_frag": "N",
-            "in_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)OSINC2([C@@]3(O[C@](C2)(C(C3))))",
-            "out_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)OSINC2([C@@]3(O[C@](C2)(C(C3))))N",
-            "total_score": -0.8413467567702946,
-            "vina_score": -8.572,
-            "sa_score": 6.88930648645941
-        },
-        {
-            "added_frag": "C#N",
-            "in_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)OSINC2([C@@]3(O[C@](C2)(C(C3))))N",
-            "out_ligand": "N1(C(C(C(C(C1)))))C(=O)P(=O)(O)(O)OSINC2([C@@]3(O[C@](C2)(C(C3))))NC#N",
-            "total_score": -1.330415725972491,
-            "vina_score": -7.826,
-            "sa_score": 5.165168548055018
+            "added_frag": "C(=O)(C(=O))",
+            "in_ligand": "C1(C([N+]([C@]2([C@](C1)(C1=C(C(=C(C3=NC(C(=C13)C2)))))))))N(C(=O)N(N=O))",
+            "out_ligand": "C(=O)(C(=O))C1(C([N+]([C@]2([C@](C1)(C1=C(C(=C(C3=NC(C(=C13)C2)))))))))N(C(=O)N(N=O))",
+            "total_score": 7.351037382062612,
+            "vina_score": 7.509,
+            "sa_score": 7.193074764125223
         }
     ],
-    "undocked_final_energy": -7.826,
-    "synthesizability_score": 5.165168548055018
+    "undocked_final_energy": 7.509,
+    "synthesizability_score": 7.193074764125223,
+    "docked_final_energy": -6.297
 }

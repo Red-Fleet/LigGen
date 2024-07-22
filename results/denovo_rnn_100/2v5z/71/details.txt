@@ -1,0 +1,25 @@
+{
+    "total_frag_screened": 2,
+    "total_frag_rejected_mpc": 0,
+    "state_details": [
+        {
+            "added_frag": "C1CCCC2=C1C(=C3C(=C2)C(=O)C4=C(C(=CC=C4O)O)C3=O)O",
+            "in_ligand": "",
+            "out_ligand": "C1CCCC2=C1C(=C3C(=C2)C(=O)C4=C(C(=CC=C4O)O)C3=O)O",
+            "total_score": 6.054968804756148,
+            "vina_score": 6.147,
+            "sa_score": 5.962937609512295
+        },
+        {
+            "added_frag": "NC5=CC=C(C=C5)C(=O)N",
+            "in_ligand": "C1CCCC2=C1C(=C3C(=C2)C(=O)C4=C(C(=CC=C4O)O)C3=O)O",
+            "out_ligand": "C1CCCC2=C1C(=C3C(=C2)C(=O)C4=C(C(=CC=C4O)O)C3=O)ONC5=CC=C(C=C5)C(=O)N",
+            "total_score": 21.09571903386531,
+            "vina_score": 35.659,
+            "sa_score": 6.532438067730626
+        }
+    ],
+    "undocked_final_energy": 35.659,
+    "synthesizability_score": 6.532438067730626,
+    "docked_final_energy": -9.834
+}
