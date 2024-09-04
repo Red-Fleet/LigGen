@@ -51,7 +51,7 @@ if __name__ == "__main__":
         num_layers=3,
         dropout=0)
 
-    model.load_state_dict(torch.load(args.model_params))
+    model.load_state_dict(torch.load(args.model_params, map_location=args.device))
     model = model.to(args.device)
 
     smiles_list = []

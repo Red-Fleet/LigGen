@@ -8,6 +8,17 @@ import os
 import time
 import json
 
+import torch
+import argparse
+from rnn_selfies import RNNSelfies
+from rnn_config import *
+from torch.optim.lr_scheduler import ReduceLROnPlateau
+from torch.utils.data import DataLoader
+from selfies_dataset import SelfiesDataset
+from torch import nn
+import torch.optim as optim
+from tqdm import tqdm
+
 from rdkit import RDLogger
 
 RDLogger.DisableLog('rdApp.*')
@@ -99,15 +110,44 @@ def _pipeline(fragments:list[str], target_path, output_dirs, initial_point, grid
             print(e)
 
 
+def generate_fragments(parms, device):
+    """this method returns total of 1024 fragments"""
+
+    vocab = get_vocab()
+    model = RNNSelfies(vocab_size=len(vocab),
+        embed_dim=256,
+        hidden_size=512,
+        num_layers=3,
+        dropout=0)
+    
+    model.load_state_dict(torch.load(parms, map_location=device))
+    model = model.to(device)
+
+    pbar = tqdm(total=1024)
+    batch_size = 64
+    iteration = 16
+    max_len = 100
+    smiles_list = []
+    for i in range(iteration):
+        smiles_list += model.generateSmiles(batch_size=batch_size, vocab=vocab, max_len=max_len)
+        pbar.update(batch_size)
+    
+    pbar.close()
+
+    return smiles_list
+
 def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_center, 
              grid_size, count=1, threads=1, initial_ligand:str=None, chain_extend_probablity=0.2, weight=500, 
-             max_iter=10, temp=300, score=0, vina_weight=0.5, alpha=0.9, dock=True):
+             max_iter=10, temp=300, score=0, vina_weight=0.5, alpha=0.9, dock=True, rnn=False, rnn_params=None, rnn_device="cpu"):
     
-    # reading fragments 
-    fragments = read_smiles(fragment_path)
-    
-    # cleaning fragments
-    fragments = clean_smiles(fragments)
+    fragments = None
+
+    if rnn == False:
+        # reading fragments 
+        fragments = read_smiles(fragment_path)
+        
+        # cleaning fragments
+        fragments = clean_smiles(fragments)
 
     output_lig_dirs = [os.path.join(output_dir, str(i)) for i in range(count)]
     
@@ -122,12 +162,21 @@ def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_cent
     # starting process pool
     with ProcessPoolExecutor(max_workers=threads) as exe:
         try:
-            futures = [exe.submit(
-                _pipeline,
-                fragments, target_path, lig_dirs, initial_point, grid_center, 
-                grid_size, initial_ligand, chain_extend_probablity, weight, 
-                max_iter, temp, score, vina_weight, alpha, dock
-            ) for lig_dirs in splitted_dir]
+            if rnn == False:
+                futures = [exe.submit(
+                    _pipeline,
+                    fragments, target_path, lig_dirs, initial_point, grid_center, 
+                    grid_size, initial_ligand, chain_extend_probablity, weight, 
+                    max_iter, temp, score, vina_weight, alpha, dock
+                ) for lig_dirs in splitted_dir]
+            else :
+                futures = [exe.submit(
+                    _pipeline,
+                    clean_smiles(generate_fragments(rnn_params, rnn_device)), target_path, lig_dirs, initial_point, grid_center, 
+                    grid_size, initial_ligand, chain_extend_probablity, weight, 
+                    max_iter, temp, score, vina_weight, alpha, dock
+                ) for lig_dirs in splitted_dir]
+
         except KeyboardInterrupt:
             exe.shutdown(wait=False, cancel_futures=True)
             print("Terminating")
@@ -141,8 +190,10 @@ if __name__ == "__main__":
                         description='Generate ligands using fragment',
                         )
 
+    default_model_params = 'model.pt'
+    default_device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-    parser.add_argument('-fp', '--fragment_path', type=str, required=True,
+    parser.add_argument('-fp', '--fragment_path', type=str, required=False,
                         help='path of file containing fragments in smile format')
 
     parser.add_argument('-tp', '--target_path', type=str, required=True,
@@ -154,8 +205,8 @@ if __name__ == "__main__":
     parser.add_argument('-c', '--count', type=int, required=True,
                         help='number of ligands to generate')
 
-    parser.add_argument('-ip', '--initial_point', type=utils.parse_cmp_coordinates, required=True,
-                        help='[x,y,z] -point at which program will start the building of fragment')
+    # parser.add_argument('-ip', '--initial_point', type=utils.parse_cmp_coordinates, required=True,
+    #                     help='[x,y,z] -point at which program will start the building of fragment')
 
     parser.add_argument('-gc', '--grid_center', type=utils.parse_cmp_coordinates, required=True,
                         help='[x,y,z] -center point of grid box')
@@ -165,8 +216,17 @@ if __name__ == "__main__":
 
     parser.add_argument('-th', '--threads', type=int, default=1, help='number of threads')
 
-    parser.add_argument('-il', '--initial_ligand', type=str, default='',
-                        help='smiles of initial ligand')
+    parser.add_argument('-rnn', '--rnn', action='store_true',
+                        help='generate fragments using rnn')
+    
+    parser.add_argument('-p', '--rnn_params', type=str, default=default_model_params,
+                        help=f'path of model parameters (default= {default_model_params})')
+    
+    parser.add_argument('-d', '--rnn_device', type=str, default=default_device,
+                        help=f'length of input tokens(selfies tokens) (default= {default_device})')
+
+    # parser.add_argument('-il', '--initial_ligand', type=str, default='',
+    #                     help='smiles of initial ligand')
     
     parser.add_argument('-al', '--alpha', type=float, default=0.4,
                     help='factor by which cooling schedule changes  default=0.4')
@@ -201,12 +261,11 @@ if __name__ == "__main__":
     mp_pipeline(fragment_path=args.fragment_path, 
                 target_path=args.target_path, 
                 output_dir=args.output_dir, 
-                initial_point=args.initial_point, 
+                initial_point=args.grid_center, 
                 grid_center=args.grid_center, 
                 grid_size=args.grid_size, 
                 count=args.count, 
-                threads=args.threads, 
-                initial_ligand=args.initial_ligand, 
+                threads=args.threads,  
                 chain_extend_probablity=args.chain_extend_probablity, 
                 weight=args.weight, 
                 max_iter=args.max_iter, 
@@ -214,5 +273,8 @@ if __name__ == "__main__":
                 score=args.score, 
                 vina_weight=args.vina_weight,
                 alpha = args.alpha,
-                dock=not args.no_docking)
+                dock=not args.no_docking,
+                rnn = args.rnn,
+                rnn_params=args.rnn_params,
+                rnn_device=args.rnn_device)
   
