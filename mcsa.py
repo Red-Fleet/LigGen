@@ -26,6 +26,8 @@ class SimulatedAnnealing:
         self.total_frag_rejected_mpc = 0
         self.obconversion = ob.OBConversion()
         self.temp_folder_path = 'temp'
+        self.obconv = ob.OBConversion()
+
         if os.path.exists(self.temp_folder_path) == False or os.path.isdir(self.temp_folder_path)==False:
             os.mkdir(self.temp_folder_path) 
 
@@ -180,8 +182,13 @@ class SimulatedAnnealing:
         pymol = pb.readstring(format="sdf", string=mol_block)
         pymol.addh()
         _ = pymol.calccharges("gasteiger")
-        pdbqt = pymol.write(format="pdbqt")
-
+        pdbqt = pymol.write(format="pdbqt", opt={'r':self.obconv.OUTOPTIONS})
+        
+        # making root so that rigid ligand can be used by vina
+        pdbqt = [l for l in pdbqt.split("\n") if l.startswith("TER")==False]
+        pdbqt = ["ROOT"] + pdbqt + ["ENDROOT", "TORSDOF 0"]
+        pdbqt = "\n".join(pdbqt)
+        
         return pdbqt
 
     def getRandomFragment(self) -> str:
@@ -215,6 +222,49 @@ class SimulatedAnnealing:
     def getSAScore(self, mol: rdkit.Chem.rdchem.Mol):
         '''returns synthesizability score of given ligand'''
         return sascorer.calculateScore(mol)
+
+    def updateMolCoordsFromPdbqt(self, mol, pdbqt_path):
+        # method will read atom coordinates from and bold info from mol  and return new mol without hydrogen
+        # will return mol on sucess , and None on failure
+
+        mol = Chem.RemoveHs(mol) # removing h and returning new one
+
+        with open(pdbqt_path) as f:
+            pdbqt_atoms = []
+            for l in f:
+                l = l.replace("\n", "")
+                if l != "" and l.startswith("ATOM"):
+                    atom = utils.readDetailsFromPdbLine(l)
+                    if atom['atom_name'] != 'H':
+                        pdbqt_atoms.append(atom)
+
+
+        if mol.GetNumAtoms() != len(pdbqt_atoms):
+            print("Could not update coords: wrong number of atoms")
+            return None
+            #raise Exception("Could not update coords: wrong number of atoms", mol.GetNumAtoms(), len(pdbqt_atoms))
+            
+        c = mol.GetConformer()
+            
+        for i in range(len(pdbqt_atoms)):
+            for i in range(c.GetNumAtoms()):
+                if mol.GetAtomWithIdx(i).GetSymbol().lower() != pdbqt_atoms[i]['atom_name'].lower(): 
+
+                    print("Could not update coords: wrong type of atom", mol.GetAtomWithIdx(i).GetSymbol(), pdbqt_atoms[i]['atom_name'])
+                    #raise Exception("Could not update coords: wrong type of atom", mol.GetAtomWithIdx(i).GetSymbol(), pdbqt_atoms[i]['atom_name'])
+                    return None
+                
+                pos = c.GetAtomPosition(i)
+                pos.x = pdbqt_atoms[i]['x_coordinate']
+                pos.y = pdbqt_atoms[i]['y_coordinate']
+                pos.z = pdbqt_atoms[i]['z_coordinate']
+
+                c.SetAtomPosition(i, pos)
+        
+
+        return mol
+
+        
     
     def _simulatedAnnealing(self, 
                             old_ligand: str,
@@ -240,7 +290,7 @@ class SimulatedAnnealing:
             frag = utils.justifyRingCloserLabelInSmiles(in_smiles=frag, reference_smiles=old_ligand)
             new_lig, atomMap, frag_index = self.addFragmentRandomlyToLigandSmiles(lig_smile=old_ligand, frag_smile=frag, end_prob=end_prob)
 
-            # renerating 3d structure from smiles
+            # generating 3d structure from smiles
             try:
                 mol = Chem.MolFromSmiles(new_lig)
                 mol = self.generateRdkitConformer(mol)
@@ -271,11 +321,11 @@ class SimulatedAnnealing:
 
             temp_file_path = os.path.join(self.temp_folder_path, str(uuid.uuid4()))
             self.vina.write_pose(temp_file_path, overwrite=True)
-            
-            # reading optimized pdbqt in mol variable
             with open(temp_file_path) as f:
-                mol_block = pb.readstring('pdbqt', f.read()).write('sdf')
-                mol = Chem.MolFromMolBlock(mol_block)
+                old_pd = f.read()
+            
+            # updating coordinates of mol 
+            mol = self.updateMolCoordsFromPdbqt(mol, temp_file_path)
             
             os.remove(temp_file_path)
             
@@ -286,11 +336,10 @@ class SimulatedAnnealing:
             
             # checking if ligand is present inside grid box, if not then try other fragment
             if self.isLigInGridbox(mol) is False:
-                continue
+               continue
             
-
             # calculationg score of new/current ligand using vina
-            sa_score = self.getSAScore(mol)
+            sa_score = self.getSAScore(mol) - 10
             new_score = vina_score_weight*vina_score + (1-vina_score_weight)*sa_score
             del_score = new_score - old_score
             new_Temp = temp * (alpha**iter)
@@ -298,13 +347,14 @@ class SimulatedAnnealing:
             if del_score <= 0 or random.random() < math.exp(-del_score / new_Temp):
                 new_score = new_score
                 detail = {
-                    "out_pdbqt": self.rdkitToPdbqt(mol),
+                    #"out_pdbqt": self.rdkitToPdbqt(mol),
+                    "out_sdf": Chem.MolToMolBlock(mol),
                     "added_frag": frag,
                     "in_ligand": old_ligand,
                     "out_ligand": new_lig,
                     "total_score": new_score,
                     "vina_score": vina_score,
-                    "sa_score": sa_score,
+                    "sa_score": sa_score+10,
                 }
 
                 details.append(detail)

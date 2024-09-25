@@ -72,7 +72,7 @@ def justifyRingCloserLabelInSmiles(in_smiles, reference_smiles):
 def readDetailsFromPdbLine(line):
     atom = line[0:6].replace(" ", '')
     atom_serial = line[6:11].replace(" ", '')
-    atom_name = line[12:16].replace(" ", '')
+    atom_name = line[12:14].replace(" ", '') # [12: 16]
     alternate_location = line[16].replace(" ", '')
     residue_name = line[17:20].replace(" ", '')
     chain_identifier = line[21].replace(" ", '')
@@ -96,9 +96,9 @@ def readDetailsFromPdbLine(line):
         'chain_identifier':chain_identifier,
         'residue_sequence_number':residue_sequence_number,
         'code':code,
-        'x_coordinate':x_coordinate,
-        'y_coordinate':y_coordinate,
-        'z_coordinate':z_coordinate,
+        'x_coordinate':float(x_coordinate),
+        'y_coordinate':float(y_coordinate),
+        'z_coordinate':float(z_coordinate),
         'occupancy':occupancy,
         'temperature':temperature,
         'segment_identifier':segment_identifier,

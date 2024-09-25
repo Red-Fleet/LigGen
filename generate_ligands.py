@@ -7,7 +7,7 @@ import concurrent
 import os 
 import time
 import json
-
+import math
 import torch
 import argparse
 from rnn_selfies import RNNSelfies
@@ -18,7 +18,7 @@ from selfies_dataset import SelfiesDataset
 from torch import nn
 import torch.optim as optim
 from tqdm import tqdm
-
+from openbabel import pybel as pb
 from rdkit import RDLogger
 
 RDLogger.DisableLog('rdApp.*')
@@ -31,12 +31,18 @@ def read_smiles(smiles_path):
     
 def clean_smiles(smiles_list):
     # removing disconnected smiles
-    smiles_list = [smiles for smiles in smiles_list if '.' not in smiles]
+    smiles_list = remove_stereo_symbols([smiles for smiles in smiles_list if '.' not in smiles])
+
+    return smiles_list
+
+def remove_stereo_symbols(smiles_list):
+    smiles_list = [smile.replace("\\", "").replace("/", "") for smile in smiles_list]
+
     return smiles_list
 
 def _pipeline(fragments:list[str], target_path, output_dirs, initial_point, grid_center, 
              grid_size, initial_ligand:str=None, chain_extend_probablity=0.2, weight=500, 
-             max_iter=10, temp=300, score=0, vina_weight=0.5, alpha=0.9, dock=True):
+             max_iter=100, temp=100, score=0, vina_weight=0.5, alpha=0.2, dock=False, save_details:bool=False):
 
     vina = Vina(cpu=1)
     sa = SimulatedAnnealing(fragments=fragments, vina=vina)
@@ -64,53 +70,58 @@ def _pipeline(fragments:list[str], target_path, output_dirs, initial_point, grid
                 print("Failed to generate ligand")
                 continue
             
-            final_ligand = sa.rdkitToPdbqt(result[0])
+            final_ligand_sdf = result[1]["state_details"][-1]["out_sdf"]
             details = result[1]
             
             # saving final ligand without docking
-            with open(os.path.join(output_dir, 'undocked_final_lig.pdbqt'), 'w') as f:
-                f.write(final_ligand)
+            with open(os.path.join(output_dir, 'ligand.sdf'), 'w') as f:
+                f.write(final_ligand_sdf)
 
-            # saving states
-            if os.path.exists(os.path.join(output_dir, 'state')) == False:
-                os.mkdir(os.path.join(output_dir, 'state'))
+            if save_details == True:
+                # saving states
+                if os.path.exists(os.path.join(output_dir, 'state')) == False:
+                    os.mkdir(os.path.join(output_dir, 'state'))
 
-            for i in range(len(details['state_details'])):
-                pdbqt = details['state_details'][i]['out_pdbqt']
-                del details['state_details'][i]['out_pdbqt']
-                with open(os.path.join(output_dir, 'state', str(i)+'.pdbqt'), 'w') as f:
-                    f.write(pdbqt)
+                for i in range(len(details['state_details'])):
+                    sdf = details['state_details'][i]['out_sdf']
+                    del details['state_details'][i]['out_sdf']
+                    with open(os.path.join(output_dir, 'state', str(i)+'.sdf'), 'w') as f:
+                        f.write(sdf)
 
 
-            undocked_energy = vina.score()[0]
+                undocked_energy = vina.score()[0]
 
-            # saving details
-            details['undocked_final_energy'] = undocked_energy
-            details['synthesizability_score'] = details['state_details'][-1]['sa_score']
-
-            with open(os.path.join(output_dir, 'details.txt'), 'w') as f:
-                json.dump(details, f, indent=4)
-
-            if dock is True:
-                # docking final ligand
-                vina.set_ligand_from_string(final_ligand)
-                vina.dock(n_poses=1)
-                docked_energy = vina.energies()[0][0]
-                vina.write_poses(os.path.join(os.path.join(output_dir, 'docked_final_lig.pdbqt')), n_poses=1, overwrite=True)
-
-                # saving details again if vina docking do not fails
-                details['docked_final_energy'] = docked_energy
+                # saving details
                 details['undocked_final_energy'] = undocked_energy
                 details['synthesizability_score'] = details['state_details'][-1]['sa_score']
 
                 with open(os.path.join(output_dir, 'details.txt'), 'w') as f:
                     json.dump(details, f, indent=4)
 
+            if dock is True:
+                pymol = pb.readstring(format="sdf", string=final_ligand_sdf)
+                pymol.addh()
+                _ = pymol.calccharges("gasteiger")
+                pdbqt = pymol.write(format="pdbqt")
+
+                # docking final ligand
+                vina.set_ligand_from_string(pdbqt)
+                vina.dock(n_poses=1)
+                docked_energy = vina.energies()[0][0]
+                vina.write_poses(os.path.join(os.path.join(output_dir, 'docked_ligand.pdbqt')), n_poses=1, overwrite=True)
+
+                if save_details == True:
+                    # saving details again if vina docking do not fails
+                    details['docked_final_energy'] = docked_energy
+
+                    with open(os.path.join(output_dir, 'details.txt'), 'w') as f:
+                        json.dump(details, f, indent=4)
+
         except Exception as e:
             print(e)
 
 
-def generate_fragments(parms, device):
+def generate_fragments(parms, device, count=256, max_len=40):
     """this method returns total of 1024 fragments"""
 
     vocab = get_vocab()
@@ -123,10 +134,10 @@ def generate_fragments(parms, device):
     model.load_state_dict(torch.load(parms, map_location=device))
     model = model.to(device)
 
-    pbar = tqdm(total=1024)
-    batch_size = 64
-    iteration = 16
-    max_len = 100
+    batch_size = 32
+    iteration = math.ceil(count/batch_size)
+    pbar = tqdm(total=iteration*batch_size)
+    
     smiles_list = []
     for i in range(iteration):
         smiles_list += model.generateSmiles(batch_size=batch_size, vocab=vocab, max_len=max_len)
@@ -138,7 +149,8 @@ def generate_fragments(parms, device):
 
 def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_center, 
              grid_size, count=1, threads=1, initial_ligand:str=None, chain_extend_probablity=0.2, weight=500, 
-             max_iter=10, temp=300, score=0, vina_weight=0.5, alpha=0.9, dock=True, rnn=False, rnn_params=None, rnn_device="cpu"):
+             max_iter=10, temp=300, score=0, vina_weight=0.5, alpha=0.9, dock=False, rnn=False, rnn_params=None, 
+             rnn_device="cpu", rnn_max_len=40, rnn_count=256, save_details:bool=False):
     
     fragments = None
 
@@ -167,14 +179,14 @@ def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_cent
                     _pipeline,
                     fragments, target_path, lig_dirs, initial_point, grid_center, 
                     grid_size, initial_ligand, chain_extend_probablity, weight, 
-                    max_iter, temp, score, vina_weight, alpha, dock
+                    max_iter, temp, score, vina_weight, alpha, dock,save_details
                 ) for lig_dirs in splitted_dir]
             else :
                 futures = [exe.submit(
                     _pipeline,
-                    clean_smiles(generate_fragments(rnn_params, rnn_device)), target_path, lig_dirs, initial_point, grid_center, 
+                    clean_smiles(generate_fragments(rnn_params, rnn_device, rnn_count, rnn_max_len)), target_path, lig_dirs, initial_point, grid_center, 
                     grid_size, initial_ligand, chain_extend_probablity, weight, 
-                    max_iter, temp, score, vina_weight, alpha, dock
+                    max_iter, temp, score, vina_weight, alpha, dock,save_details
                 ) for lig_dirs in splitted_dir]
 
         except KeyboardInterrupt:
@@ -223,25 +235,30 @@ if __name__ == "__main__":
                         help=f'path of model parameters (default= {default_model_params})')
     
     parser.add_argument('-d', '--rnn_device', type=str, default=default_device,
-                        help=f'length of input tokens(selfies tokens) (default= {default_device})')
+                        help=f'cpu or gpu (default= {default_device})')
 
+    parser.add_argument('-ml', "--rnn_max_len", type=int, default=40,
+                        help=f'max lenght of output generated by rnn (default= {40})')
+    
+    parser.add_argument('-rc', "--rnn_count", type=int, default=256,
+                        help=f'count of fragment rnn will generate for each ligand (default= {256})')
     # parser.add_argument('-il', '--initial_ligand', type=str, default='',
     #                     help='smiles of initial ligand')
     
-    parser.add_argument('-al', '--alpha', type=float, default=0.4,
-                    help='factor by which cooling schedule changes  default=0.4')
+    parser.add_argument('-al', '--alpha', type=float, default=0.3,
+                    help='factor by which cooling schedule changes  default=0.3')
 
-    parser.add_argument('-cp', '--chain_extend_probablity', type=float, default=0.2,
-                        help='probablity by which fragment will get added to ends of ligand chain default=0.2')
+    parser.add_argument('-cp', '--chain_extend_probablity', type=float, default=0.8,
+                        help='probablity by which fragment will get added to ends of ligand chain default=0.8')
 
     parser.add_argument('-w', '--weight', type=float, default=500,
                         help='molecular weight of ligand default=500')
 
-    parser.add_argument('-mi', '--max_iter', type=int, default=10,
-                        help='number of failed fragments should be tried at a stage before rejectiong that state default=10')
+    parser.add_argument('-mi', '--max_iter', type=int, default=50,
+                        help='number of failed fragments should be tried at a stage before rejectiong that state default=50')
 
-    parser.add_argument('-t', '--temp', type=float, default=500,
-                        help='temperature default=500')
+    parser.add_argument('-t', '--temp', type=float, default=50,
+                        help='temperature default=50')
 
     parser.add_argument('-s', '--score', type=float, default=0,
                         help='initial score default=0')
@@ -249,8 +266,12 @@ if __name__ == "__main__":
     parser.add_argument('-vw', '--vina_weight', type=float, default=0.5,
                         help='weight of vina score between [0 to 1], default=0.5, 1-vina_weight = sa_score')
 
-    parser.add_argument('-nd', '--no_docking', action='store_true',
-                        help='do not dock the generated ligand with protien if flag is provided')
+    parser.add_argument('-do', '--dock', action='store_true',
+                        help='dock the generated ligand with protien if flag is provided')
+    
+
+    parser.add_argument('-de', '--details', action='store_true',
+                        help='save the details of each step of ligand generation if flag is provided')
 
     args = parser.parse_args()
 
@@ -273,8 +294,11 @@ if __name__ == "__main__":
                 score=args.score, 
                 vina_weight=args.vina_weight,
                 alpha = args.alpha,
-                dock=not args.no_docking,
+                dock=args.dock,
                 rnn = args.rnn,
                 rnn_params=args.rnn_params,
-                rnn_device=args.rnn_device)
+                rnn_device=args.rnn_device,
+                rnn_max_len = args.rnn_max_len,
+                rnn_count = args.rnn_count,
+                save_details=args.details)
   
