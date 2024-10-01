@@ -1,4 +1,4 @@
-import torchtext;torchtext.disable_torchtext_deprecation_warning()
+import torchtext
 from collections import OrderedDict
 import torchtext.vocab
 

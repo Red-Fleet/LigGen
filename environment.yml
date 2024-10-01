@@ -1,0 +1,13 @@
+channels:
+  - defaults
+  - conda-forge
+  - pytorch
+dependencies:
+  - numpy=2.1.1
+  - selfies=2.1.1
+  - openbabel
+  - rdkit=2023.3.2
+  - tqdm=4.63.0
+  - torchtext=0.18.0
+  - sphinx_rtd_theme
+  - vina=1.2.5
