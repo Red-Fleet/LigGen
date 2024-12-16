@@ -150,7 +150,7 @@ def generate_fragments(parms, device, count=256, max_len=40):
 def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_center, 
              grid_size, count=1, threads=1, initial_ligand:str=None, chain_extend_probablity=0.2, weight=500, 
              max_iter=10, temp=300, score=0, vina_weight=0.5, alpha=0.9, dock=False, rnn=False, rnn_params=None, 
-             rnn_device="cpu", rnn_max_len=40, rnn_count=256, save_details:bool=False):
+             rnn_device="cpu", rnn_max_len=100, rnn_count=256, save_details:bool=False):
     
     fragments = None
 
