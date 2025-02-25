@@ -198,7 +198,7 @@ def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_cent
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-                        prog='Denovo-frag',
+                        prog='LigGen',
                         description='Generate ligands using fragment',
                         )
 
