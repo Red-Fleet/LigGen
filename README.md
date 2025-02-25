@@ -3,7 +3,7 @@
 ## Introduction
 LigGen is a computational tool designed for de novo ligand generation using fragment-based approaches. It can utilize pre-existing molecular fragments or generate new ones using a trained RNN-based fragment generator. Additionally, LigGen allows for fragment generator training, which improves its ability to generate meaningful chemical structures. LigGen also includes a Flask server and a React.js frontend, making it accessible via a web interface.
 
-The server is hosted at: Neurocare LigGen and is free to use.
+The server is hosted at: [Neurocare LigGen](https://neurocare-liggen.iiitd.edu.in/) and is free to use.
 
 ## Installation
 To install LigGen, follow these steps:
@@ -67,7 +67,7 @@ generate_ligands [-h] [-fp FRAGMENT_PATH] -tp TARGET_PATH -o OUTPUT_DIR -c COUNT
 ### Train Fragment Generator
 To train an RNN-based fragment generator:
 ```bash
-Train-fragment-generator [-h] -i INPUT_SMILES [-ip IN_MODEL_PARAMS] [-op OUT_MODEL_PARAMS] [-b BATCH_SIZE] [-e EPOCH] [-l MAX_LEN] [-d DEVICE]
+train_fragment_generator [-h] -i INPUT_SMILES [-ip IN_MODEL_PARAMS] [-op OUT_MODEL_PARAMS] [-b BATCH_SIZE] [-e EPOCH] [-l MAX_LEN] [-d DEVICE]
 ```
 #### Parameters Explained
 - **-i, --input_smiles**: Path to file containing molecular fragments in SMILES format.
@@ -82,7 +82,7 @@ Train-fragment-generator [-h] -i INPUT_SMILES [-ip IN_MODEL_PARAMS] [-op OUT_MOD
 ### Fragment Generator
 To generate fragments using a trained RNN model:
 ```bash
-Fragment-generation [-h] [-p MODEL_PARAMS] -o OUT_PATH [-b BATCH_SIZE] [-i ITERATION] [-l MAX_LEN] [-d DEVICE]
+generate_fragments [-h] [-p MODEL_PARAMS] -o OUT_PATH [-b BATCH_SIZE] [-i ITERATION] [-l MAX_LEN] [-d DEVICE]
 ```
 #### Parameters Explained
 - **-p, --model_params**: Path to trained RNN model parameters (default: `model.pt`).
@@ -117,5 +117,5 @@ python generate_fragments.py -p {model_parameters_path} -o {output_path} -i {tot
 ## Conclusion
 LigGen provides a robust framework for ligand generation using fragment-based and deep-learning approaches. By allowing users to train their fragment generators and generate ligands efficiently, LigGen is a powerful tool for virtual screening and drug discovery research.
 
-For any issues, please refer to the documentation or contact the developers.
+For any issues, please refer to the documentation.
 
