@@ -118,6 +118,7 @@ def _pipeline(fragments:list[str], target_path, output_dirs, initial_point, grid
                         json.dump(details, f, indent=4)
 
         except Exception as e:
+            raise e
             print(e)
 
 
@@ -189,9 +190,22 @@ def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_cent
                     max_iter, temp, score, vina_weight, alpha, dock,save_details
                 ) for lig_dirs in splitted_dir]
 
+            while True:
+                time.sleep(10)
+                all_done = True
+                for exe in futures:
+                    if exe.done() == False:
+                        all_done = False
+                        break
+                
+                    print(exe.exception())
+            
+                if all_done: break
+            
         except KeyboardInterrupt:
             exe.shutdown(wait=False, cancel_futures=True)
             print("Terminating")
+        
 
 
   
@@ -273,6 +287,9 @@ if __name__ == "__main__":
     parser.add_argument('-de', '--details', action='store_true',
                         help='save the details of each step of ligand generation if flag is provided')
 
+    parser.add_argument('-sc', '--scaffold', type=str, required=False,
+                        help='output dir location')
+    
     args = parser.parse_args()
 
     for k, v in args.__dict__.items():
@@ -300,5 +317,6 @@ if __name__ == "__main__":
                 rnn_device=args.rnn_device,
                 rnn_max_len = args.rnn_max_len,
                 rnn_count = args.rnn_count,
-                save_details=args.details)
+                save_details=args.details,
+                initial_ligand = args.scaffold)
   

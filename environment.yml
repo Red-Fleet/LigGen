@@ -1,11 +1,14 @@
 channels:
-  - defaults
   - conda-forge
+  - defaults          # order matters: conda-forge searched first
 dependencies:
-  - selfies
+
+  # Conda-forge / defaults packages
   - openbabel
-  - rdkit=2023.3.2
-  - tqdm=4.63.0
-  - sphinx_rtd_theme
-  - vina
+  - rdkit
+  - selfies
+  - tqdm
+  - vina==1.2.5
   - flask
+
+  # PyPI-only packages

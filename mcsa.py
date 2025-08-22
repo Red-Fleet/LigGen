@@ -247,19 +247,19 @@ class SimulatedAnnealing:
         c = mol.GetConformer()
             
         for i in range(len(pdbqt_atoms)):
-            for i in range(c.GetNumAtoms()):
-                if mol.GetAtomWithIdx(i).GetSymbol().lower() != pdbqt_atoms[i]['atom_name'].lower(): 
 
-                    print("Could not update coords: wrong type of atom", mol.GetAtomWithIdx(i).GetSymbol(), pdbqt_atoms[i]['atom_name'])
-                    #raise Exception("Could not update coords: wrong type of atom", mol.GetAtomWithIdx(i).GetSymbol(), pdbqt_atoms[i]['atom_name'])
-                    return None
-                
-                pos = c.GetAtomPosition(i)
-                pos.x = pdbqt_atoms[i]['x_coordinate']
-                pos.y = pdbqt_atoms[i]['y_coordinate']
-                pos.z = pdbqt_atoms[i]['z_coordinate']
+            if mol.GetAtomWithIdx(i).GetSymbol().lower() != pdbqt_atoms[i]['atom_name'].lower(): 
 
-                c.SetAtomPosition(i, pos)
+                print("Could not update coords: wrong type of atom", mol.GetAtomWithIdx(i).GetSymbol(), pdbqt_atoms[i]['atom_name'])
+                #raise Exception("Could not update coords: wrong type of atom", mol.GetAtomWithIdx(i).GetSymbol(), pdbqt_atoms[i]['atom_name'])
+                return None
+            
+            pos = c.GetAtomPosition(i)
+            pos.x = pdbqt_atoms[i]['x_coordinate']
+            pos.y = pdbqt_atoms[i]['y_coordinate']
+            pos.z = pdbqt_atoms[i]['z_coordinate']
+
+            c.SetAtomPosition(i, pos)
         
 
         return mol
@@ -283,8 +283,9 @@ class SimulatedAnnealing:
         mpc_reject = 0
 
         for i in range(int(max_iter_at_state)):
-
+            # if initial ligand(scaffold) is present then pick that
             frag = self.getRandomFragment()
+                
             self.total_frag_screened += 1
 
             frag = utils.justifyRingCloserLabelInSmiles(in_smiles=frag, reference_smiles=old_ligand)
@@ -300,7 +301,7 @@ class SimulatedAnnealing:
             if mol is None:
                 continue
 
-            if old_ligand is None or old_ligand == '':
+            if old_ligand is None or old_ligand == '' or old_ligand_3d is None:
                 # if current/new fragment is the first fragment then place this fragment at initial position
                 mol = self.placeRdkitMolAtNewPoint(mol, 0, initial_position[0], initial_position[1], initial_position[2])
             else:
@@ -409,7 +410,7 @@ class SimulatedAnnealing:
         '''
         
         if ligand is None: ligand = ""
-        if ligand_3d is None and ligand != "": 
+        if ligand != "": 
             mol = Chem.MolFromSmiles(ligand)
             mol = self.generateRdkitConformer(mol)
 
@@ -420,7 +421,7 @@ class SimulatedAnnealing:
         self.total_frag_rejected_mpc = 0
         result, details = self._simulatedAnnealing(old_ligand=ligand, 
                                                 old_score=start_score, 
-                                                old_ligand_3d=ligand_3d, 
+                                                old_ligand_3d=None, 
                                                 initial_position=initial_building_position, 
                                                 max_mw=max_mw, 
                                                 temp=temp, 
