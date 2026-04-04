@@ -50,10 +50,10 @@ def run_liggen(
             score = score,
             vina_weight = vina_weight,
             dock=False, 
-            rnn=False,
+            rnn=True,
             save_details = True,
             rnn_max_len=100, 
-            rnn_count=10,
+            rnn_count=512,
             rnn_params = '../ligbuilder_model.pt'
         )
     finally:

@@ -16,8 +16,8 @@ To install LigGen, follow these steps:
 
 2. **Manually install PyTorch and TorchText:**
    ```bash
-   torch version = 2.2.0
-   torchtext version = 0.17.0
+   torch version = 2.3.1
+   torchtext version = 0.18.0
    ```
 
 ## LigGen Components

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import OtherTools from "./otherTools";
+import exampleFileContent from "./ExampleFile";
 import {
   AppBar,
   TextField,
@@ -44,7 +45,7 @@ const App = () => {
   const [helpOpen, setHelpOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
 
-  
+
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
@@ -56,7 +57,7 @@ const App = () => {
   const handleHelpClose = () => {
     setHelpOpen(false);
   };
-  
+
 
   const [parameters, setParameters] = useState({
     count: 10,
@@ -70,7 +71,8 @@ const App = () => {
     temp: 50,
     score: 0,
     vina_weight: 0.5,
-    jobId: ""
+    jobId: "",
+    example: false
   });
 
   const [ligandDetailsDict, setLigandDetailsDict] = useState(null);
@@ -96,6 +98,12 @@ const App = () => {
   };
 
   const submitJob = async () => {
+    let rnn_device = parameters.rnn_device;
+    if (rnn_device === "cpu") {
+      rnn_device = "cpu";
+    } else {
+      rnn_device = "cuda";
+    }
 
     try {
       let content = {
@@ -103,7 +111,7 @@ const App = () => {
         grid_center: parameters.grid_center.replaceAll(" ", "").split(',').map(str => parseFloat(str)),
         grid_size: parameters.grid_size.replaceAll(" ", "").split(',').map(str => parseFloat(str)),
         threads: +parameters.threads,
-        rnn_device: parameters.rnn_device,
+        rnn_device: rnn_device,
         alpha: parseFloat(parameters.alpha),
         chain_extend_probability: parseFloat(parameters.chain_extend_probability),
         weight: parseFloat(parameters.weight),
@@ -112,8 +120,8 @@ const App = () => {
         vina_weight: parseFloat(parameters.vina_weight),
         target: file.content
       }
-      
-      
+
+
       const response = await axios.post(ADDRESS + "/submit-job", content);
       setJobId(response.data.job_id);
     } catch (error) {
@@ -138,7 +146,7 @@ const App = () => {
     if (!parameters.jobId) return;
     // Construct the URL with the job ID
     const downloadUrl = `${ADDRESS}/download/${parameters.jobId}`;
-    
+
     // Create an anchor element to programmatically trigger a download
     const link = document.createElement("a");
     link.href = downloadUrl;
@@ -152,7 +160,7 @@ const App = () => {
 
     const reader = new FileReader();
     reader.onload = (e) => {
-    const content = e.target.result;
+      const content = e.target.result;
       setFile({
         file_name: uploadedFile.name,
         content: content
@@ -160,30 +168,68 @@ const App = () => {
     };
 
     reader.readAsText(uploadedFile);
-    
+
+  };
+
+  const loadExampleJob = async () => {
+
+    // 1. Pre-fill the parameters so the user can see what inputs generate these results
+    setParameters({
+      count: 10,
+      grid_center: "-4, -4, 30", // Replace with your actual 7D9O coordinates
+      grid_size: "30, 30, 30",   // Replace with your actual 7D9O grid size
+      threads: 1,
+      rnn_device: "gpu",
+      alpha: 0.3,
+      chain_extend_probability: 0.8,
+      weight: 500,
+      temp: 50,
+      score: 0,
+      vina_weight: 0.5,
+      example: true
+    });
+
+    setFile({
+      file_name: "example_2g94.pdbqt",
+      content: exampleFileContent
+    });
+
   };
 
   const submitJobUI = () => {
     return (<Container>
       <Box sx={{ textAlign: "center", mt: 4 }}>
-        
+
         <Typography variant="subtitle1" color="textSecondary">
           Submit jobs for ligand generation.
         </Typography>
       </Box>
-  
+
       <Box sx={{ mt: 4 }}>
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="h5" gutterBottom>
             Job Parameters
           </Typography>
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={handleHelpOpen}
-          >
-            Help
-          </Button>
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={handleHelpOpen}
+            >
+              Help
+            </Button>
+
+
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={loadExampleJob}
+            >
+              Example
+            </Button>
+          </Stack>
+
+
         </Stack>
         <br />
         <Stack spacing={3}>
@@ -199,7 +245,7 @@ const App = () => {
               onChange={handleFileChange}
               accept=".pdbqt"
             />
-            
+
           </Button>
           {file && <Typography>Target File: {file.file_name}</Typography>}
           <Stack direction="row" spacing={2}>
@@ -229,7 +275,7 @@ const App = () => {
               onChange={handleChange}
             />
           </Stack>
-  
+
           <Stack direction="row" spacing={2}>
             <TextField
               fullWidth
@@ -248,8 +294,8 @@ const App = () => {
               onChange={handleChange}
             />
           </Stack>
-  
-  
+
+
           <Stack direction="row" spacing={2}>
             <TextField
               fullWidth
@@ -271,7 +317,7 @@ const App = () => {
               </Select>
             </FormControl>
           </Stack>
-  
+
           <Stack direction="row" spacing={2}>
             <TextField
               fullWidth
@@ -324,13 +370,13 @@ const App = () => {
           >
             Submit Job
           </Button>
-  
+
         </Stack>
-        </Box>
+      </Box>
 
 
-        <Dialog open={helpOpen} onClose={handleHelpClose} fullWidth
-  maxWidth="md">
+      <Dialog open={helpOpen} onClose={handleHelpClose} fullWidth
+        maxWidth="md">
         <DialogTitle>Parameter Descriptions</DialogTitle>
         <DialogContent>
           <Typography variant="body1" gutterBottom>
@@ -376,7 +422,7 @@ const App = () => {
     </Container>);
   }
 
-  const checkStatusUI = () =>{
+  const checkStatusUI = () => {
     return (<Container sx={{ mt: 4 }}>
       <Stack direction="row" spacing={2}>
         <Button
@@ -396,12 +442,12 @@ const App = () => {
         </Button>
 
         <TextField
-              fullWidth
-              label="Job Id"
-              name="jobId"
-              value={parameters.jobId}
-              onChange={handleChange}
-            />
+          fullWidth
+          label="Job Id"
+          name="jobId"
+          value={parameters.jobId}
+          onChange={handleChange}
+        />
 
       </Stack>
 
@@ -417,7 +463,7 @@ const App = () => {
         <Typography variant="h5" gutterBottom>
           Ligand {key} : Generating
         </Typography>
-        </Box>
+      </Box>
     );
 
     return (
@@ -428,31 +474,31 @@ const App = () => {
 
         {/* General Details */}
         <Paper sx={{ p: 2, mb: 4 }}>
-        
-        {ligandDetails.img ? <Stack direction="row" spacing={2}>
-        {<img
-                    src={`data:image/png;base64,${ligandDetails.img}`}
-                    alt="Ligand"
-                    style={{border: "1px solid #ccc" }}
-                  />}
 
-          <Box>
+          {ligandDetails.img ? <Stack direction="row" spacing={2}>
+            {<img
+              src={`data:image/png;base64,${ligandDetails.img}`}
+              alt="Ligand"
+              style={{ border: "1px solid #ccc" }}
+            />}
 
-          
-          <Typography>
-            <strong>Vina Score:</strong>{" "}
-            {ligandDetails.undocked_final_energy}
-          </Typography>
-          <Typography>
-            <strong>Synthesizability Score:</strong>{" "}
-            {ligandDetails.synthesizability_score}
-          </Typography>
+            <Box>
 
-          </Box>
 
-        </Stack> : <Box> Generating </Box>}
-        
-          
+              <Typography>
+                <strong>Vina Score:</strong>{" "}
+                {ligandDetails.undocked_final_energy}
+              </Typography>
+              <Typography>
+                <strong>Synthesizability Score:</strong>{" "}
+                {ligandDetails.synthesizability_score}
+              </Typography>
+
+            </Box>
+
+          </Stack> : <Box> Generating </Box>}
+
+
         </Paper>
 
         {/* State Details Table */}
@@ -486,86 +532,86 @@ const App = () => {
 
 
 
-const introductionUI = () => (
-  <Container maxWidth="md">
-    {/* Header */}
-    <Box sx={{ marginBottom: 4, textAlign: "center" }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        LigGen - A GEN-AI and Monte Carlo Simulated Annealing Based  
-        De Novo Drug Design Toolbox
-      </Typography>
-    </Box>
+  const introductionUI = () => (
+    <Container maxWidth="md">
+      {/* Header */}
+      <Box sx={{ marginBottom: 4, textAlign: "center" }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          LigGen - A GEN-AI and Monte Carlo Simulated Annealing Based
+          De Novo Drug Design Toolbox
+        </Typography>
+      </Box>
 
-    {/* Introduction */}
-    <Box sx={{ marginBottom: 3 }}>
-      <Typography variant="body1" paragraph>
-        We have developed a novel Gen-AI and Monte Carlo Simulated Annealing
-        based de novo ligand generation tool referred to as <strong>LigGen</strong>, which
-        uses fragments in SMILES format as building blocks. 
-      </Typography>
-      <Typography variant="body1" paragraph>
-        When compared to other de novo drug discovery packages such as 
-        <strong> LigBuilder</strong> and <strong>Pocket2Mol</strong>, LigGen's fragment generation 
-        is based on generative AI exploiting an RNN-LSTM approach. This approach 
-        was pretrained on the <strong>ChEMBL dataset</strong> and fine-tuned on LigBuilder’s 
-        fragment library.
-      </Typography>
-    </Box>
+      {/* Introduction */}
+      <Box sx={{ marginBottom: 3 }}>
+        <Typography variant="body1" paragraph>
+          We have developed a novel Gen-AI and Monte Carlo Simulated Annealing
+          based de novo ligand generation tool referred to as <strong>LigGen</strong>, which
+          uses fragments in SMILES format as building blocks.
+        </Typography>
+        <Typography variant="body1" paragraph>
+          When compared to other de novo drug discovery packages such as
+          <strong> LigBuilder</strong> and <strong>Pocket2Mol</strong>, LigGen's fragment generation
+          is based on generative AI exploiting an RNN-LSTM approach. This approach
+          was pretrained on the <strong>ChEMBL dataset</strong> and fine-tuned on LigBuilder’s
+          fragment library.
+        </Typography>
+      </Box>
 
-    {/* Performance Highlights */}
-    <Box sx={{ marginBottom: 3 }}>
-      <Typography variant="h5" component="h2" gutterBottom>
-        Performance Highlights
-      </Typography>
-      <Typography variant="body1" paragraph>
-        LigGen’s performance was evaluated on the <strong>CrossDock dataset</strong> and 
-        three Alzheimer’s-related proteins to compare it with several 
-        state-of-the-art de novo drug design tools, including 
-        <strong> Pocket2Mol</strong>, <strong>LigBuilder V3</strong>, and others. 
-      </Typography>
-      <Typography variant="body1" paragraph>
-        On the CrossDock dataset, LigGen demonstrated competitive binding 
-        affinities, achieving a Vina score of <strong>-7.508 ± 1.83</strong>, 
-        outperforming baseline methods like <strong>3D-SBDD</strong>, <strong>FLAG</strong>, and 
-        <strong>DrugGPS</strong>. LigGen also showcased strong diversity in the generated 
-        molecules while maintaining reasonable synthesizability.
-      </Typography>
-      <Typography variant="body1" paragraph>
-        Although tools like Pocket2Mol showed higher QED values, LigGen 
-        consistently produced ligands with good <strong>Lipinski compliance</strong>, 
-        suggesting its balance between drug-likeness and innovation.
-      </Typography>
-    </Box>
+      {/* Performance Highlights */}
+      <Box sx={{ marginBottom: 3 }}>
+        <Typography variant="h5" component="h2" gutterBottom>
+          Performance Highlights
+        </Typography>
+        <Typography variant="body1" paragraph>
+          LigGen’s performance was evaluated on the <strong>CrossDock dataset</strong> and
+          three Alzheimer’s-related proteins to compare it with several
+          state-of-the-art de novo drug design tools, including
+          <strong> Pocket2Mol</strong>, <strong>LigBuilder V3</strong>, and others.
+        </Typography>
+        <Typography variant="body1" paragraph>
+          On the CrossDock dataset, LigGen demonstrated competitive binding
+          affinities, achieving a Vina score of <strong>-7.508 ± 1.83</strong>,
+          outperforming baseline methods like <strong>3D-SBDD</strong>, <strong>FLAG</strong>, and
+          <strong>DrugGPS</strong>. LigGen also showcased strong diversity in the generated
+          molecules while maintaining reasonable synthesizability.
+        </Typography>
+        <Typography variant="body1" paragraph>
+          Although tools like Pocket2Mol showed higher QED values, LigGen
+          consistently produced ligands with good <strong>Lipinski compliance</strong>,
+          suggesting its balance between drug-likeness and innovation.
+        </Typography>
+      </Box>
 
-    {/* Alzheimer's Protein Analysis */}
-    <Box sx={{ marginBottom: 3 }}>
-      <Typography variant="h5" component="h2" gutterBottom>
-        Alzheimer’s-Related Protein Analysis
-      </Typography>
-      <Typography variant="body1" paragraph>
-        In the Alzheimer’s-related protein analysis, ligands generated by LigGen 
-        consistently showed better binding affinities compared to those from 
-        LigBuilder and Pocket2Mol. LigGen demonstrated a balanced approach 
-        between ligand synthesizability and structural complexity, as seen in 
-        its ability to produce ligands with moderate synthesizability scores.
-      </Typography>
-    </Box>
+      {/* Alzheimer's Protein Analysis */}
+      <Box sx={{ marginBottom: 3 }}>
+        <Typography variant="h5" component="h2" gutterBottom>
+          Alzheimer’s-Related Protein Analysis
+        </Typography>
+        <Typography variant="body1" paragraph>
+          In the Alzheimer’s-related protein analysis, ligands generated by LigGen
+          consistently showed better binding affinities compared to those from
+          LigBuilder and Pocket2Mol. LigGen demonstrated a balanced approach
+          between ligand synthesizability and structural complexity, as seen in
+          its ability to produce ligands with moderate synthesizability scores.
+        </Typography>
+      </Box>
 
-    {/* Conclusion */}
-    <Box sx={{ marginBottom: 3 }}>
-      <Typography variant="h5" component="h2" gutterBottom>
-        Conclusion
-      </Typography>
-      <Typography variant="body1" paragraph>
-        Overall, the results indicate that LigGen is a robust tool for fragment-based 
-        ligand generation, capable of producing high-quality ligands with 
-        competitive docking scores and favorable synthesizability. LigGen provides 
-        a novel method for generating ligands using a fragment-based de novo 
-        drug design approach.
-      </Typography>
-    </Box>
-  </Container>
-);
+      {/* Conclusion */}
+      <Box sx={{ marginBottom: 3 }}>
+        <Typography variant="h5" component="h2" gutterBottom>
+          Conclusion
+        </Typography>
+        <Typography variant="body1" paragraph>
+          Overall, the results indicate that LigGen is a robust tool for fragment-based
+          ligand generation, capable of producing high-quality ligands with
+          competitive docking scores and favorable synthesizability. LigGen provides
+          a novel method for generating ligands using a fragment-based de novo
+          drug design approach.
+        </Typography>
+      </Box>
+    </Container>
+  );
 
   const otherToolsUI = () => (
     <Container>
@@ -576,16 +622,16 @@ const introductionUI = () => (
     </Container>
   );
 
-  const computationUi = () =>{
+  const computationUi = () => {
 
-  
 
-  return (
+
+    return (
       <Container maxWidth="md">
-        
+
         {submitJobUI()}
         <Container>
-        <Box sx={{ mt: 4 }}>
+          <Box sx={{ mt: 4 }}>
             <Typography variant="subtitle1">Job ID: {jobId}</Typography>
           </Box>
         </Container>
@@ -622,8 +668,8 @@ const introductionUI = () => (
         Results: CrossDock Dataset
       </Typography>
       <Typography variant="body1" gutterBottom>
-      We evaluated LigGen using the test set of the CrossDock dataset. The test set contains 100 diverse protein-ligand pairs. This table summarizes the molecular properties of the ligands generated for these targets. We compared LigGen against multiple baselines, including 3D-SBDD, Pocket2Mol, GraphBP, TargetDiff, DecompDiff, DiffSBDD, FLAG, DrugGPS, Lingo3DMol, and Frag2Seq. Baseline results are sourced from the paper “Fragment and Geometry Aware Tokenization of Molecules for Structure-Based Drug Design Using Language Models”.
-      We use the same evaluation matrix which was used in baselines. Vina Score estimates the binding affinity between generated molecules and given protein pockets; QED is a measure used to assess the drug-likeness of a molecule based on its molecular properties; SA estimates how easy it would be to synthesize a given chemical compound; Lipinski measures how well a molecule satisfies the Lipinski's rule of five , which evaluates the drug-likeness of a molecule; Diversity measures the average pairwise diversity (calculated as 1-Tanimotosimilarity) of generated molecules for a binding pocket; Time is the average time cost to generate 100 molecules for a protein pocket in the test set. All the Vina scores are calculated by QVina, and the chemical properties are calculated by RDKit .
+        We evaluated LigGen using the test set of the CrossDock dataset. The test set contains 100 diverse protein-ligand pairs. This table summarizes the molecular properties of the ligands generated for these targets. We compared LigGen against multiple baselines, including 3D-SBDD, Pocket2Mol, GraphBP, TargetDiff, DecompDiff, DiffSBDD, FLAG, DrugGPS, Lingo3DMol, and Frag2Seq. Baseline results are sourced from the paper “Fragment and Geometry Aware Tokenization of Molecules for Structure-Based Drug Design Using Language Models”.
+        We use the same evaluation matrix which was used in baselines. Vina Score estimates the binding affinity between generated molecules and given protein pockets; QED is a measure used to assess the drug-likeness of a molecule based on its molecular properties; SA estimates how easy it would be to synthesize a given chemical compound; Lipinski measures how well a molecule satisfies the Lipinski's rule of five , which evaluates the drug-likeness of a molecule; Diversity measures the average pairwise diversity (calculated as 1-Tanimotosimilarity) of generated molecules for a binding pocket; Time is the average time cost to generate 100 molecules for a protein pocket in the test set. All the Vina scores are calculated by QVina, and the chemical properties are calculated by RDKit .
       </Typography>
       <TableContainer component={Paper}>
         <Table>
@@ -664,46 +710,46 @@ const introductionUI = () => (
       </TableContainer>
       <br /> <br /><br /> <br /> <br />
       <Typography variant="h4" gutterBottom>
-      Alzheimer’s-Related Protein Analysis
+        Alzheimer’s-Related Protein Analysis
       </Typography>
       <Typography>
-      In this section, we compare the performance of LigGen by generating ligands for Alzheimer's-Related Targets Beta-secretase 1, Monoamine Oxidase B and Acetylcholinesterase against tools LigBuilder V3 and Pocket2Mol. LigBuilder V3 and Pocket2Mol are popular ligand-building tools based on Genetic Algorithms and Deep Learning, respectively. We have generated results for three different targets with PDB IDs 2G94, 2V5Z, and 7D9O. The designed ligands were evaluated based on their Binding Affinities (using AutoDock Vina).
-      A total of 100 ligands were generated for each protein using all three programs, LigGen, Pocket2Mol and LigBuilder. Subsequently, these compounds underwent docking using AutoDock-Vina. 
+        In this section, we compare the performance of LigGen by generating ligands for Alzheimer's-Related Targets Beta-secretase 1, Monoamine Oxidase B and Acetylcholinesterase against tools LigBuilder V3 and Pocket2Mol. LigBuilder V3 and Pocket2Mol are popular ligand-building tools based on Genetic Algorithms and Deep Learning, respectively. We have generated results for three different targets with PDB IDs 2G94, 2V5Z, and 7D9O. The designed ligands were evaluated based on their Binding Affinities (using AutoDock Vina).
+        A total of 100 ligands were generated for each protein using all three programs, LigGen, Pocket2Mol and LigBuilder. Subsequently, these compounds underwent docking using AutoDock-Vina.
       </Typography>
       <div style={{ display: "flex", justifyContent: "center", gap: "20px", alignItems: "center" }}>
-                <div>
-                    <img src="/images/ba_7d9o.png" alt="7D9O: Docking Scores" style={{ width: "350px", height: "auto" }} />
-                </div>
-                <div>
-                    <img src="/images/ba_2v5z.png" alt="2V5Z: Docking Scores" style={{ width: "350px", height: "auto" }} />
-                </div>
-                <div>
-                    <img src="/images/ba_2g94.png" alt="2G94: Docking Scores" style={{ width: "350px", height: "auto" }} />
-                </div>
-            </div>
-      
+        <div>
+          <img src="/images/ba_7d9o.png" alt="7D9O: Docking Scores" style={{ width: "350px", height: "auto" }} />
+        </div>
+        <div>
+          <img src="/images/ba_2v5z.png" alt="2V5Z: Docking Scores" style={{ width: "350px", height: "auto" }} />
+        </div>
+        <div>
+          <img src="/images/ba_2g94.png" alt="2G94: Docking Scores" style={{ width: "350px", height: "auto" }} />
+        </div>
+      </div>
+
     </Container>
   );
 
   return (
     <Box>
       <AppBar position="static">
-      <Toolbar>
-        {/* Logo or Title */}
-        <Box display="flex" alignItems="center" sx={{ marginRight: 2 }}>
-          <Typography variant="h6" noWrap component="div">
-            LigGen Webserver
-          </Typography>
-        </Box>
-        
-        <Tabs value={activeTab} onChange={handleTabChange} indicatorColor="secondary" 
-    textColor="inherit"
-    centered sx={{ flexGrow: 0.5 }} >
-          <Tab label="Introduction" />
-          <Tab label="Computation" />
-          <Tab label="Our Results"/>
-          <Tab label="Other Tools" />
-        </Tabs>
+        <Toolbar>
+          {/* Logo or Title */}
+          <Box display="flex" alignItems="center" sx={{ marginRight: 2 }}>
+            <Typography variant="h6" noWrap component="div">
+              LigGen Webserver
+            </Typography>
+          </Box>
+
+          <Tabs value={activeTab} onChange={handleTabChange} indicatorColor="secondary"
+            textColor="inherit"
+            centered sx={{ flexGrow: 0.5 }} >
+            <Tab label="Introduction" />
+            <Tab label="Computation" />
+            <Tab label="Our Results" />
+            <Tab label="Other Tools" />
+          </Tabs>
         </Toolbar>
       </AppBar>
       <Box sx={{ p: 3 }}>
@@ -715,5 +761,6 @@ const introductionUI = () => (
     </Box>
   );
 };
+
 
 export default App;

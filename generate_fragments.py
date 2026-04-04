@@ -41,9 +41,8 @@ if __name__ == "__main__":
     parser.add_argument('-d', '--device', type=str, default=default_device,
                         help=f'length of input tokens(selfies tokens) (default= {default_device})')
     
-    
     args = parser.parse_args()
-
+    
     vocab = get_vocab()
     model = RNNSelfies(vocab_size=len(vocab),
         embed_dim=256,

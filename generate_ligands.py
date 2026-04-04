@@ -20,7 +20,7 @@ import torch.optim as optim
 from tqdm import tqdm
 from openbabel import pybel as pb
 from rdkit import RDLogger
-
+import random
 RDLogger.DisableLog('rdApp.*')
 
 def read_smiles(smiles_path):
@@ -40,20 +40,65 @@ def remove_stereo_symbols(smiles_list):
 
     return smiles_list
 
-def _pipeline(fragments:list[str], target_path, output_dirs, initial_point, grid_center, 
-             grid_size, initial_ligand:str=None, chain_extend_probablity=0.2, weight=500, 
-             max_iter=100, temp=100, score=0, vina_weight=0.5, alpha=0.2, dock=False, save_details:bool=False):
+def generate_fragments(parms, device, count=256, max_len=40):
+    """this method returns total of 1024 fragments"""
 
+    vocab = get_vocab()
+    model = RNNSelfies(vocab_size=len(vocab),
+        embed_dim=256,
+        hidden_size=512,
+        num_layers=3,
+        dropout=0)
+    
+    model.load_state_dict(torch.load(parms, map_location=device))
+    model = model.to(device)
+
+    batch_size = 32
+    iteration = math.ceil(count/batch_size)
+    pbar = tqdm(total=iteration*batch_size)
+    
+    smiles_list = []
+    for i in range(iteration):
+        smiles_list += model.generateSmiles(batch_size=batch_size, vocab=vocab, max_len=max_len)
+        pbar.update(batch_size)
+    
+    pbar.close()
+
+    return smiles_list
+
+def _pipeline(fragment_path, target_path, output_dirs, initial_point, grid_center, 
+             grid_size, initial_ligand:str=None, chain_extend_probablity=0.2, weight=500, 
+             max_iter=100, temp=100, score=0, vina_weight=0.5, alpha=0.2, dock=False, 
+             rnn=False, rnn_params=None, 
+             rnn_device="cpu", rnn_max_len=100, rnn_count=256,save_details:bool=False, seed=None):
+    
     vina = Vina(cpu=1)
+
+    fragments = None
+    if rnn == False:
+        # reading fragments 
+        fragments = read_smiles(fragment_path)
+        
+        # cleaning fragments
+        fragments = clean_smiles(fragments)
+    
     sa = SimulatedAnnealing(fragments=fragments, vina=vina)
     # setting target and computing grid box
     sa.setTarget(target_pdbqt_path=target_path, grid_param=(None, grid_center, grid_size))
 
+    if seed is not None:
+        random.seed(seed)
+        torch.manual_seed(seed)
+    
     for output_dir in output_dirs:
         if os.path.exists(output_dir)==False or os.path.isdir(output_dir)==False:
             os.mkdir(output_dir)
             
         try:
+            if rnn is True:
+                fragments = clean_smiles(generate_fragments(rnn_params, rnn_device, rnn_count, rnn_max_len))
+
+            sa.fragments = fragments  
             result = sa.simulatedAnnealing(
                     max_mw=weight,
                     temp = temp,
@@ -122,45 +167,13 @@ def _pipeline(fragments:list[str], target_path, output_dirs, initial_point, grid
             print(e)
 
 
-def generate_fragments(parms, device, count=256, max_len=40):
-    """this method returns total of 1024 fragments"""
 
-    vocab = get_vocab()
-    model = RNNSelfies(vocab_size=len(vocab),
-        embed_dim=256,
-        hidden_size=512,
-        num_layers=3,
-        dropout=0)
-    
-    model.load_state_dict(torch.load(parms, map_location=device))
-    model = model.to(device)
-
-    batch_size = 32
-    iteration = math.ceil(count/batch_size)
-    pbar = tqdm(total=iteration*batch_size)
-    
-    smiles_list = []
-    for i in range(iteration):
-        smiles_list += model.generateSmiles(batch_size=batch_size, vocab=vocab, max_len=max_len)
-        pbar.update(batch_size)
-    
-    pbar.close()
-
-    return smiles_list
 
 def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_center, 
              grid_size, count=1, threads=1, initial_ligand:str=None, chain_extend_probablity=0.2, weight=500, 
              max_iter=10, temp=300, score=0, vina_weight=0.5, alpha=0.9, dock=False, rnn=False, rnn_params=None, 
-             rnn_device="cpu", rnn_max_len=100, rnn_count=256, save_details:bool=False):
+             rnn_device="cpu", rnn_max_len=100, rnn_count=256, save_details:bool=False, seed=None):
     
-    fragments = None
-
-    if rnn == False:
-        # reading fragments 
-        fragments = read_smiles(fragment_path)
-        
-        # cleaning fragments
-        fragments = clean_smiles(fragments)
 
     output_lig_dirs = [os.path.join(output_dir, str(i)) for i in range(count)]
     
@@ -174,21 +187,21 @@ def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_cent
 
     # starting process pool
     with ProcessPoolExecutor(max_workers=threads) as exe:
+        def _add_seed(seed, i):
+            if seed is not None:
+                return seed + i
+            return None
+        
         try:
-            if rnn == False:
-                futures = [exe.submit(
-                    _pipeline,
-                    fragments, target_path, lig_dirs, initial_point, grid_center, 
-                    grid_size, initial_ligand, chain_extend_probablity, weight, 
-                    max_iter, temp, score, vina_weight, alpha, dock,save_details
-                ) for lig_dirs in splitted_dir]
-            else :
-                futures = [exe.submit(
-                    _pipeline,
-                    clean_smiles(generate_fragments(rnn_params, rnn_device, rnn_count, rnn_max_len)), target_path, lig_dirs, initial_point, grid_center, 
-                    grid_size, initial_ligand, chain_extend_probablity, weight, 
-                    max_iter, temp, score, vina_weight, alpha, dock,save_details
-                ) for lig_dirs in splitted_dir]
+            
+            futures = [exe.submit(
+                _pipeline,
+                fragment_path, target_path, lig_dirs, initial_point, grid_center, 
+                grid_size, initial_ligand, chain_extend_probablity, weight, 
+                max_iter, temp, score, vina_weight, alpha, dock, rnn, rnn_params, 
+             rnn_device, rnn_max_len, rnn_count,save_details, _add_seed(seed, i)
+            ) for i, lig_dirs in enumerate(splitted_dir)]
+
 
             while True:
                 time.sleep(10)
@@ -290,12 +303,14 @@ if __name__ == "__main__":
     parser.add_argument('-sc', '--scaffold', type=str, required=False,
                         help='output dir location')
     
+    parser.add_argument('-se', '--seed', type=int, required=False,
+                        help='seed for random number generator, Default=Random')
+    
     args = parser.parse_args()
 
     for k, v in args.__dict__.items():
         print(k, ":", v)
 
-    
     mp_pipeline(fragment_path=args.fragment_path, 
                 target_path=args.target_path, 
                 output_dir=args.output_dir, 
@@ -318,5 +333,6 @@ if __name__ == "__main__":
                 rnn_max_len = args.rnn_max_len,
                 rnn_count = args.rnn_count,
                 save_details=args.details,
-                initial_ligand = args.scaffold)
+                initial_ligand = args.scaffold,
+                seed = args.seed)
   
