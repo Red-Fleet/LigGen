@@ -3,10 +3,11 @@ channels:
   - defaults
 dependencies:
   - openbabel=3.1.1
-  - python=3.9.20
-  - selfies=2.2.0
+  - python
+  - selfies
   - vina
-  - numpy=2.0.2
+  - numpy
   - requests
   - tqdm
+  - scipy
 
