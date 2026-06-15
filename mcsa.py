@@ -16,6 +16,7 @@ import rdkit.Chem
 import utils as utils
 from rdkit import RDLogger
 import uuid
+import copy
 
 class SimulatedAnnealing:
     def __init__(self, fragments: list[str], vina: Vina):
@@ -344,7 +345,7 @@ class SimulatedAnnealing:
             new_score = vina_score_weight*vina_score + (1-vina_score_weight)*sa_score
             del_score = new_score - old_score
             new_Temp = temp * (alpha**iter)
-
+            # print("new temp:", new_Temp, "alpha:", alpha, "iter:", iter, "del_score:", del_score, "exp:", math.exp(-del_score / new_Temp))
             if del_score <= 0 or random.random() < math.exp(-del_score / new_Temp):
                 new_score = new_score
                 detail = {
@@ -359,7 +360,11 @@ class SimulatedAnnealing:
                 }
 
                 details.append(detail)
-                
+
+                if self.global_best_score > new_score:
+                    self.global_best_score = new_score
+                    self.global_best_details = copy.deepcopy(details)
+                    self.global_best_mol = mol
                 if Descriptors.MolWt(mol) >= max_mw:
                     return mol, details
                 else:
@@ -419,6 +424,10 @@ class SimulatedAnnealing:
         
         self.total_frag_screened = 0
         self.total_frag_rejected_mpc = 0
+        self.global_best_score = start_score
+        self.global_best_details = None
+        self.global_best_mol = None
+        self.start_score = start_score
         result, details = self._simulatedAnnealing(old_ligand=ligand, 
                                                 old_score=start_score, 
                                                 old_ligand_3d=None, 
@@ -430,10 +439,11 @@ class SimulatedAnnealing:
                                                 end_prob=end_prob,
                                                 max_iter_at_state=max_iter_at_state,
                                                 vina_score_weight=vina_score_weight)
+        
         details = {
             'total_frag_screened': self.total_frag_screened,
             'total_frag_rejected_mpc': self.total_frag_rejected_mpc,
-            'state_details': details
+            'state_details': self.global_best_details
         }
-        return result, details
+        return self.global_best_mol, details
 

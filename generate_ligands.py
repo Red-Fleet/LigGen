@@ -21,6 +21,7 @@ from tqdm import tqdm
 from openbabel import pybel as pb
 from rdkit import RDLogger
 import random
+from scipy.stats import truncnorm
 RDLogger.DisableLog('rdApp.*')
 
 def read_smiles(smiles_path):
@@ -40,18 +41,34 @@ def remove_stereo_symbols(smiles_list):
 
     return smiles_list
 
+def normal_distribution_bounded(mean, std, min_val, max_val, count=1):
+    """
+    Generates new data assuming a bell curve, strictly bounded by min_val and max_val.
+    """
+    # Convert min and max bounds to z-scores 
+    a = (min_val - mean) / std
+    b = (max_val - mean) / std
+    
+    # Generate the bounded distribution
+    return truncnorm.rvs(a, b, loc=mean, scale=std, size=count)
+
+global_model = None
+global_vocab = None
+
 def generate_fragments(parms, device, count=256, max_len=40):
     """this method returns total of 1024 fragments"""
-
-    vocab = get_vocab()
-    model = RNNSelfies(vocab_size=len(vocab),
-        embed_dim=256,
-        hidden_size=512,
-        num_layers=3,
-        dropout=0)
+    global global_model, global_vocab
+    if global_model is None or global_vocab is None:
+        print("Initializing rnn model")
+        global_vocab = get_vocab()
+        global_model = RNNSelfies(vocab_size=len(global_vocab),
+            embed_dim=256,
+            hidden_size=512,
+            num_layers=3,
+            dropout=0)
     
-    model.load_state_dict(torch.load(parms, map_location=device))
-    model = model.to(device)
+        global_model.load_state_dict(torch.load(parms, map_location=device))
+        global_model = global_model.to(device)
 
     batch_size = 32
     iteration = math.ceil(count/batch_size)
@@ -59,15 +76,16 @@ def generate_fragments(parms, device, count=256, max_len=40):
     
     smiles_list = []
     for i in range(iteration):
-        smiles_list += model.generateSmiles(batch_size=batch_size, vocab=vocab, max_len=max_len)
+        smiles_list += global_model.generateSmiles(batch_size=batch_size, vocab=global_vocab, max_len=max_len)
         pbar.update(batch_size)
     
     pbar.close()
 
     return smiles_list
 
-def _pipeline(fragment_path, target_path, output_dirs, initial_point, grid_center, 
+def _pipeline(fragment_path, fragments_for_dirs, target_path, output_dirs, initial_point, grid_center, 
              grid_size, initial_ligand:str=None, chain_extend_probablity=0.2, weight=500, 
+               mean_weight=-1, std_weight=-1, min_weight=-1, max_weight=-1,
              max_iter=100, temp=100, score=0, vina_weight=0.5, alpha=0.2, dock=False, 
              rnn=False, rnn_params=None, 
              rnn_device="cpu", rnn_max_len=100, rnn_count=256,save_details:bool=False, seed=None):
@@ -88,19 +106,26 @@ def _pipeline(fragment_path, target_path, output_dirs, initial_point, grid_cente
 
     if seed is not None:
         random.seed(seed)
-        torch.manual_seed(seed)
     
-    for output_dir in output_dirs:
+    for i, output_dir in enumerate(output_dirs):
         if os.path.exists(output_dir)==False or os.path.isdir(output_dir)==False:
             os.mkdir(output_dir)
             
         try:
             if rnn is True:
-                fragments = clean_smiles(generate_fragments(rnn_params, rnn_device, rnn_count, rnn_max_len))
+                fragments = fragments_for_dirs[i]
+
+            if weight == -1:
+                lig_weight = normal_distribution_bounded(mean = mean_weight, 
+                                                         std = std_weight, 
+                                                         min_val = min_weight, 
+                                                         max_val = max_weight, count=1)[0]
+            else:
+                lig_weight = weight
 
             sa.fragments = fragments  
             result = sa.simulatedAnnealing(
-                    max_mw=weight,
+                    max_mw=lig_weight,
                     temp = temp,
                     initial_building_position=initial_point,
                     start_score=score,
@@ -163,14 +188,14 @@ def _pipeline(fragment_path, target_path, output_dirs, initial_point, grid_cente
                         json.dump(details, f, indent=4)
 
         except Exception as e:
-            raise e
+            # raise e
             print(e)
 
 
 
 
 def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_center, 
-             grid_size, count=1, threads=1, initial_ligand:str=None, chain_extend_probablity=0.2, weight=500, 
+             grid_size, count=1, threads=1, initial_ligand:str=None, chain_extend_probablity=0.2, weight=500, mean_weight=-1, std_weight=-1, min_weight=-1, max_weight=-1,
              max_iter=10, temp=300, score=0, vina_weight=0.5, alpha=0.9, dock=False, rnn=False, rnn_params=None, 
              rnn_device="cpu", rnn_max_len=100, rnn_count=256, save_details:bool=False, seed=None):
     
@@ -179,11 +204,14 @@ def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_cent
     
     # splitting output dirs for assigning them to multi-processes
     splitted_dir = [output_lig_dirs[i*(count//threads):(i+1)*(count//threads)] for i in range(threads)]
-
+    
     # adding lefts
     lefts = output_lig_dirs[(count//threads)*threads: len(output_lig_dirs)]
     for i in range(len(lefts)):
         splitted_dir[i].append(lefts[i])
+
+    if seed is not None:
+        torch.manual_seed(seed)
 
     # starting process pool
     with ProcessPoolExecutor(max_workers=threads) as exe:
@@ -196,8 +224,11 @@ def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_cent
             
             futures = [exe.submit(
                 _pipeline,
-                fragment_path, target_path, lig_dirs, initial_point, grid_center, 
+                fragment_path,
+                [clean_smiles(generate_fragments(rnn_params, rnn_device, rnn_count, rnn_max_len)) for _ in range(len(lig_dirs))],
+                target_path, lig_dirs, initial_point, grid_center, 
                 grid_size, initial_ligand, chain_extend_probablity, weight, 
+                 mean_weight, std_weight, min_weight, max_weight,
                 max_iter, temp, score, vina_weight, alpha, dock, rnn, rnn_params, 
              rnn_device, rnn_max_len, rnn_count,save_details, _add_seed(seed, i)
             ) for i, lig_dirs in enumerate(splitted_dir)]
@@ -213,6 +244,7 @@ def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_cent
                 
                     print(exe.exception())
             
+            
                 if all_done: break
             
         except KeyboardInterrupt:
@@ -224,6 +256,12 @@ def mp_pipeline(fragment_path, target_path, output_dir, initial_point, grid_cent
   
 
 if __name__ == "__main__":
+    # import multiprocessing
+    # try:
+    #     multiprocessing.set_start_method('spawn')
+    # except RuntimeError:
+    #     pass
+        
     parser = argparse.ArgumentParser(
                         prog='LigGen',
                         description='Generate ligands using fragment',
@@ -279,7 +317,17 @@ if __name__ == "__main__":
                         help='probablity by which fragment will get added to ends of ligand chain default=0.8')
 
     parser.add_argument('-w', '--weight', type=float, default=500,
-                        help='molecular weight of ligand default=500')
+                        help='molecular weight of ligand default=500, if weight is -1 then weights will be genrates using normal distribution')
+    
+    parser.add_argument('--mean_weight', type=float, default=400,
+                        help='Distribution: mean molecular weight')
+    parser.add_argument('--std_weight', type=float, default=30,
+                        help='Distribution: standard deviation of molecular weight')
+    parser.add_argument('--min_weight', type=float, default=300,
+                        help='Distribution: min molecular weight')
+    parser.add_argument('--max_weight', type=float, default=600,
+                        help='Distribution: max molecular weight')
+    
 
     parser.add_argument('-mi', '--max_iter', type=int, default=50,
                         help='number of failed fragments should be tried at a stage before rejectiong that state default=50')
@@ -320,7 +368,11 @@ if __name__ == "__main__":
                 count=args.count, 
                 threads=args.threads,  
                 chain_extend_probablity=args.chain_extend_probablity, 
-                weight=args.weight, 
+                weight=args.weight,
+                mean_weight = args.mean_weight,
+                std_weight = args.std_weight,
+                min_weight = args.min_weight,
+                max_weight = args.max_weight,
                 max_iter=args.max_iter, 
                 temp=args.temp, 
                 score=args.score, 

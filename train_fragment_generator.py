@@ -1,8 +1,20 @@
 import torch
 import argparse
+from rdkit import Chem
+from rdkit import RDLogger
+RDLogger.DisableLog('rdApp.*')
 from rnn_selfies import RNNSelfies
 from rnn_config import *
 from torch.optim.lr_scheduler import ReduceLROnPlateau
+
+def get_canonical_smiles(smi):
+    try:
+        mol = Chem.MolFromSmiles(smi)
+        if mol is not None:
+            return Chem.MolToSmiles(mol, canonical=True)
+    except:
+        pass
+    return None
 from torch.utils.data import DataLoader
 from selfies_dataset import SelfiesDataset
 from torch import nn
@@ -106,7 +118,19 @@ if __name__ == "__main__":
     parser.add_argument('-d', '--device', type=str, default=default_device,
                         help=f'length of input tokens(selfies tokens) (default= {default_device})')
     
+    parser.add_argument('-f', type=int, default=0,
+                        help='Epoch frequency for generating and calculating similarity (default=0, no calc)')
+    
+    parser.add_argument('-y', type=int, default=-1,
+                        help='Number of smiles to generate (default=10*batch_size)')
+    
+    parser.add_argument('-sc', '--similarity_cutoff', type=float, default=0.5,
+                        help='Threshold for stopping training (default=0.5)')
+    
     args = parser.parse_args()
+    
+    if args.y == -1:
+        args.y = 10 * args.batch_size
 
     for k, v in args.__dict__.items():
         print(k, ":", v)
@@ -118,7 +142,7 @@ if __name__ == "__main__":
         num_layers=3,
         dropout=0)
 
-    if args.in_model_params is not None: model.load_state_dict(torch.load(args.in_model_params))
+    if args.in_model_params is not None: model.load_state_dict(torch.load(args.in_model_params, map_location=args.device))
 
     model = model.to(args.device)
 
@@ -131,15 +155,53 @@ if __name__ == "__main__":
     # learning rate scheduler
     scheduler = ReduceLROnPlateau(
         optimizer, mode='min',
-        factor=0.5, patience=5,
-        cooldown=10, min_lr=0.0001
+        factor=0.5, patience=4,
+        cooldown=8, min_lr=0.0000001
     )
+
+    if args.f > 0:
+        print("Pre-calculating training set unique smiles (x_set)...")
+        x_set = set()
+        with open(args.input_smiles, 'r') as f_in:
+            for line in f_in:
+                if not line.strip(): continue
+                smi = line.strip().split(',')[0].split()[0]
+                can = get_canonical_smiles(smi)
+                if can:
+                    x_set.add(can)
+        print(f"Loaded {len(x_set)} unique canonical smiles from training set.")
 
     for i in range(args.epoch):
         print('\n')
         print(f'Epoch : {i+1}')
         loss = train(model, optimizer, criterion, train_loader, args.device)
         print(f'Loss : {loss}')
+        scheduler.step(loss)
+
+        if args.f > 0 and (i + 1) % args.f == 0:
+            print(f"Generating ~{args.y} smiles to check similarity...")
+            gen_smiles = []
+            num_batches = max(1, args.y // args.batch_size)
+            model.eval()
+            with torch.no_grad():
+                for _ in range(num_batches):
+                    gen_smiles.extend(model.generateSmiles(args.batch_size, vocab, max_len=args.max_len))
+            
+            y_set = set()
+            for smi in gen_smiles:
+                if smi and smi != 'invalid':
+                    can = get_canonical_smiles(smi)
+                    if can:
+                        y_set.add(can)
+            
+            if len(y_set) > 0:
+                overlap_ratio = len(x_set.intersection(y_set)) / len(x_set.union(y_set))
+                print(f"Jaccard Similarity: {overlap_ratio:.2%} ({len(x_set.intersection(y_set))} overlapping / {len(x_set.union(y_set))} total unique)")
+                if overlap_ratio >= args.similarity_cutoff:
+                    print(f"Stopping training: Similarity >= {args.similarity_cutoff}")
+                    break
+            else:
+                print("Could not generate any valid unique smiles.")
 
     
     torch.save(model.state_dict(), args.out_model_params)
